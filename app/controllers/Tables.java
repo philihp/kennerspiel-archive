@@ -12,20 +12,12 @@ import play.mvc.Result;
 import views.html.*;
 
 public class Tables extends Controller {
-
-    public static Result index() {
-        return ok(tables.render());
-    }
-    
-    public static Result indexId(Integer id) {
-    	return ok(table.render());
-    }
   
     public static Result add() {
         Table table = Form.form(Table.class).bindFromRequest().get();
         table.seed = new Random().nextInt();
         table.save();
-        return redirect(routes.Tables.index());
+        return ok(Json.toJson(table));
     }
     
     public static Result get(Integer id) {
@@ -42,6 +34,14 @@ public class Tables extends Controller {
     	Table table = Table.finder.byId(id);
     	table.delete();
     	return ok();
+    }
+
+    public static Result update(Integer id) {
+        Form<Table> tableForm = Form.form(Table.class).bindFromRequest();
+        Table table = tableForm.get();
+        table.update();
+        return ok();
+
     }
     
 }

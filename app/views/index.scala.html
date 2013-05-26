@@ -1,0 +1,47 @@
+@main() {
+    
+    <h1>Tables</h1>
+    <hr />
+    
+    <div id="page"></div>
+    
+    <script type="text/template" id="tables-list-template">
+        <a href="#/new" class="btn btn-primary">New Table</a>
+        <table class="table striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Seed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% _.each(tables, function(table) { %>
+                    <tr>
+                        <td><%= table.get('id') %></td>
+                        <td><%= table.get('name') %></td>
+                        <td><%= table.get('seed') %></td>
+                        <td><a href="#/edit/<%= table.id %>" class="btn">Edit</a></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </script>
+    
+    <script type="text/template" id="table-edit-template">
+        <form class="table-edit-form">
+            <legend><%= table ? 'Update' : 'Create' %> Table</legend>
+            <label>Name</label>
+            <input type="text" name="name" value="<%= table ? table.get('name') : '' %>" />
+            <hr />
+            <% if(table) { %>
+                <input type="hidden" name="id" value="<%= table.id %>" />
+            <% }; %>
+            <button type="submit" class="btn"><%= table ? 'Update' : 'Create' %></button>
+        </form> 
+    </script>
+    
+    <script src='@routes.Assets.at("javascripts/index.js")'></script>
+    
+}

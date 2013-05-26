@@ -4,12 +4,11 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /tables/index               controllers.Tables.index()
 
-GET		/tables/:id/index			controllers.Tables.indexId(id: Integer)
-POST    /tables						controllers.Tables.add()
 GET		/tables						controllers.Tables.getAll()
 GET		/tables/:id					controllers.Tables.get(id: Integer)
+POST    /tables						controllers.Tables.add()
+PUT     /tables/:id					controllers.Tables.update(id: Integer)
 DELETE  /tables/:id					controllers.Tables.delete(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
