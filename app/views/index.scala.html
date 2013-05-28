@@ -1,17 +1,17 @@
 @main() {
     
-    <h1>Tables</h1>
-    <hr />
-    
-    <div id="page"></div>
+    <div id="page" class="container"></div>
     
     <script type="text/template" id="tables-list-template">
+        <h1>Tables</h1>
+        <hr />
+    
         <a href="#/new" class="btn btn-primary">New Table</a>
         <table class="table striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
+                    <th>Game</th>
                     <th>Seed</th>
                     <th></th>
                 </tr>
@@ -19,8 +19,8 @@
             <tbody>
                 <% _.each(tables, function(table) { %>
                     <tr>
-                        <td><%= table.get('id') %></td>
-                        <td><%= table.get('name') %></td>
+                        <td><a href="#/view/<%= table.id %>"><%= table.get('name') %></a></td>
+                        <td><%= table.get('game') %></td>
                         <td><%= table.get('seed') %></td>
                         <td><a href="#/edit/<%= table.id %>" class="btn">Edit</a></td>
                     </tr>
@@ -37,9 +37,213 @@
             <hr />
             <% if(table) { %>
                 <input type="hidden" name="id" value="<%= table.id %>" />
+                <button type="button" class="btn btn-danger delete">Delete</button>
             <% }; %>
             <button type="submit" class="btn"><%= table ? 'Update' : 'Create' %></button>
         </form> 
+    </script>
+
+    <script type="text/template" id="table-view-template">
+        <h1>Agricola: All Creatures Big & Small</h1>
+        <hr />
+        <h3>Actions</h3>
+        <div class="row">
+            <div class="span3 action">
+                &rarr; 1 Wood<br />
+                Starting Player
+            </div>
+            <div class="span3 action">&rarr; 3 Wood</div>
+            <div class="span3 action">&rarr; 1 Stone</div>
+            <div class="span3 action">&rarr; 2 Stone</div>
+        </div>
+        <div class="row">
+            <div class="span3 action">1 Wood &rarr; Build Fence</div>
+            <div class="span3 action">
+                Build 2 Fences<br />
+                2 Stone &rarr; Build Fence
+            </div>
+            <div class="span3 action">
+                +1 Wood<br />
+                +1 Stone<br />
+                +1 Reed
+            </div>
+            <div class="span3 action">
+                &rarr; 1 Fence<br />
+                Expansion
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3 action">3 Stone 1 Reed &rarr; Stall</div>
+            <div class="span3 action">
+                +1 Trough<br />
+                3 Wood &rarr; Trough
+            </div>
+            <div class="span3 action">&rarr; 1 Reed (1 Sheep)</div>
+            <div class="span3 action">&rarr; 1 Boar (1 sheep)</div>
+        </div>
+        <div class="row">
+            <div class="span3 action">
+                5 Wood/5 Stone<br />
+                Stall &rarr; Stables
+            </div>
+            <div class="span3">
+                <div class="row">
+                    <div class="span3 half-action">Special Build</div>
+                </div>
+                <div class="row">
+                    <div class="span3 half-action">Special Build</div>
+                </div>
+            </div>
+            <div class="span3 action">&rarr; 1 Cattle (1 Boar)</div>
+            <div class="span3 action">&rarr; 1 Horse (1 Sheep)</div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                Feeding Troughs: 10<br />
+                Expansions:
+                    <div>[Half-Timbered House]</div>
+                    <div>[Storage Building]</div>
+                    <div>[Shelter]</div>
+                    <div>[Open Stables]</div>
+                Stalls: 4<br />
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="span6">
+                <h3>Red Player</h3>
+                <div class="red bin">
+                    <div class="worker">[Worker]</div>
+                    <div class="worker">[Worker]</div>
+                    <div class="worker">[Worker]</div>
+                    <ul>
+                        <li>Wood: 5</li>
+                        <li>Stone: 3</li>
+                        <li>Reed: 1</li>
+                        <li>Fences: 5</li>
+                    </ul>
+                    <table border="1">
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="span6">
+                <h3>Blue Player</h3>
+                <div class="blue bin">
+                    <div class="worker">[Worker]</div>
+                    <div class="worker">[Worker]</div>
+                    <div class="worker">[Worker]</div>
+                    <ul>
+                        <li>Wood: 5</li>
+                        <li>Stone: 3</li>
+                        <li>Reed: 1</li>
+                        <li>Fences: 8</li>
+                    </ul>
+                    <table border="1">
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                            <td class="farmtile">Tile</td>
+                            <td class="vfence">F</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                            <td class="hfence">Fence</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </script>
     
     <script src='@routes.Assets.at("javascripts/index.js")'></script>

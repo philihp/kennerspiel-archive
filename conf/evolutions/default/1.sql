@@ -7,6 +7,7 @@ create table table (
   id                        bigint not null,
   name                      varchar(255),
   seed                      integer,
+  game                      varchar(255),
   constraint pk_table primary key (id))
 ;
 

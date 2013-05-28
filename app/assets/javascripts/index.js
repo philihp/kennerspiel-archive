@@ -48,8 +48,8 @@ var TableEdit = Backbone.View.extend({
 	render: function(options) {
 		var that = this;
 		if(options.id) {
-			var table = new Table({id: options.id});
-			table.fetch({
+			that.table = new Table({id: options.id});
+			that.table.fetch({
 				success: function(table) {
 					var template = _.template($('#table-edit-template').html(), {table: table});
 					that.$el.html(template);
@@ -63,19 +63,44 @@ var TableEdit = Backbone.View.extend({
 		}
 	},
 	events: {
-		'submit .table-edit-form': 'saveTable'
+		'submit .table-edit-form': 'saveTable',
+		'click .delete' : 'deleteTable'
 	},
-	saveTable: function (ev) {
+	saveTable: function(ev) {
 		var tableDetails = $(ev.currentTarget).serializeObject();
 		var table = new Table();
-		console.log('saving');
 		table.save(tableDetails, {
-			success: function() {
-				console.log('saved');
+			success: function (table) {
 				router.navigate('', {trigger: true});
 			}
 		})
 		return false;
+	},
+	deleteTable: function(ev) {
+		console.log(this.table);
+		this.table.destroy({
+			success: function() {
+				console.log('deleted');
+				router.navigate('', {trigger: true});
+			}
+		})
+	}
+});
+
+var TableView = Backbone.View.extend({
+	el: '#page',
+	render: function(options) {
+		var that = this;
+		that.table = new Table({id: options.id});
+		that.table.fetch({
+			success: function(table) {
+				var template = _.template($('#table-view-template').html(), {table: table});
+				that.$el.html(template);
+			}
+		})
+	},
+	events: {
+
 	}
 })
 
@@ -83,12 +108,14 @@ var Router = Backbone.Router.extend({
 	routes: {
 		'' : 'home',
 		'new' : 'tableEdit',
-		'edit/:id' : 'tableEdit'
+		'edit/:id' : 'tableEdit',
+		'view/:id' : 'tableView'
 	}
 })
 
 var tableList = new TableList();
 var tableEdit = new TableEdit();
+var tableView = new TableView();
 
 var router = new Router();
 router.on('route:home', function() {
@@ -96,6 +123,9 @@ router.on('route:home', function() {
 });
 router.on('route:tableEdit', function(id) {
 	tableEdit.render({id: id});
+});
+router.on('route:tableView', function(id) {
+	tableView.render({id: id});
 });
 
 Backbone.history.start();

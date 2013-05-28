@@ -16,6 +16,7 @@ public class Tables extends Controller {
     public static Result add() {
         Table table = Form.form(Table.class).bindFromRequest().get();
         table.seed = new Random().nextInt();
+        table.game = "agricola2p";
         table.save();
         return ok(Json.toJson(table));
     }
@@ -33,14 +34,15 @@ public class Tables extends Controller {
     public static Result delete(Integer id) {
     	Table table = Table.finder.byId(id);
     	table.delete();
-    	return ok();
+    	//return noContent();
+    	return ok(Json.toJson(table));
     }
 
     public static Result update(Integer id) {
         Form<Table> tableForm = Form.form(Table.class).bindFromRequest();
         Table table = tableForm.get();
         table.update();
-        return ok();
+        return ok(Json.toJson(table));
 
     }
     
