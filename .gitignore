@@ -13,5 +13,10 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+*.class
 
 .target
+# Package Files #
+*.jar
+*.war
+*.ear
