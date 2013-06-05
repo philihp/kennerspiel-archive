@@ -3,8 +3,7 @@ package controllers;
 import java.util.List;
 import java.util.Random;
 
-import org.codehaus.jackson.JsonNode;
-
+import models.Command;
 import models.Table;
 import play.data.*;
 import play.db.ebean.Model;
@@ -13,26 +12,24 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
 
-public class Tables extends Controller {
+public class Commands extends Controller {
   
     public static Result add() {
-        Table table = Form.form(Table.class).bindFromRequest().get();
-        table.seed = new Random().nextInt();
-        table.game = "agricola2p";
-        table.save();
-        return ok(Json.toJson(table));
+    	Command command = Form.form(Command.class).bindFromRequest().get();
+    	//command.table = Table.finder.byId(Integer.parseInt(Form.form().bindFromRequest().get("table")));
+    	command.save();
+    	System.out.println("-----------");
+    	System.out.println(Json.toJson(command));
+    	System.out.println("-----------");
+        return ok(Json.toJson(command));
     }
     
     public static Result get(Integer id) {
-    	Table table = Table.finder.byId(id);
-    	return ok(Json.toJson(table));
+    	Command command = Command.finder.byId(id);
+    	return ok(Json.toJson(command));
     }
-    
-    public static Result getAll() {
-    	List<Table> tables = Table.finder.all();
-    	return ok(Json.toJson(tables));
-    }
-    
+
+    /*
     public static Result delete(Integer id) {
     	Table table = Table.finder.byId(id);
     	table.delete();
@@ -47,5 +44,6 @@ public class Tables extends Controller {
         return ok(Json.toJson(table));
 
     }
+    */
     
 }

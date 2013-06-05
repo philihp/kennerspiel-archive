@@ -22,18 +22,39 @@ $.fn.serializeObject = function() {
 	return o;
 }
 
-var Tables = Backbone.Collection.extend({
-	url: '/tables'
+
+
+var Table = Backbone.RelationalModel.extend({
+	urlRoot: '/api/tables',
+	idAttribute: '_id',
+	relations: [{
+		type: Backbone.HasMany,
+		key: "commands",
+		relatedModel: 'Command',
+
+
+		reverseRelation: {
+			key: 'table.id',
+			includeInJSON: '_id'
+		}
+	}]
 });
-var Table = Backbone.Model.extend({
-	urlRoot: '/tables'
-})
+var Command = Backbone.RelationalModel.extend({
+	urlRoot: '/api/commands',
+	idAttribute: '_id'
+});
+var TableCollection = Backbone.Collection.extend({
+	url: '/api/tables',
+	model: Table
+});
 
 var TableList = Backbone.View.extend({
 	el: '#page',
+	events: {
+	},
 	render: function() {
 		var that = this;
-		var tables = new Tables();
+		var tables = new TableCollection();
 		tables.fetch({
 			success: function() {
 				var template = _.template($('#tables-list-template').html(), {tables: tables.models});
@@ -45,10 +66,14 @@ var TableList = Backbone.View.extend({
 
 var TableEdit = Backbone.View.extend({
 	el: '#page',
+	events: {
+		'submit .table-edit-form': 'saveTable',
+		'click .delete' : 'deleteTable'
+	},
 	render: function(options) {
 		var that = this;
 		if(options.id) {
-			that.table = new Table({id: options.id});
+			that.table = Table.findOrCreate({id: options.id});
 			that.table.fetch({
 				success: function(table) {
 					var template = _.template($('#table-edit-template').html(), {table: table});
@@ -62,10 +87,6 @@ var TableEdit = Backbone.View.extend({
 			this.$el.html(template);
 		}
 	},
-	events: {
-		'submit .table-edit-form': 'saveTable',
-		'click .delete' : 'deleteTable'
-	},
 	saveTable: function(ev) {
 		var tableDetails = $(ev.currentTarget).serializeObject();
 		var table = new Table();
@@ -77,21 +98,24 @@ var TableEdit = Backbone.View.extend({
 		return false;
 	},
 	deleteTable: function(ev) {
-		console.log(this.table);
 		this.table.destroy({
 			success: function() {
-				console.log('deleted');
 				router.navigate('', {trigger: true});
 			}
 		})
 	}
 });
 
+
 var TableView = Backbone.View.extend({
 	el: '#page',
+	events: {
+		'submit .move-create-form': 'sendCommand'
+	},
 	render: function(options) {
+		console.log('Rerendering Table View');
 		var that = this;
-		that.table = new Table({id: options.id});
+		that.table = Table.findOrCreate(options);
 		that.table.fetch({
 			success: function(table) {
 				var template = _.template($('#table-view-template').html(), {table: table});
@@ -99,8 +123,23 @@ var TableView = Backbone.View.extend({
 			}
 		})
 	},
-	events: {
+	sendCommand: function(ev) {
+		event.stopPropagation();
+		event.preventDefault();
 
+		var that = this;
+
+
+		var commandDetails = $(ev.currentTarget).serializeObject();
+		commandDetails['table.id'] = this.table;
+
+		var command = new Command();
+		command.save(commandDetails, {
+			success: function(command) {
+				console.log('Saved! Navigating... /view/'+command.get('table.id').id);
+				that.render({_id: command.get('table.id').id});
+			}
+		});
 	}
 })
 
@@ -108,24 +147,24 @@ var Router = Backbone.Router.extend({
 	routes: {
 		'' : 'home',
 		'new' : 'tableEdit',
-		'edit/:id' : 'tableEdit',
 		'view/:id' : 'tableView'
+	},
+	home: function() {
+		console.log('ROUTER: home');
+		tableList.render();
+	},
+	tableEdit: function(id) {
+		tableEdit.render({_id: id});
+	},
+	tableView: function(id) {
+		console.log('ROUTER: view('+id+')');
+		tableView.render({_id: id});
 	}
 })
 
 var tableList = new TableList();
 var tableEdit = new TableEdit();
 var tableView = new TableView();
-
 var router = new Router();
-router.on('route:home', function() {
-	tableList.render();
-});
-router.on('route:tableEdit', function(id) {
-	tableEdit.render({id: id});
-});
-router.on('route:tableView', function(id) {
-	tableView.render({id: id});
-});
 
 Backbone.history.start();

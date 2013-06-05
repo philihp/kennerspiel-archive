@@ -3,13 +3,18 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET		/api/tables						controllers.Tables.getAll()
+GET		/api/tables/:id					controllers.Tables.get(id: Integer)
+POST    /api/tables						controllers.Tables.add()
+PUT     /api/tables/:id					controllers.Tables.update(id: Integer)
+DELETE  /api/tables/:id					controllers.Tables.delete(id: Integer)
 
-GET		/tables						controllers.Tables.getAll()
-GET		/tables/:id					controllers.Tables.get(id: Integer)
-POST    /tables						controllers.Tables.add()
-PUT     /tables/:id					controllers.Tables.update(id: Integer)
-DELETE  /tables/:id					controllers.Tables.delete(id: Integer)
+POST	/api/commands					controllers.Commands.add()
+GET		/api/commands/:id				controllers.Commands.get(id: Integer)
+# PUT		/api/commands/:id			controllers.Commands.update(id: Integer)
+# DELETE	/api/commands/:id			controllers.Commands.delete(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET     /                               controllers.Application.index()

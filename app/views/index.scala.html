@@ -19,10 +19,10 @@
             <tbody>
                 <% _.each(tables, function(table) { %>
                     <tr>
-                        <td><a href="#/view/<%= table.id %>"><%= table.get('name') %></a></td>
+                        <td><a href="#/view/<%= table.get('id') %>"><%= table.get('name') %></a></td>
                         <td><%= table.get('game') %></td>
                         <td><%= table.get('seed') %></td>
-                        <td><a href="#/edit/<%= table.id %>" class="btn">Edit</a></td>
+                        <td><a href="#/edit/<%= table.get('id') %>" class="btn">Edit</a></td>
                     </tr>
                 <% }); %>
             </tbody>
@@ -36,7 +36,7 @@
             <input type="text" name="name" value="<%= table ? table.get('name') : '' %>" />
             <hr />
             <% if(table) { %>
-                <input type="hidden" name="id" value="<%= table.id %>" />
+                <input type="hidden" name="id" value="<%= table.get('id') %>" />
                 <button type="button" class="btn btn-danger delete">Delete</button>
             <% }; %>
             <button type="submit" class="btn"><%= table ? 'Update' : 'Create' %></button>
@@ -47,59 +47,86 @@
         <h1>Agricola: All Creatures Big & Small</h1>
         <hr />
         <h3>Actions</h3>
-        <div class="row">
-            <div class="span3 action">
-                &rarr; 1 Wood<br />
-                Starting Player
-            </div>
-            <div class="span3 action">&rarr; 3 Wood</div>
-            <div class="span3 action">&rarr; 1 Stone</div>
-            <div class="span3 action">&rarr; 2 Stone</div>
-        </div>
-        <div class="row">
-            <div class="span3 action">1 Wood &rarr; Build Fence</div>
-            <div class="span3 action">
-                Build 2 Fences<br />
-                2 Stone &rarr; Build Fence
-            </div>
-            <div class="span3 action">
-                +1 Wood<br />
-                +1 Stone<br />
-                +1 Reed
-            </div>
-            <div class="span3 action">
-                &rarr; 1 Fence<br />
-                Expansion
-            </div>
-        </div>
-        <div class="row">
-            <div class="span3 action">3 Stone 1 Reed &rarr; Stall</div>
-            <div class="span3 action">
-                +1 Trough<br />
-                3 Wood &rarr; Trough
-            </div>
-            <div class="span3 action">&rarr; 1 Reed (1 Sheep)</div>
-            <div class="span3 action">&rarr; 1 Boar (1 sheep)</div>
-        </div>
-        <div class="row">
-            <div class="span3 action">
-                5 Wood/5 Stone<br />
-                Stall &rarr; Stables
-            </div>
-            <div class="span3">
-                <div class="row">
-                    <div class="span3 half-action">Special Build</div>
-                </div>
-                <div class="row">
-                    <div class="span3 half-action">Special Build</div>
-                </div>
-            </div>
-            <div class="span3 action">&rarr; 1 Cattle (1 Boar)</div>
-            <div class="span3 action">&rarr; 1 Horse (1 Sheep)</div>
-        </div>
 
         <div class="row">
-            <div class="span12">
+            <div class="span6">
+                <form class="move-create-form" class="form-inline">
+                    <div class="input-append">
+                        <!--input type="hidden" name="tableId" value="<%= table.get('id') %>" / -->
+                        <input type="text" name="command" class="input-xlarge" placeholder="Command">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form> 
+            </div>
+
+            <div class="span6">
+                Move List:
+                <ul>
+                    <% _.each(table.get('commands').models, function(command) { %>
+                        <li><%= command.get('command') %></li>
+                    <% }); %>
+                </li>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="span8">
+
+                <div class="row">
+                    <div class="span2 action">
+                        &rarr; 1 Wood<br />
+                        Starting Player
+                    </div>
+                    <div class="span2 action">&rarr; 3 Wood</div>
+                    <div class="span2 action">&rarr; 1 Stone</div>
+                    <div class="span2 action">&rarr; 2 Stone</div>
+                </div>
+                <div class="row">
+                    <div class="span2 action">1 Wood &rarr; Build Fence</div>
+                    <div class="span2 action">
+                        Build 2 Fences<br />
+                        2 Stone &rarr; Build Fence
+                    </div>
+                    <div class="span2 action">
+                        +1 Wood<br />
+                        +1 Stone<br />
+                        +1 Reed
+                    </div>
+                    <div class="span2 action">
+                        &rarr; 1 Fence<br />
+                        Expansion
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2 action">3 Stone 1 Reed &rarr; Stall</div>
+                    <div class="span2 action">
+                        +1 Trough<br />
+                        3 Wood &rarr; Trough
+                    </div>
+                    <div class="span2 action">&rarr; 1 Reed (1 Sheep)</div>
+                    <div class="span2 action">&rarr; 1 Boar (1 sheep)</div>
+                </div>
+                <div class="row">
+                    <div class="span2 action">
+                        5 Wood/5 Stone<br />
+                        Stall &rarr; Stables
+                    </div>
+                    <div class="span2">
+                        <div class="row">
+                            <div class="span2 half-action">Special Build</div>
+                        </div>
+                        <div class="row">
+                            <div class="span2 half-action">Special Build</div>
+                        </div>
+                    </div>
+                    <div class="span2 action">&rarr; 1 Cattle (1 Boar)</div>
+                    <div class="span2 action">&rarr; 1 Horse (1 Sheep)</div>
+                </div>
+
+            </div>
+            <div class="span4">
                 Feeding Troughs: 10<br />
                 Expansions:
                     <div>[Half-Timbered House]</div>
@@ -109,8 +136,6 @@
                 Stalls: 4<br />
             </div>
         </div>
-
-        <hr />
 
         <div class="row">
             <div class="span6">
@@ -176,6 +201,7 @@
                             <td></td>
                         </tr>
                     </table>
+                    <br />
                 </div>
             </div>
             <div class="span6">
@@ -241,9 +267,12 @@
                             <td></td>
                         </tr>
                     </table>
+                    <br />
                 </div>
             </div>
         </div>
+
+
     </script>
     
     <script src='@routes.Assets.at("javascripts/index.js")'></script>

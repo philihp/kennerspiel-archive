@@ -1,4 +1,14 @@
+@font-face {
+    font-family: 'Helvetica Neue Header';
+    src: url('../fonts/helveticaneue-bold-webfont.eot');
+    src: url('../fonts/helveticaneue-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneue-bold-webfont.svg#helvetica_neueregular') format('svg'),
+    	 url('../fonts/helveticaneue-bold-webfont.woff') format('woff'),
+         url('../fonts/helveticaneue-bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 
+}
 
 /* colors by Cynthia Brewer, colorbrewer2.org */
 @color-red: #fbb4ae;
@@ -27,9 +37,9 @@ alternate color set
 @colorb: #ccebc5;
 @colorc: #ffed6f;
 */
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6,legend {
 	text-rendering: geometricPrecision;
-	-webkit-font-smoothing: antialiased;
+	font-family: 'Helvetica Neue Header';
 }
 
 .action {
@@ -56,4 +66,8 @@ h1,h2,h3,h4,h5,h6 {
 
 .bin {
 	border-radius: 4px;
+}
+
+body {
+	margin-bottom: 30em;
 }
