@@ -138,6 +138,13 @@ var TableView = Backbone.View.extend({
 			success: function(command) {
 				console.log('Saved! Navigating... /view/'+command.get('table.id').id);
 				that.render({_id: command.get('table.id').id});
+			},
+			error: function(command, xhr) {
+				//$('#errorText').text(xhr.responseJSON.error);
+				//$('#errorBox').modal();
+				//console.log(xhr.responseJSON.error);
+				$('#alertPlaceholder').html('<div class="alert alert-error"><a class="close" data-dismiss="alert">&times;</a>'+
+					'<strong>Error: </strong>'+xhr.responseJSON.error+'</div>');
 			}
 		});
 	}

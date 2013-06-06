@@ -33,7 +33,7 @@ public class Command extends Model {
 	static class Serializer extends JsonSerializer<Command>{
 
 		/**
-		 * Overrides normal seralize operation by adding the table.id field
+		 * Overrides normal serialize operation by adding the table.id field
 		 */
 		@Override
 		public void serialize(Command command, JsonGenerator jgen,

@@ -16,12 +16,13 @@ public class Commands extends Controller {
   
     public static Result add() {
     	Command command = Form.form(Command.class).bindFromRequest().get();
-    	//command.table = Table.finder.byId(Integer.parseInt(Form.form().bindFromRequest().get("table")));
-    	command.save();
-    	System.out.println("-----------");
-    	System.out.println(Json.toJson(command));
-    	System.out.println("-----------");
-        return ok(Json.toJson(command));
+    	if(command.command.length() < 5) {
+    		return badRequest(Json.toJson(new Object() { public String error = "I didn't like the length";}));
+    	}
+    	else {
+	    	command.save();
+	        return ok(Json.toJson(command));
+    	}
     }
     
     public static Result get(Integer id) {
