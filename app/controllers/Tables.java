@@ -1,5 +1,7 @@
 package controllers;
 
+import game.Board;
+
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +27,15 @@ public class Tables extends Controller {
     
     public static Result get(Integer id) {
     	Table table = Table.finder.byId(id);
+		try {
+			table.board = (Board)Class.forName("game."+table.game+".Board").newInstance();
+			table.board.seedRandom(table.seed);
+		} catch (ClassNotFoundException e) {
+			//do nothing, leave board null
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
     	return ok(Json.toJson(table));
     }
     

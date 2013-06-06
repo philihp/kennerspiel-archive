@@ -34,15 +34,14 @@ public class Table extends Model {
 	@OneToMany(fetch=FetchType.LAZY)
 	@JsonManagedReference
 	public List<Command> commands;
-
-	@Transient
-	public Random random;
 	
 	@Transient
 	public Board board;
 
 	@PostConstruct
 	public void init() {
-		random = new Random(seed);
+		//board = (Board)Class.forName("game."+game+".Board").newInstance();
+		//board.seedRandom(seed);
+		//doesn't seem to want to work here?
 	}
 }
