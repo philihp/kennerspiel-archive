@@ -57,6 +57,7 @@ var TableList = Backbone.View.extend({
 		var tables = new TableCollection();
 		tables.fetch({
 			success: function() {
+				console.log('tables.fetch --> success', tables.models);
 				var template = _.template($('#tables-list-template').html(), {tables: tables.models});
 				that.$el.html(template);
 			}
@@ -118,6 +119,7 @@ var TableView = Backbone.View.extend({
 		that.table = Table.findOrCreate(options);
 		that.table.fetch({
 			success: function(table) {
+				console.log('Table Returned: ',table);
 				var template = _.template($('#table-view-template').html(), {table: table});
 				that.$el.html(template);
 			}
@@ -161,10 +163,11 @@ var Router = Backbone.Router.extend({
 		tableList.render();
 	},
 	tableEdit: function(id) {
+		console.log('ROUTER: tableEdit('+id+')');
 		tableEdit.render({_id: id});
 	},
 	tableView: function(id) {
-		console.log('ROUTER: view('+id+')');
+		console.log('ROUTER: tableView('+id+')');
 		tableView.render({_id: id});
 	}
 })

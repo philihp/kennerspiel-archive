@@ -2,11 +2,13 @@ package controllers;
 
 import game.Board;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.codehaus.jackson.JsonNode;
 
+import models.Command;
 import models.Table;
 import play.data.*;
 import play.db.ebean.Model;
@@ -25,15 +27,13 @@ public class Tables extends Controller {
         return ok(Json.toJson(table));
     }
     
-    public static Result get(Integer id) {
+    public static Result get(Integer id) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Table table = Table.finder.byId(id);
-		try {
-			table.board = (Board)Class.forName("game."+table.game+".Board").newInstance();
-			table.board.seedRandom(table.seed);
-		} catch (ClassNotFoundException e) {
-			//do nothing, leave board null
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+		table.board = (Board)Class.forName("game."+table.game+".Board").newInstance();
+		table.board.seedRandom(table.seed);
+		
+		for(Command c : table.commands) {
+			table.board.runCommand(c.command);
 		}
 		
     	return ok(Json.toJson(table));

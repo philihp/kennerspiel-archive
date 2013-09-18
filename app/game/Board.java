@@ -1,5 +1,6 @@
 package game;
 
+import java.util.List;
 import java.util.Random;
 
 import org.codehaus.jackson.JsonNode;
@@ -19,6 +20,10 @@ abstract public class Board {
 	
 	public JsonNode getState() {
 		return Json.newObject();
+	}
+	
+	public void runCommand(String command) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException(command);
 	}
 	
 }
