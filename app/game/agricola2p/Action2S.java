@@ -1,16 +1,16 @@
 package game.agricola2p;
 
-public class Space1S extends Space {
-	
-	public Space1S(Board board) {
-		super(board);
-	}
+public class Action2S extends Action {
 
 	public int stone = 0;
 	
+	public Action2S(Board board) {
+		super(board);
+	}
+	
 	protected void onNewRound() {
 		super.onNewRound();
-		this.stone += 3;
+		this.stone += 2;
 	}
 	
 	protected void onTake() {

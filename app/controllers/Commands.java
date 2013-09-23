@@ -16,8 +16,8 @@ public class Commands extends Controller {
   
     public static Result add() {
     	Command command = Form.form(Command.class).bindFromRequest().get();
-    	if(command.command.length() < 5) {
-    		return badRequest(Json.toJson(new Object() { public String error = "I didn't like the length";}));
+    	if(command.command == null || command.command.length() == 0) {
+    		return badRequest(Json.toJson(new Object() { public String error = "Missing Command";}));
     	}
     	else {
 	    	command.save();

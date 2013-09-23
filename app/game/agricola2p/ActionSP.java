@@ -1,22 +1,27 @@
 package game.agricola2p;
 
-public class Space3W extends Space {
+public class ActionSP extends Action {
 
+	private Board board;
+	
 	public int wood = 0;
 	
-	public Space3W(Board board) {
+	public ActionSP(Board board) {
 		super(board);
 	}
 	
 	protected void onNewRound() {
 		super.onNewRound();
-		this.wood += 3;
+		this.wood += 1;
 	}
 	
 	protected void onTake() {
 		super.onTake();
 		board.activeFarm().wood += this.wood;
 		this.wood = 0;
+		
+		board.startingPlayer = board.activeFarm().color;
+		
 	}
 	
 }

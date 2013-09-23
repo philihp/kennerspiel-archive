@@ -1,8 +1,8 @@
 package game.agricola2p;
 
-public class SpaceWoodFences extends Space {
+public class ActionRSW extends Action {
 	
-	public SpaceWoodFences(Board board) {
+	public ActionRSW(Board board) {
 		super(board);
 	}
 

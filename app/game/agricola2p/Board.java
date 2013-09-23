@@ -6,14 +6,14 @@ public class Board extends game.Board {
 	
 	public int round = 0;
 
-	public Space spaceSP = new SpaceSP(this);
-	public Space space3W = new Space3W(this);
-	public Space space1S = new Space1S(this);
-	public Space space2S = new Space2S(this);
-	public Space spaceWoodFences = new SpaceWoodFences(this);
-	public Space spaceStoneFences = new SpaceStoneFences(this);
-	public Space spaceRSW = new SpaceRSW(this);
-	public Space spaceExpansion = new SpaceExpansion(this);
+	public Action spaceSP = new ActionSP(this);
+	public Action space3W = new Action3W(this);
+	public Action space1S = new Action1S(this);
+	public Action space2S = new Action2S(this);
+	public Action spaceWoodFences = new ActionWFen(this);
+	public Action spaceStoneFences = new ActionSFen(this);
+	public Action spaceRSW = new ActionRSW(this);
+	public Action spaceExpansion = new ActionExp(this);
 
 	public Farm redFarm = new Farm(this, "red");
 	public Farm blueFarm = new Farm(this, "blue");

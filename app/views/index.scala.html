@@ -54,28 +54,28 @@
                 <div class="row">
                     
                     <% var space = board.spaceSP %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="SP">
                         &rarr; 1 Wood<br />
                         Starting Player<br />
                         <b><%= space.wood %> Wood</b>
                     </div>
                     
                     <% var space = board.space3W %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="3W">
                         &rarr; 3 Wood<br />
                         <br />
                         <b><%= space.wood %> Wood</b>
                     </div>
                     
                     <% var space = board.space1S %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="1S">
                         &rarr; 1 Stone<br />
                         <br />
                         <b><%= space.stone %> Stone</b>
                     </div>
                     
                     <% var space = board.space2S %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="2S">
                         &rarr; 2 Stone<br />
                         <br />
                         <b><%= space.stone %> Stone</b>
@@ -84,25 +84,25 @@
                 </div>
                 <div class="row">
                     <% var space = board.spaceWoodFences %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="WFen">
                         1 Wood &rarr; Build Fence
                     </div>
                     
                     <% var space = board.spaceStoneFences %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="SFen">
                         Build 2 Fences<br />
                         2 Stone &rarr; Build Fence<br />
                     </div>
                     
                     <% var space = board.spaceRSW %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="RSW">
                         +1 Wood<br />
                         +1 Stone<br />
                         +1 Reed
                     </div>
                     
                     <% var space = board.spaceExpansion %>
-                    <div class="span2 action">
+                    <div class="span2 action" data-command="Exp">
                         &rarr; 1 Fence<br />
                         Expansion<br />
                         <b><%= space.fences %> Fences</b>
@@ -155,9 +155,9 @@
                 <h3>Red Player</h3>
                 <% var farm = table.get('board').redFarm %>
                 <div class="red bin">
-                    <div class="worker">[Worker]</div>
-                    <div class="worker">[Worker]</div>
-                    <div class="worker">[Worker]</div> 
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div>
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div>
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div> 
                     <ul>
                         <li>Wood:   <%= farm.wood %></li>
                         <li>Stone:  <%= farm.stone %></li>
@@ -224,9 +224,9 @@
                 <h3>Blue Player</h3>
                 <% var farm = table.get('board').blueFarm %>
                 <div class="blue bin">
-                    <div class="worker">[Worker]</div>
-                    <div class="worker">[Worker]</div>
-                    <div class="worker">[Worker]</div> 
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
+                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
                     <ul>
                         <li>Wood:   <%= farm.wood %></li>
                         <li>Stone:  <%= farm.stone %></li>
@@ -318,6 +318,7 @@
                 </li>
             </div>
         </div>
+        <script src='@routes.Assets.at("javascripts/interface.js")'></script>
 
 
     </script>

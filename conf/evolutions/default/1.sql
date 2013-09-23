@@ -22,21 +22,6 @@ create sequence table_seq;
 alter table command add constraint fk_command_table_1 foreign key (table_id) references table (id) on delete restrict on update restrict;
 create index ix_command_table_1 on command (table_id);
 
-insert into table values (1, 'First Table', 12345, 'agricola2p');
-insert into table values (2, 'Second Table', 12345, 'agricola2p');
-insert into table values (3, 'Third Table', 12345, 'agricola2p');
-insert into table values (4, 'London Table', 12345, 'london');
-insert into table values (5, 'Manhattan Table', 12345, 'manhattan');
-
-insert into command values (10, 1, 'Move One V');
-insert into command values (11, 1, 'Move Two V');
-insert into command values (12, 1, 'Move Three V');
-insert into command values (20, 2, 'Move One X');
-insert into command values (21, 2, 'Move Two X');
-insert into command values (22, 2, 'Move Three X');
-
-
-
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;

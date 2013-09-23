@@ -1,10 +1,10 @@
 package game.agricola2p;
 
-public class SpaceExpansion extends Space {
+public class ActionExp extends Action {
 
 	public int fences = 0;
 	
-	public SpaceExpansion(Board board) {
+	public ActionExp(Board board) {
 		super(board);
 	}
 	

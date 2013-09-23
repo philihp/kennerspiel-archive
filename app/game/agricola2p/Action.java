@@ -1,12 +1,12 @@
 package game.agricola2p;
 
-abstract class Space {
+abstract class Action {
 	
 	protected Board board;
 	
 	public String occupant = null;
 	
-	public Space(Board board) {
+	public Action(Board board) {
 		this.board = board;
 	}
 	

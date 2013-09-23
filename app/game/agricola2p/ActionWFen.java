@@ -1,8 +1,8 @@
 package game.agricola2p;
 
-public class SpaceRSW extends Space {
+public class ActionWFen extends Action {
 	
-	public SpaceRSW(Board board) {
+	public ActionWFen(Board board) {
 		super(board);
 	}
 
