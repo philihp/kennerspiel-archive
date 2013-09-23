@@ -111,7 +111,8 @@ var TableEdit = Backbone.View.extend({
 var TableView = Backbone.View.extend({
 	el: '#page',
 	events: {
-		'submit .move-create-form': 'sendCommand'
+		'submit .commit-form': 'sendCommand',
+		'submit .undo-form': 'sendCommand'
 	},
 	render: function(options) {
 		console.log('Rerendering Table View');
@@ -122,31 +123,38 @@ var TableView = Backbone.View.extend({
 				console.log('Table Returned: ',table);
 				var template = _.template($('#table-view-template').html(), {table: table});
 				that.$el.html(template);
+
+				if(options.message) {
+					console.log('Alerted');
+					$('#alertPlaceholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>'+
+						'<strong>Note: </strong>'+options.message+'</div>');
+				}
 			}
-		})
+		});
 	},
 	sendCommand: function(ev) {
 		event.stopPropagation();
 		event.preventDefault();
 
 		var that = this;
-
-
-		var commandDetails = $(ev.currentTarget).serializeObject();
-		commandDetails['table.id'] = this.table;
+		var commandDetails = {
+				'table.id': this.table,
+				'command': $(ev.target).data('command')
+		}
 
 		var command = new Command();
 		command.save(commandDetails, {
-			success: function(command) {
+			success: function(command, xhr) {
+				console.log('SUCCESS', xhr);
 				console.log('Saved! Navigating... /view/'+command.get('table.id').id);
-				that.render({_id: command.get('table.id').id});
+				that.render({
+					_id: command.get('table.id').id,
+					message: xhr.message
+				});
 			},
 			error: function(command, xhr) {
-				//$('#errorText').text(xhr.responseJSON.error);
-				//$('#errorBox').modal();
-				//console.log(xhr.responseJSON.error);
 				$('#alertPlaceholder').html('<div class="alert alert-error"><a class="close" data-dismiss="alert">&times;</a>'+
-					'<strong>Error: </strong>'+xhr.responseJSON.error+'</div>');
+					'<strong>Error: </strong>'+xhr.responseJSON.message+'</div>');
 			}
 		});
 	}

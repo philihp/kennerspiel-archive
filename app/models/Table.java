@@ -60,7 +60,7 @@ public class Table extends Model {
 			Integer.class, Table.class);
 
 	@Id
-	public Long id;
+	public Integer id;
 
 	public String name;
 

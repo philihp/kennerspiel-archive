@@ -53,29 +53,49 @@
 
                 <div class="row">
                     
-                    <% var space = board.spaceSP %>
+                    <% var space = board.actions.SP %>
                     <div class="span2 action" data-command="SP">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         &rarr; 1 Wood<br />
                         Starting Player<br />
                         <b><%= space.wood %> Wood</b>
                     </div>
                     
-                    <% var space = board.space3W %>
-                    <div class="span2 action" data-command="3W">
+                    <% var space = board.actions.Wx3 %>
+                    <div class="span2 action" data-command="Wx3">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         &rarr; 3 Wood<br />
                         <br />
                         <b><%= space.wood %> Wood</b>
                     </div>
                     
-                    <% var space = board.space1S %>
-                    <div class="span2 action" data-command="1S">
+                    <% var space = board.actions.Sx1 %>
+                    <div class="span2 action" data-command="Sx1">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         &rarr; 1 Stone<br />
                         <br />
                         <b><%= space.stone %> Stone</b>
                     </div>
                     
-                    <% var space = board.space2S %>
-                    <div class="span2 action" data-command="2S">
+                    <% var space = board.actions.Sx2 %>
+                    <div class="span2 action" data-command="Sx2">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         &rarr; 2 Stone<br />
                         <br />
                         <b><%= space.stone %> Stone</b>
@@ -83,26 +103,46 @@
                     
                 </div>
                 <div class="row">
-                    <% var space = board.spaceWoodFences %>
+                    <% var space = board.actions.WFen %>
                     <div class="span2 action" data-command="WFen">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         1 Wood &rarr; Build Fence
                     </div>
                     
-                    <% var space = board.spaceStoneFences %>
+                    <% var space = board.actions.SFen %>
                     <div class="span2 action" data-command="SFen">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         Build 2 Fences<br />
                         2 Stone &rarr; Build Fence<br />
                     </div>
                     
-                    <% var space = board.spaceRSW %>
+                    <% var space = board.actions.RSW %>
                     <div class="span2 action" data-command="RSW">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         +1 Wood<br />
                         +1 Stone<br />
                         +1 Reed
                     </div>
                     
-                    <% var space = board.spaceExpansion %>
+                    <% var space = board.actions.Exp %>
                     <div class="span2 action" data-command="Exp">
+                        <% if(space.occupant == "red") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } else if(space.occupant == "blue") { %>
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
                         &rarr; 1 Fence<br />
                         Expansion<br />
                         <b><%= space.fences %> Fences</b>
@@ -153,80 +193,62 @@
         <div class="row">
             <div class="span6">
                 <h3>Red Player</h3>
-                <% var farm = table.get('board').redFarm %>
+                <% var farm = board.redFarm %>
                 <div class="red bin">
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div>
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div>
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.svg")"/></div> 
+                    <% if(board.currentPlayer == 'red' && board.inputState == 'placeWorker') { %>
+                        <% if(farm.workers >= 1) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 2) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 3) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                    <% } else { %>
+                        <% if(farm.workers >= 1) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 2) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 3) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
+                        <% } %>
+                    <% } %>
                     <ul>
                         <li>Wood:   <%= farm.wood %></li>
                         <li>Stone:  <%= farm.stone %></li>
                         <li>Reed:   <%= farm.reed %></li>
                         <li>Fences: <%= farm.fences %></li>
                     </ul>
-<!--
-                    <table border="1">
-                        <tr>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                            <td class="farmtile">Tile</td>
-                            <td class="vfence">F</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                            <td class="hfence">Fence</td>
-                            <td></td>
-                        </tr>
-                    </table>
-                    <br />
--->
                 </div>
             </div>
             <div class="span6">
                 <h3>Blue Player</h3>
-                <% var farm = table.get('board').blueFarm %>
+                <% var farm = board.blueFarm %>
                 <div class="blue bin">
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
-                    <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.svg")"/></div>
+                    <% if(board.currentPlayer == 'blue' && board.inputState == 'placeWorker') { %>
+                        <% if(farm.workers >= 1) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 2) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 3) { %>
+                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                    <% } else { %>
+                        <% if(farm.workers >= 1) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 2) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                        <% if(farm.workers >= 3) { %>
+                        <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
+                        <% } %>
+                    <% } %>
                     <ul>
                         <li>Wood:   <%= farm.wood %></li>
                         <li>Stone:  <%= farm.stone %></li>
@@ -294,19 +316,18 @@
 
         <hr />
 
-        <h3>Actions</h3>
-
         <div class="row">
             <div class="span6">
 
                 <div id="alertPlaceholder"></div>
-                <form class="move-create-form" class="form-inline">
-                    <div class="input-append">
-                        <!--input type="hidden" name="tableId" value="<%= table.get('id') %>" / -->
-                        <input type="text" name="command" class="input-xlarge" placeholder="Command">
-                        <button type="submit" class="btn">Submit</button>
-                    </div>
-                </form> 
+                <form class="undo-form" class="form-inline" data-command="undo">
+                    <button type="submit" class="btn">Undo</button>
+                </form>
+                <form class="commit-form" class="form-inline" data-command="commit">
+                    <% if(board.inputState == 'waitingOnCommit') { %>
+                    <button type="submit" class="btn">Commit</button>
+                    <% } %>
+                </form>
             </div>
 
             <div class="span6">

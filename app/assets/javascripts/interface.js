@@ -1,7 +1,7 @@
 $(function() {
 
 	console.log('Workers Draggable');
-	$('.worker').draggable({
+	$('.worker.usable').draggable({
 		start: function(event) {
 		},
 		drag: function(event) {
@@ -9,6 +9,7 @@ $(function() {
 		stop: function(event) {
 		},
 		opacity: 0.7,
+		zIndex: 100,
 		cursor: 'pointer',
 		cursorAt: { left: 20, top: 20 },
 		revert: 'invalid',
@@ -33,11 +34,8 @@ $(function() {
 					tableView.render({_id: command.get('table.id').id});
 				},
 				error: function(command, xhr) {
-					//$('#errorText').text(xhr.responseJSON.error);
-					//$('#errorBox').modal();
-					//console.log(xhr.responseJSON.error);
 					$('#alertPlaceholder').html('<div class="alert alert-error"><a class="close" data-dismiss="alert">&times;</a>'+
-						'<strong>Error: </strong>'+xhr.responseJSON.error+'</div>');
+						'<strong>Error: </strong>'+xhr.responseJSON.message+'</div>');
 				}
 			});
 			

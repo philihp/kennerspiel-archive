@@ -51,7 +51,7 @@ public class Command extends Model {
 			Integer.class, Command.class);
 
 	@Id
-	public Long id;
+	public Integer id;
 
 	public String command;
 	

@@ -16,6 +16,8 @@ abstract class Action {
 	
 	protected void onTake() {
 		this.occupant = board.activeFarm().color;
+		board.activeFarm().workers--;
+		board.inputState = "waitingOnCommit";
 	}
 	
 }

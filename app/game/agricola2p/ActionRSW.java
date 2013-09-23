@@ -12,6 +12,9 @@ public class ActionRSW extends Action {
 	
 	protected void onTake() {
 		super.onTake();
+		board.activeFarm().reed++;
+		board.activeFarm().stone++;
+		board.activeFarm().wood++;
 	}
 	
 }
