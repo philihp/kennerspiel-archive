@@ -10,7 +10,7 @@ $(function() {
 		},
 		opacity: 0.7,
 		zIndex: 100,
-		cursor: 'pointer',
+		cursor: 'grabbing',
 		cursorAt: { left: 20, top: 20 },
 		revert: 'invalid',
 		revertDuration: 200
