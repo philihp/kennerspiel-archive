@@ -42,15 +42,6 @@ h1,h2,h3,h4,h5,h6,legend {
 	font-family: 'Helvetica Neue Header';
 }
 
-.action {
-	border-radius: 4px;
-	background-color: @color-grey;
-	height: 60px;
-	margin-bottom: 20px;
-}
-.actionable {
-  background-color: @color-orange;
-}
 
 .half-action {
 	border-radius: 4px;
@@ -80,7 +71,18 @@ body {
 }
 .worker.usable {
 }
-.ui-draggable-dragging {
+
+.action {
+  border-radius: 4px;
+  background-color: @color-grey;
+  height: 60px;
+  margin-bottom: 20px;
+}
+.action.usable {
+}
+
+.actiondrophover {
+  background-color: @color-orange;
 }
 
 .ui-draggable {

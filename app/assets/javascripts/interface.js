@@ -16,7 +16,7 @@ $(function() {
 	});
 	
 	
-	$('.action').droppable({
+	$('.action.usable').droppable({
 		drop: function(event, ui) {
 			
 			var commandDetails = {
@@ -37,7 +37,7 @@ $(function() {
 			
 			
 		},
-		hoverClass: 'actionable'
+		hoverClass: 'actiondrophover'
 	});
 	
 	
