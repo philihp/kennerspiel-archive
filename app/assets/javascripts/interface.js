@@ -1,6 +1,5 @@
 $(function() {
 
-	console.log('Workers Draggable');
 	$('.worker.usable').draggable({
 		start: function(event) {
 		},
@@ -17,16 +16,13 @@ $(function() {
 	});
 	
 	
-	console.log('Actions Droppable');
 	$('.action').droppable({
 		drop: function(event, ui) {
 			
-			console.log(tableView.table);
 			var commandDetails = {
 					"table.id" : tableView.table.id,
 					"command" : $(event.target).data('command')
 			};
-			console.log(commandDetails);
 
 			var command = new Command();
 			command.save(commandDetails, {

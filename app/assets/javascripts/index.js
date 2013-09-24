@@ -57,7 +57,6 @@ var TableList = Backbone.View.extend({
 		var tables = new TableCollection();
 		tables.fetch({
 			success: function() {
-				console.log('tables.fetch --> success', tables.models);
 				var template = _.template($('#tables-list-template').html(), {tables: tables.models});
 				that.$el.html(template);
 			}
@@ -115,17 +114,14 @@ var TableView = Backbone.View.extend({
 		'submit .undo-form': 'sendCommand'
 	},
 	render: function(options) {
-		console.log('Rerendering Table View');
 		var that = this;
 		that.table = Table.findOrCreate(options);
 		that.table.fetch({
 			success: function(table) {
-				console.log('Table Returned: ',table);
 				var template = _.template($('#table-view-template').html(), {table: table});
 				that.$el.html(template);
 
 				if(options.message) {
-					console.log('Alerted');
 					$('#alertPlaceholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>'+
 						'<strong>Note: </strong>'+options.message+'</div>');
 				}
@@ -145,8 +141,6 @@ var TableView = Backbone.View.extend({
 		var command = new Command();
 		command.save(commandDetails, {
 			success: function(command, xhr) {
-				console.log('SUCCESS', xhr);
-				console.log('Saved! Navigating... /view/'+command.get('table.id').id);
 				that.render({
 					_id: command.get('table.id').id,
 					message: xhr.message
@@ -167,15 +161,12 @@ var Router = Backbone.Router.extend({
 		'view/:id' : 'tableView'
 	},
 	home: function() {
-		console.log('ROUTER: home');
 		tableList.render();
 	},
 	tableEdit: function(id) {
-		console.log('ROUTER: tableEdit('+id+')');
 		tableEdit.render({_id: id});
 	},
 	tableView: function(id) {
-		console.log('ROUTER: tableView('+id+')');
 		tableView.render({_id: id});
 	}
 })
