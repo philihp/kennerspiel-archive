@@ -60,6 +60,7 @@ h1,h2,h3,h4,h5,h6,legend {
 
 .bin {
 	border-radius: 4px;
+	padding: 10px;
 }
 
 body {
@@ -102,10 +103,36 @@ body {
   cursor: nodrop;
 }
 
-
-
-
-
-
-
-
+table.farm {
+}
+table.farm td {
+  max-height: 10px;
+  max-width: 10px;
+  height: 10px;
+  width: 10px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+table.farm td.farmtile {
+  max-height: 100px;
+  max-width: 100px;
+  height: 100px;
+  width: 100px;
+}
+table.farm td.hfence {
+  max-height: 10px;
+  max-width: 100px;
+  height: 10px;
+  width: 100px;
+}
+table.farm td.vfence {
+  max-width: 10px;
+  max-height: 100px;
+  width: 10px;
+  height: 100px;
+}
+table.farm td.vfence.fenced,
+table.farm td.hfence.fenced {
+  background-color: @color-brown; 
+}
