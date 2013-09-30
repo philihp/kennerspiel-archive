@@ -1,6 +1,9 @@
 package models;
 
-import org.codehaus.jackson.JsonNode;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.annotation.*;
+import com.fasterxml.jackson.annotation.*;
 
 import play.libs.Json;
 

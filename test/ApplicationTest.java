@@ -3,7 +3,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonNode;
+import com.fasterxml.jackson.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.annotation.*;
 import org.junit.*;
 
 import play.mvc.*;
