@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import game.Board;
 import play.data.Form;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Result;
@@ -38,9 +39,9 @@ public class Command extends Model {
 				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
 			jgen.writeStartObject();
-			jgen.writeNumberField("id", command.id);
-			jgen.writeStringField("command", command.command);
-			jgen.writeNumberField("table.id", command.table.id);
+			jgen.writeNumberField("id", command.getId());
+			jgen.writeStringField("command", command.getCommand());
+			jgen.writeNumberField("table.id", command.getTable().getId());
 			jgen.writeEndObject();
 		}
 	}
@@ -49,15 +50,40 @@ public class Command extends Model {
 			Integer.class, Command.class);
 
 	@Id
-	public Integer id;
+	private Integer id;
 
-	public String command;
+	@Required
+	private String command;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonBackReference
-	public Table table;
+	private Table table;
 	
 	@PostConstruct
 	public void init() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
 	}
 }

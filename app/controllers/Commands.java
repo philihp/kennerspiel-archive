@@ -17,21 +17,21 @@ public class Commands extends Controller {
   
     public static Result add() {
     	Command command = Form.form(Command.class).bindFromRequest().get();
-    	if(command.command == null || command.command.length() == 0) {
+    	if(command.getCommand() == null || command.getCommand().length() == 0) {
     		return badRequest(Response.json("Missing Command"));
     	}
-    	else if(command.command.equals("undo")) {
-    		Table table = Table.finder.byId(command.table.id);
+    	else if(command.getCommand().equals("undo")) {
+    		Table table = Table.finder.byId(command.getTable().getId());
     		if(table == null)
-    			return badRequest(Response.json("No such Table ID "+command.table.id));
+    			return badRequest(Response.json("No such Table ID "+command.getTable().getId()));
     		
-    		List<Command> commands = table.commands;
+    		List<Command> commands = table.getCommands();
     		if(commands.size() == 0) {
-    			return badRequest(Response.json("Table "+command.table.id+" has no moves to undo."));
+    			return badRequest(Response.json("Table "+command.getTable().getId()+" has no moves to undo."));
     		}
     		
     		Command c = commands.get(commands.size()-1);
-    		if("commit".equals(c.command)) {
+    		if("commit".equals(c.getCommand())) {
     			return badRequest(Response.json("You can't undo a commit."));
     		}
     		

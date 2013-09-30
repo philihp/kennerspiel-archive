@@ -14,6 +14,7 @@ import play.data.*;
 import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http.Request;
 import play.mvc.Result;
 import views.html.*;
 
@@ -21,19 +22,22 @@ public class Tables extends Controller {
   
     public static Result add() {
         Table table = Form.form(Table.class).bindFromRequest().get();
-        table.seed = new Random().nextInt();
-        table.game = "agricola2p";
+        
+        table.setSeed(new Random().nextInt());
+        table.setGame("agricola2p");
         table.save();
-        return ok(Json.toJson(table));
+        
+        JsonNode node = Json.toJson(table);
+        return ok(node);
     }
     
     public static Result get(Integer id) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Table table = Table.finder.byId(id);
-		table.board = (Board)Class.forName("game."+table.game+".Board").newInstance();
-		table.board.seedRandom(table.seed);
+		table.setBoard((Board)Class.forName("game."+table.getGame()+".Board").newInstance());
+		table.getBoard().seedRandom(table.getSeed());
 		
-		for(Command c : table.commands) {
-			table.board.runCommand(c.command);
+		for(Command c : table.getCommands()) {
+			table.getBoard().runCommand(c.getCommand());
 		}
 		
     	return ok(Json.toJson(table));
@@ -56,7 +60,6 @@ public class Tables extends Controller {
         Table table = tableForm.get();
         table.update();
         return ok(Json.toJson(table));
-
     }
     
 }

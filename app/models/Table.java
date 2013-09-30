@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.*;
 import com.fasterxml.jackson.annotation.*;
 import game.Board;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -31,18 +32,19 @@ public class Table extends Model {
 		public void serialize(Table table, JsonGenerator jgen,
 				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
+			
 			jgen.writeStartObject();
-			jgen.writeNumberField("id", table.id);
-			jgen.writeStringField("name", table.name);
-			jgen.writeStringField("game", table.game);
+			jgen.writeNumberField("id", table.getId());
+			jgen.writeStringField("name", table.getName());
+			jgen.writeStringField("game", table.getGame());
 			
 			provider.defaultSerializeField("board", table.board, jgen);
 			
 			jgen.writeArrayFieldStart("commands");
-			for(Command command : table.commands) {
+			if(table.getCommands() != null) for(Command command : table.getCommands()) {
 				jgen.writeStartObject();
-				jgen.writeNumberField("id", command.id);
-				jgen.writeStringField("command", command.command);
+				jgen.writeNumberField("id", command.getId());
+				jgen.writeStringField("command", command.getCommand());
 				jgen.writeEndObject();
 			}
 			jgen.writeEndArray();
@@ -56,20 +58,21 @@ public class Table extends Model {
 			Integer.class, Table.class);
 
 	@Id
-	public Integer id;
+	private Integer id;
 
-	public String name;
+	@Required
+	private String name;
 
-	public Integer seed;
+	private Integer seed;
 	
-	public String game;
+	private String game;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	@JsonManagedReference
-	public List<Command> commands;
+	private List<Command> commands;
 	
 	@Transient
-	public Board board;
+	private Board board;
 
 	@PostConstruct
 	public void init() {
@@ -77,4 +80,54 @@ public class Table extends Model {
 		//board.seedRandom(seed);
 		//doesn't seem to want to work here?
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getSeed() {
+		return seed;
+	}
+
+	public void setSeed(Integer seed) {
+		this.seed = seed;
+	}
+
+	public String getGame() {
+		return game;
+	}
+
+	public void setGame(String game) {
+		this.game = game;
+	}
+
+	public List<Command> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(List<Command> commands) {
+		this.commands = commands;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	
 }
