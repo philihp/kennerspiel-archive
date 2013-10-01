@@ -157,15 +157,15 @@
                         +1 Reed
                     </div>
                     
-                    <% var space = board.actions.Exp %>
+                    <% var space = board.actions.X %>
                     <% if(space.occupant == "red") { %>
-                    <div class="span2 action" data-command="Exp">
+                    <div class="span2 action" data-command="X">
                         <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-red.png")"/></div>
                     <% } else if(space.occupant == "blue") { %>
-                    <div class="span2 action" data-command="Exp">
+                    <div class="span2 action" data-command="X">
                         <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-blue.png")"/></div>
                     <% } else { %>
-                    <div class="span2 action usable" data-command="Exp">
+                    <div class="span2 action usable" data-command="X">
                     <% } %>
                         &rarr; 1 Fence<br />
                         Expansion<br />
@@ -316,7 +316,7 @@
                         </tr>
                         <tr>
                             <td data-y="5" data-x="8" class="vfence fenced"></td>
-                            <td data-y="5" data-x="9" class="farmtile">Cottage</td>
+                            <td data-y="5" data-x="9" class="farmtile"><img src="/assets/images/agricola2p/cottage.png"</td>
                             <td data-y="5" data-x="10" class="vfence fenced"></td>
                             <td data-y="5" data-x="11" class="farmtile"></td>
                             <td data-y="5" data-x="12" class="vfence"></td>

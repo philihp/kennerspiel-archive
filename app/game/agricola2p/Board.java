@@ -18,7 +18,7 @@ public class Board extends game.Board {
 		actions.put("WFen", new ActionWFen(this));
 		actions.put("SFen", new ActionSFen(this));
 		actions.put("RSW", new ActionRSW(this));
-		actions.put("Exp", new ActionExp(this));
+		actions.put("X", new ActionX(this));
 	}
 
 	public Farm redFarm = new Farm(this, "red");
