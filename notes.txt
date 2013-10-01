@@ -1,0 +1,12 @@
+base board has cottage:
+
+0 points, holds 1 animal
+
+other buildings:
+
+4 stalls (3s and 1r) 1 point holds 3 animals
+4 stables (5w or 5s, stalls) 4 points, holds 5 animals
+1 shelter (2w and 1s) gives 1 any animal, holds 1 animal
+1 open stables (3w or 3s, stalls) 2 points, holds 5 animals, immediately 1 horse or 1 cattle
+1 half-timbered house (3w+2s+1r, cottage), 5 points, holds 2 animals
+1 storage building (2w 1r), 1/2 point per own building material

@@ -1,10 +1,10 @@
 package game.agricola2p;
 
-public class ActionExp extends Action {
+public class ActionX extends Action {
 
 	public int fences = 0;
 	
-	public ActionExp(Board board) {
+	public ActionX(Board board) {
 		super(board);
 	}
 	
