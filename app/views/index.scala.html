@@ -2,7 +2,7 @@
     
     <div id="page" class="container"></div>
     
-    <script type="text/template" id="tables-list-template">
+    <script type="text/x-handlebars-template" id="tables-list-template">
         <h1>Tables</h1>
         <hr />
     
@@ -13,33 +13,28 @@
                     <th>Name</th>
                     <th>Game</th>
                     <th>Seed</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <% _.each(tables, function(table) { %>
+                {{#each tables}}
                     <tr>
-                        <td><a href="#/view/<%= table.get('id') %>"><%= table.get('name') %></a></td>
-                        <td><%= table.get('game') %></td>
-                        <td><%= table.get('seed') %></td>
-                        <td><a href="#/edit/<%= table.get('id') %>" class="btn">Edit</a></td>
+                        <td><a href="#/view/{{ this.id }}">{{ this.name }}</a></td>
+                        <td>{{ this.game }}</td>
+                        <td>{{ this.seed }}</td>
+                        <!--<td><a href="#/edit/{{ this.id }}" class="btn">Edit</a></td>-->
                     </tr>
-                <% }); %>
+                {{/each}}
             </tbody>
         </table>
     </script>
     
-    <script type="text/template" id="table-edit-template">
+    <script type="text/x-handlebars-template" id="table-edit-template">
         <form class="table-edit-form">
-            <legend><%= table ? 'Update' : 'Create' %> Table</legend>
+            <legend>Create Table</legend>
             <label>Name</label>
-            <input type="text" name="name" value="<%= table ? table.get('name') : '' %>" />
+            <input type="text" name="name" value="{{ table.name }}" />
             <hr />
-            <% if(table) { %>
-                <input type="hidden" name="id" value="<%= table.get('id') %>" />
-                <button type="button" class="btn btn-danger delete">Delete</button>
-            <% }; %>
-            <button type="submit" class="btn"><%= table ? 'Update' : 'Create' %></button>
+            <button type="submit" class="btn">Create</button>
         </form> 
     </script>
 
