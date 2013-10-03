@@ -33,6 +33,17 @@ Handlebars.JavaScriptCompiler.prototype.nameLookup = function(parent, name, type
 	}
 };
 
+Handlebars.registerHelper('equals', function(v1, v2, options) {
+	if(v1 == v2) {
+		return options.fn(this);
+	}
+	return options.inverse(this);
+});
+
+Handlebars.registerHelper("log", function(context) {
+	return console.log(context);
+});
+
 
 var Table = Backbone.RelationalModel.extend({
 	urlRoot: '/api/tables',
@@ -114,8 +125,8 @@ var TableView = Backbone.View.extend({
 		that.table = Table.findOrCreate(options);
 		that.table.fetch({
 			success: function(table) {
-				var template = _.template($('#table-view-template').html(), {table: table});
-				that.$el.html(template);
+				var template = Handlebars.compile($('#table-view-template').html());
+				that.$el.html(template(table));
 
 				if(options.message) {
 					$('#alertPlaceholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>'+

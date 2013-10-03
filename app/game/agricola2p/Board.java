@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 public class Board extends game.Board {
 	
 	public int round = 0;
@@ -38,7 +40,8 @@ public class Board extends game.Board {
 		case "commit" :
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
 			inputState = "placeWorker";
-			if(redFarm.workers == 0 && blueFarm.workers == 0) onNewRound();
+			if(redFarm.workers.size() == 0 &&
+			   blueFarm.workers.size() == 0) onNewRound();
 			break;
 		default :
 			Action action = actions.get(command);
@@ -49,23 +52,18 @@ public class Board extends game.Board {
 	}
 
 	public Farm activeFarm() {
-		if (currentPlayer == null) {
-			return null;
-		}
-		else if (redFarm.color.equals(currentPlayer)) {
+		if(redFarm.color.equals(currentPlayer)) {
 			return redFarm;
-		} else {
+		} else if(blueFarm.color.equals(currentPlayer)) {
 			return blueFarm;
+		} else {
+			throw new RuntimeException("Invalid value for currentPlayer=\""+currentPlayer+"\"");
 		}
 	}
 	
 	public void onNewRound() {
 		round++;
-		
 		currentPlayer = startingPlayer;
-		redFarm.workers = 3;
-		blueFarm.workers = 3;
-		
 		for(Action action : actions.values()) {
 			action.onNewRound();
 		}

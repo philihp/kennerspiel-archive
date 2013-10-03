@@ -1,13 +1,12 @@
 package game.agricola2p;
 
 public class ActionSP extends Action {
-
-	private Board board;
 	
 	public int wood = 0;
 	
 	public ActionSP(Board board) {
 		super(board);
+		System.out.println("Instantiating Action Starting Player with "+board);
 	}
 	
 	protected void onNewRound() {
@@ -21,7 +20,6 @@ public class ActionSP extends Action {
 		this.wood = 0;
 		
 		board.startingPlayer = board.activeFarm().color;
-		
 	}
 	
 }
