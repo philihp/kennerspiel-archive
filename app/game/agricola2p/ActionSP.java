@@ -6,7 +6,6 @@ public class ActionSP extends Action {
 	
 	public ActionSP(Board board) {
 		super(board);
-		System.out.println("Instantiating Action Starting Player with "+board);
 	}
 	
 	protected void onNewRound() {
