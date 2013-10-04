@@ -173,7 +173,7 @@
                 {{#with redFarm}}
                 <div class="red bin">
                     {{#each workers}}
-                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
+                        <div class="worker {{#if usable}}usable{{/if}}"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
                     {{/each}}
                     <ul>
                         <li>Wood:   {{wood}}</li>
@@ -240,7 +240,7 @@
                 {{#with blueFarm}}
                 <div class="blue bin">
                     {{#each workers}}
-                        <div class="worker usable"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
+                        <div class="worker {{#if usable}}usable{{/if}}"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
                     {{/each}}
                     <ul>
                         <li>Wood:   {{wood}}</li>

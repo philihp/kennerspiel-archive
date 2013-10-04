@@ -33,17 +33,33 @@ public class Board extends game.Board {
 	
 	public Board() {
 		onNewRound();
+		
+		for(Worker worker : activeFarm().workers) {
+			worker.setUsable(true);
+		}
 	}
 
 	public void runCommand(String command) {
 		switch(command) {
 		case "commit" :
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
+			
 			inputState = "placeWorker";
+			
 			if(redFarm.workers.size() == 0 &&
-			   blueFarm.workers.size() == 0) onNewRound();
+			   blueFarm.workers.size() == 0) {
+				onNewRound();
+			}
+			
+			for(Worker worker : activeFarm().workers) {
+				worker.setUsable(true);
+			}
+			
 			break;
 		default :
+			for(Worker worker : activeFarm().workers) {
+				worker.setUsable(false);
+			}
 			Action action = actions.get(command);
 			//if(action == null) then error, unknown command
 			if(action != null) 
@@ -67,7 +83,6 @@ public class Board extends game.Board {
 		for(Action action : actions.values()) {
 			action.onNewRound();
 		}
-		
 	}
 	
 }
