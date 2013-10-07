@@ -21,13 +21,13 @@ public class Commands extends Controller {
     		return badRequest(Response.json("Missing Command"));
     	}
     	else if(command.getCommand().equals("undo")) {
-    		Instance table = Instance.finder.byId(command.getTable().getId());
-    		if(table == null)
-    			return badRequest(Response.json("No such Table ID "+command.getTable().getId()));
+    		Instance instance = Instance.finder.byId(command.getInstance().getId());
+    		if(instance == null)
+    			return badRequest(Response.json("No such Table ID "+command.getInstance().getId()));
     		
-    		List<Command> commands = table.getCommands();
+    		List<Command> commands = instance.getCommands();
     		if(commands.size() == 0) {
-    			return badRequest(Response.json("Table "+command.getTable().getId()+" has no moves to undo."));
+    			return badRequest(Response.json("Instance "+command.getInstance().getId()+" has no moves to undo."));
     		}
     		
     		Command c = commands.get(commands.size()-1);

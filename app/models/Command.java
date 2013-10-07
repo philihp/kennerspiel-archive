@@ -41,7 +41,7 @@ public class Command extends Model {
 			jgen.writeStartObject();
 			jgen.writeNumberField("id", command.getId());
 			jgen.writeStringField("command", command.getCommand());
-			jgen.writeNumberField("table.id", command.getTable().getId());
+			jgen.writeNumberField("table.id", command.getInstance().getId());
 			jgen.writeEndObject();
 		}
 	}
@@ -79,11 +79,11 @@ public class Command extends Model {
 		this.command = command;
 	}
 
-	public Instance getTable() {
+	public Instance getInstance() {
 		return instance;
 	}
 
-	public void setTable(Instance table) {
-		this.instance = table;
+	public void setInstance(Instance instance) {
+		this.instance = instance;
 	}
 }
