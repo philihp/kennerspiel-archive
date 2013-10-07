@@ -20,14 +20,14 @@ $(function() {
 		drop: function(event, ui) {
 			
 			var commandDetails = {
-					"table.id" : tableView.table.id,
+					"instance.id" : instanceView.instance.id,
 					"command" : $(event.target).data('command')
 			};
 
 			var command = new Command();
 			command.save(commandDetails, {
 				success: function(command) {
-					tableView.render({_id: command.get('table.id').id});
+					instanceView.render({_id: command.get('instance.id').id});
 				},
 				error: function(command, xhr) {
 					$('#alertPlaceholder').html('<div class="alert alert-error"><a class="close" data-dismiss="alert">&times;</a>'+

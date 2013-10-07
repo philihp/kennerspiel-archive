@@ -5,7 +5,7 @@ import java.util.Random;
 
 import models.Command;
 import models.Response;
-import models.Table;
+import models.Instance;
 import play.data.*;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -21,7 +21,7 @@ public class Commands extends Controller {
     		return badRequest(Response.json("Missing Command"));
     	}
     	else if(command.getCommand().equals("undo")) {
-    		Table table = Table.finder.byId(command.getTable().getId());
+    		Instance table = Instance.finder.byId(command.getTable().getId());
     		if(table == null)
     			return badRequest(Response.json("No such Table ID "+command.getTable().getId()));
     		

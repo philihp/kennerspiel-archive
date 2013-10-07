@@ -57,7 +57,7 @@ public class Command extends Model {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonBackReference
-	private Table table;
+	private Instance instance;
 	
 	@PostConstruct
 	public void init() {
@@ -79,11 +79,11 @@ public class Command extends Model {
 		this.command = command;
 	}
 
-	public Table getTable() {
-		return table;
+	public Instance getTable() {
+		return instance;
 	}
 
-	public void setTable(Table table) {
-		this.table = table;
+	public void setTable(Instance table) {
+		this.instance = table;
 	}
 }

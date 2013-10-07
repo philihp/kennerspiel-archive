@@ -45,8 +45,8 @@ Handlebars.registerHelper("log", function(context) {
 });
 
 
-var Table = Backbone.RelationalModel.extend({
-	urlRoot: '/api/tables',
+var Instance = Backbone.RelationalModel.extend({
+	urlRoot: '/api/instances',
 	idAttribute: '_id',
 	relations: [{
 		type: Backbone.HasMany,
@@ -55,7 +55,7 @@ var Table = Backbone.RelationalModel.extend({
 
 
 		reverseRelation: {
-			key: 'table.id',
+			key: 'instance.id',
 			includeInJSON: '_id'
 		}
 	}]
@@ -64,48 +64,48 @@ var Command = Backbone.RelationalModel.extend({
 	urlRoot: '/api/commands',
 	idAttribute: '_id'
 });
-var TableCollection = Backbone.Collection.extend({
-	url: '/api/tables',
-	model: Table
+var InstanceCollection = Backbone.Collection.extend({
+	url: '/api/instances',
+	model: Instance
 });
 
-var TableList = Backbone.View.extend({
+var InstanceList = Backbone.View.extend({
 	el: '#page',
 	events: {
 	},
 	render: function() {
 		var that = this;
-		var tables = new TableCollection();
-		tables.fetch({
+		var instances = new InstanceCollection();
+		instances.fetch({
 			success: function() {
-				var template = Handlebars.compile($('#tables-list-template').html());
-				that.$el.html(template({tables: tables.models}));
+				var template = Handlebars.compile($('#instances-list-template').html());
+				that.$el.html(template({instances: instances.models}));
 			}
 		});
 	}
 });
 
-var TableEdit = Backbone.View.extend({
+var InstanceEdit = Backbone.View.extend({
 	el: '#page',
 	events: {
-		'submit .table-edit-form': 'saveTable',
-		'click .delete' : 'deleteTable'
+		'submit .instance-edit-form': 'saveInstance',
+		'click .delete' : 'deleteInstance'
 	},
 	render: function(options) {
 		var that = this;
-		that.table = Table.findOrCreate({id: options.id});
-		that.table.fetch({
-			success: function(table) {
-				var template = Handlebars.compile($('#table-edit-template').html());
-				that.$el.html(template({table: table}));
+		that.instance = Instance.findOrCreate({id: options.id});
+		that.instance.fetch({
+			success: function(instance) {
+				var template = Handlebars.compile($('#instance-edit-template').html());
+				that.$el.html(template({instance: instance}));
 			}
 		});
 	},
-	saveTable: function(ev) {
-		var tableDetails = $(ev.currentTarget).serializeObject();
-		var table = new Table();
-		table.save(tableDetails, {
-			success: function (table) {
+	saveInstance: function(ev) {
+		var instanceDetails = $(ev.currentTarget).serializeObject();
+		var instance = new Instance();
+		instance.save(instanceDetails, {
+			success: function (instance) {
 				router.navigate('', {trigger: true});
 			}
 		})
@@ -114,7 +114,7 @@ var TableEdit = Backbone.View.extend({
 });
 
 
-var TableView = Backbone.View.extend({
+var InstanceView = Backbone.View.extend({
 	el: '#page',
 	events: {
 		'submit .commit-form': 'sendCommand',
@@ -122,11 +122,11 @@ var TableView = Backbone.View.extend({
 	},
 	render: function(options) {
 		var that = this;
-		that.table = Table.findOrCreate(options);
-		that.table.fetch({
-			success: function(table) {
-				var template = Handlebars.compile($('#table-view-template').html());
-				that.$el.html(template(table));
+		that.instance = Instance.findOrCreate(options);
+		that.instance.fetch({
+			success: function(instance) {
+				var template = Handlebars.compile($('#instance-view-template').html());
+				that.$el.html(template(instance));
 
 				if(options.message) {
 					$('#alertPlaceholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>'+
@@ -141,7 +141,7 @@ var TableView = Backbone.View.extend({
 
 		var that = this;
 		var commandDetails = {
-				'table.id': this.table,
+				'instance.id': this.instance,
 				'command': $(ev.target).data('command')
 		}
 
@@ -149,7 +149,7 @@ var TableView = Backbone.View.extend({
 		command.save(commandDetails, {
 			success: function(command, xhr) {
 				that.render({
-					_id: command.get('table.id').id,
+					_id: command.get('instance.id').id,
 					message: xhr.message
 				});
 			},
@@ -164,23 +164,23 @@ var TableView = Backbone.View.extend({
 var Router = Backbone.Router.extend({
 	routes: {
 		'' : 'home',
-		'new' : 'tableEdit',
-		'view/:id' : 'tableView'
+		'new' : 'instanceEdit',
+		'view/:id' : 'instanceView'
 	},
 	home: function() {
-		tableList.render();
+		instanceList.render();
 	},
-	tableEdit: function(id) {
-		tableEdit.render({_id: id});
+	instanceEdit: function(id) {
+		instanceEdit.render({_id: id});
 	},
-	tableView: function(id) {
-		tableView.render({_id: id});
+	instanceView: function(id) {
+		instanceView.render({_id: id});
 	}
 })
 
-var tableList = new TableList();
-var tableEdit = new TableEdit();
-var tableView = new TableView();
+var instanceList = new InstanceList();
+var instanceEdit = new InstanceEdit();
+var instanceView = new InstanceView();
 var router = new Router();
 
 Backbone.history.start();

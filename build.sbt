@@ -6,7 +6,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  "com.google.guava" % "guava" % "15.0"
+  "com.google.guava" % "guava" % "15.0",
+  "mysql" % "mysql-connector-java" % "5.1.24"
 )
 
 play.Project.playJavaSettings

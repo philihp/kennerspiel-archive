@@ -1,38 +1,35 @@
+# --- Created by Ebean DDL
+# To stop Ebean DDL generation, remove this comment and start using Evolutions
+
 # --- !Ups
 
 create table command (
-  id                        bigint not null,
-  table_id                  bigint not null,
+  id                        integer auto_increment not null,
   command                   varchar(255),
+  instance_id               integer,
   constraint pk_command primary key (id))
 ;
 
-create table table (
-  id                        bigint not null,
+create table instance (
+  id                        integer auto_increment not null,
   name                      varchar(255),
   seed                      integer,
   game                      varchar(255),
-  constraint pk_table primary key (id))
+  constraint pk_instance primary key (id))
 ;
 
-create sequence command_seq;
+alter table command add constraint fk_command_instance_1 foreign key (instance_id) references instance (id) on delete restrict on update restrict;
+create index ix_command_instance_1 on command (instance_id);
 
-create sequence table_seq;
 
-alter table command add constraint fk_command_table_1 foreign key (table_id) references table (id) on delete restrict on update restrict;
-create index ix_command_table_1 on command (table_id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists command;
+drop table command;
 
-drop table if exists table;
+drop table instance;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists command_seq;
-
-drop sequence if exists table_seq;
+SET FOREIGN_KEY_CHECKS=1;
 

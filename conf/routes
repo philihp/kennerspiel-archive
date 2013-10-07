@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET		/api/tables						controllers.Tables.getAll()
-GET		/api/tables/:id					controllers.Tables.get(id: Integer)
-POST    /api/tables						controllers.Tables.add()
-PUT     /api/tables/:id					controllers.Tables.update(id: Integer)
-DELETE  /api/tables/:id					controllers.Tables.delete(id: Integer)
+GET		/api/instances					controllers.Instances.getAll()
+GET		/api/instances/:id				controllers.Instances.get(id: Integer)
+POST    /api/instances					controllers.Instances.add()
+PUT     /api/instances/:id				controllers.Instances.update(id: Integer)
+DELETE  /api/instances/:id				controllers.Instances.delete(id: Integer)
 
 POST	/api/commands					controllers.Commands.add()
 GET		/api/commands/:id				controllers.Commands.get(id: Integer)

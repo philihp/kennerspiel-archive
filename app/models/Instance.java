@@ -20,28 +20,28 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-@JsonSerialize(using = Table.Serializer.class)
-public class Table extends Model {
+@JsonSerialize(using = Instance.Serializer.class)
+public class Instance extends Model {
 	
-	static class Serializer extends JsonSerializer<Table>{
+	static class Serializer extends JsonSerializer<Instance>{
 
 		/**
 		 * Overrides normal serialize operation by adding the table.id field
 		 */
 		@Override
-		public void serialize(Table table, JsonGenerator jgen,
+		public void serialize(Instance instance, JsonGenerator jgen,
 				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
 			
 			jgen.writeStartObject();
-			jgen.writeNumberField("id", table.getId());
-			jgen.writeStringField("name", table.getName());
-			jgen.writeStringField("game", table.getGame());
+			jgen.writeNumberField("id", instance.getId());
+			jgen.writeStringField("name", instance.getName());
+			jgen.writeStringField("game", instance.getGame());
 			
-			provider.defaultSerializeField("board", table.board, jgen);
+			provider.defaultSerializeField("board", instance.board, jgen);
 			
 			jgen.writeArrayFieldStart("commands");
-			if(table.getCommands() != null) for(Command command : table.getCommands()) {
+			if(instance.getCommands() != null) for(Command command : instance.getCommands()) {
 				jgen.writeStartObject();
 				jgen.writeNumberField("id", command.getId());
 				jgen.writeStringField("command", command.getCommand());
@@ -54,8 +54,8 @@ public class Table extends Model {
 	}
 	
 	
-	public static Model.Finder<Integer, Table> finder = new Model.Finder<Integer, Table>(
-			Integer.class, Table.class);
+	public static Model.Finder<Integer, Instance> finder = new Model.Finder<Integer, Instance>(
+			Integer.class, Instance.class);
 
 	@Id
 	private Integer id;

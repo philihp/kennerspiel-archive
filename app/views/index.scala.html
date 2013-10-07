@@ -2,11 +2,11 @@
     
     <div id="page" class="container"></div>
     
-    <script type="text/x-handlebars-template" id="tables-list-template">
-        <h1>Tables</h1>
+    <script type="text/x-handlebars-template" id="instances-list-template">
+        <h1>Instances</h1>
         <hr />
     
-        <a href="#/new" class="btn btn-primary">New Table</a>
+        <a href="#/new" class="btn btn-primary">New Instance</a>
         <table class="table striped">
             <thead>
                 <tr>
@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each tables}}
+                {{#each instances}}
                     <tr>
                         <td><a href="#/view/{{ id }}">{{ name }}</a></td>
                         <td>{{ game }}</td>
@@ -28,17 +28,17 @@
         </table>
     </script>
     
-    <script type="text/x-handlebars-template" id="table-edit-template">
-        <form class="table-edit-form">
-            <legend>Create Table</legend>
+    <script type="text/x-handlebars-template" id="instance-edit-template">
+        <form class="instance-edit-form">
+            <legend>Create Instance</legend>
             <label>Name</label>
-            <input type="text" name="name" value="{{ table.name }}" />
+            <input type="text" name="name" value="{{ instance.name }}" />
             <hr />
             <button type="submit" class="btn">Create</button>
         </form> 
     </script>
 
-    <script type="text/x-handlebars-template" id="table-view-template">
+    <script type="text/x-handlebars-template" id="instance-view-template">
         <h1>Agricola: All Creatures Big &amp; Small</h1>
         <hr />
         
