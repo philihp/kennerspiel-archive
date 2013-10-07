@@ -12,6 +12,7 @@ public class ActionSFen extends Action {
 	
 	protected void onTake() {
 		super.onTake();
+		//board.activeFarm().buildableFences
 	}
 	
 }
