@@ -23,8 +23,6 @@ public class Instances extends Controller {
     public static Result add() {
         Instance instance = Form.form(Instance.class).bindFromRequest().get();
         
-        System.out.println("creating instance");
-        
         instance.setSeed(new Random().nextInt());
         instance.setGame("agricola2p");
         instance.save();
