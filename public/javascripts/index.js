@@ -118,7 +118,8 @@ var InstanceView = Backbone.View.extend({
 	el: '#page',
 	events: {
 		'submit .commit-form': 'sendCommand',
-		'submit .undo-form': 'sendCommand'
+		'submit .undo-form': 'sendCommand',
+		'submit .command-form': 'sendCommand'
 	},
 	render: function(options) {
 		var that = this;

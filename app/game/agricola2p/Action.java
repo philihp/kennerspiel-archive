@@ -1,5 +1,7 @@
 package game.agricola2p;
 
+import game.agricola2p.Board.State;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 abstract class Action {
@@ -32,8 +34,12 @@ abstract class Action {
 		Worker worker = board.activeFarm().workers.remove(0);
 		worker.setUsable(false);
 		this.occupant = worker;
-		
-		board.inputState = "waitingOnCommit";
+
+		board.canCommit = true;
+	}
+	
+	protected void onTake(String[] params) {
+		//typically follow-up moves, such as "build fence" "which fence" "which fence" "which fence"
 	}
 	
 }

@@ -7,7 +7,6 @@ $(function() {
 		},
 		stop: function(event) {
 		},
-		opacity: 0.7,
 		zIndex: 100,
 		cursor: 'grabbing',
 		cursorAt: { left: 20, top: 20 },

@@ -8,8 +8,17 @@ import javax.management.RuntimeErrorException;
 
 public class Board extends game.Board {
 	
+	public static enum State {
+		PLACE_WORKER,
+		EXPANDING_FARM,
+		WAITING_ON_COMMIT
+	}
+	
+	public boolean canCommit = false;
+	
 	public int round = 0;
-
+	public int expansions = 4;
+	public int troughs = 10;
 	
 	public Map<String, Action> actions = new HashMap<String, Action>();
 	{
@@ -29,7 +38,9 @@ public class Board extends game.Board {
 	public String startingPlayer = redFarm.color;
 	public String currentPlayer;
 	
-	public String inputState = "placeWorker";
+	public State inputState = State.PLACE_WORKER;
+	
+	private String commandRoot = "";
 	
 	public Board() {
 		onNewRound();
@@ -44,7 +55,7 @@ public class Board extends game.Board {
 		case "commit" :
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
 			
-			inputState = "placeWorker";
+			inputState = State.PLACE_WORKER;
 			
 			if(redFarm.workers.size() == 0 &&
 			   blueFarm.workers.size() == 0) {
@@ -55,15 +66,27 @@ public class Board extends game.Board {
 				worker.setUsable(true);
 			}
 			
+			canCommit = false;
+			
 			break;
 		default :
 			for(Worker worker : activeFarm().workers) {
 				worker.setUsable(false);
 			}
-			Action action = actions.get(command);
+			
+			String[] commandTokens = command.split(":");
+			if(commandTokens[0].equals("") == false) {
+				commandRoot = commandTokens[0];
+			}
+			
+			Action action = actions.get(commandRoot);
 			//if(action == null) then error, unknown command
-			if(action != null) 
-				action.onTake();
+			if(action != null) {
+				if(commandTokens.length == 1)
+					action.onTake();
+				else
+					action.onTake(commandTokens);
+			}
 		}
 	}
 

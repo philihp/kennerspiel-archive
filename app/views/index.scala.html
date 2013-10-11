@@ -156,7 +156,8 @@
         
             </div>
             <div class="span4">
-                Feeding Troughs: 10<br />
+                Expansions: {{expansions}}<br />
+                Feeding Troughs: {{troughs}}<br />
                 Expansions:
                     <div>[Half-Timbered House]</div>
                     <div>[Storage Building]</div>
@@ -165,7 +166,15 @@
                 Stalls: 4<br />
             </div>
         </div>
-        
+
+        {{#equals inputState "EXPANDING_FARM"}}
+            <form class="command-form" class="form-inline" data-command=":L">
+                <button type="submit" class="btn">Expand Left</button>
+            </form>
+            <form class="command-form" class="form-inline" data-command=":R">
+                <button type="submit" class="btn">Expand Right</button>
+            </form>
+        {{/equals}}
         
         <div class="row">
             <div class="span6">
@@ -175,63 +184,28 @@
                     {{#each workers}}
                         <div class="worker {{#if usable}}usable{{/if}}"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
                     {{/each}}
+                    
                     <ul>
                         <li>Wood:   {{wood}}</li>
                         <li>Stone:  {{stone}}</li>
                         <li>Reed:   {{reed}}</li>
                         <li>Fences: {{fences}}</li>
                     </ul>
-                    <table border="1" class="farm">
+                    <table class="farm">
+                        {{#each terrain}}
                         <tr>
-                            <td data-y="0" data-x="8"></td>
-                            <td data-y="0" data-x="9" class="hfence"></td>
-                            <td data-y="0" data-x="10"></td>
-                            <td data-y="0" data-x="11" class="hfence"></td>
-                            <td data-y="0" data-x="12"></td>
+                            {{#each this}}
+                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}fenced{{/if}}">
+                                    {{#if building}}
+                                        <img src="/assets/images/agricola2p/{{building}}.png" />
+                                    {{/if}}
+                                </td>
+                            {{/each}}
                         </tr>
-                        <tr>
-                            <td data-y="1" data-x="8" class="vfence"></td>
-                            <td data-y="1" data-x="9" class="farmtile"></td>
-                            <td data-y="1" data-x="10" class="vfence"></td>
-                            <td data-y="1" data-x="11" class="farmtile"></td>
-                            <td data-y="1" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="2" data-x="8"></td>
-                            <td data-y="2" data-x="9" class="hfence"></td>
-                            <td data-y="2" data-x="10"></td>
-                            <td data-y="2" data-x="11" class="hfence"></td>
-                            <td data-y="2" data-x="12"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="3" data-x="8" class="vfence"></td>
-                            <td data-y="3" data-x="9" class="farmtile"></td>
-                            <td data-y="3" data-x="10" class="vfence"></td>
-                            <td data-y="3" data-x="11" class="farmtile"></td>
-                            <td data-y="3" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="4" data-x="8"></td>
-                            <td data-y="4" data-x="9" class="hfence fenced"></td>
-                            <td data-y="4" data-x="10"></td>
-                            <td data-y="4" data-x="11" class="hfence"></td>
-                            <td data-y="4" data-x="12"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="5" data-x="8" class="vfence fenced"></td>
-                            <td data-y="5" data-x="9" class="farmtile"><img src="/assets/images/agricola2p/cottage.png"</td>
-                            <td data-y="5" data-x="10" class="vfence fenced"></td>
-                            <td data-y="5" data-x="11" class="farmtile"></td>
-                            <td data-y="5" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="6" data-x="8"></td>
-                            <td data-y="6" data-x="9" class="hfence fenced"></td>
-                            <td data-y="6" data-x="10"></td>
-                            <td data-y="6" data-x="11" class="hfence"></td>
-                            <td data-y="6" data-x="12"></td>
-                        </tr>
+                        {{/each}}
                     </table>
+                    
+                    
                 </div>
                 {{/with}}
             </div>
@@ -249,56 +223,18 @@
                         <li>Fences: {{fences}}</li>
                     </ul>
                     
-                    <table border="1" class="farm">
+                    <table class="farm">
+                        {{#each terrain}}
                         <tr>
-                            <td data-y="0" data-x="8"></td>
-                            <td data-y="0" data-x="9" class="hfence"></td>
-                            <td data-y="0" data-x="10"></td>
-                            <td data-y="0" data-x="11" class="hfence"></td>
-                            <td data-y="0" data-x="12"></td>
+                            {{#each this}}
+                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}fenced{{/if}}">
+                                    {{#if building}}
+                                        <img src="/assets/images/agricola2p/{{building}}.png" />
+                                    {{/if}}
+                                </td>
+                            {{/each}}
                         </tr>
-                        <tr>
-                            <td data-y="1" data-x="8" class="vfence"></td>
-                            <td data-y="1" data-x="9" class="farmtile"></td>
-                            <td data-y="1" data-x="10" class="vfence"></td>
-                            <td data-y="1" data-x="11" class="farmtile"></td>
-                            <td data-y="1" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="2" data-x="8"></td>
-                            <td data-y="2" data-x="9" class="hfence"></td>
-                            <td data-y="2" data-x="10"></td>
-                            <td data-y="2" data-x="11" class="hfence"></td>
-                            <td data-y="2" data-x="12"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="3" data-x="8" class="vfence"></td>
-                            <td data-y="3" data-x="9" class="farmtile"></td>
-                            <td data-y="3" data-x="10" class="vfence"></td>
-                            <td data-y="3" data-x="11" class="farmtile"></td>
-                            <td data-y="3" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="4" data-x="8"></td>
-                            <td data-y="4" data-x="9" class="hfence fenced"></td>
-                            <td data-y="4" data-x="10"></td>
-                            <td data-y="4" data-x="11" class="hfence"></td>
-                            <td data-y="4" data-x="12"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="5" data-x="8" class="vfence fenced"></td>
-                            <td data-y="5" data-x="9" class="farmtile"><img src="/assets/images/agricola2p/cottage.png"</td>
-                            <td data-y="5" data-x="10" class="vfence fenced"></td>
-                            <td data-y="5" data-x="11" class="farmtile"></td>
-                            <td data-y="5" data-x="12" class="vfence"></td>
-                        </tr>
-                        <tr>
-                            <td data-y="6" data-x="8"></td>
-                            <td data-y="6" data-x="9" class="hfence fenced"></td>
-                            <td data-y="6" data-x="10"></td>
-                            <td data-y="6" data-x="11" class="hfence"></td>
-                            <td data-y="6" data-x="12"></td>
-                        </tr>
+                        {{/each}}
                     </table>
                 </div>
                 {{/with}}
@@ -314,11 +250,11 @@
                 <form class="undo-form" class="form-inline" data-command="undo">
                     <button type="submit" class="btn">Undo</button>
                 </form>
+                {{#if board.canCommit}}
                 <form class="commit-form" class="form-inline" data-command="commit">
-                    {{#equals board.inputState "waitingOnCommit"}}
                         <button type="submit" class="btn">Commit</button>
-                    {{/equals}}
                 </form>
+                {{/if}}
             </div>
 
             <div class="span6">
