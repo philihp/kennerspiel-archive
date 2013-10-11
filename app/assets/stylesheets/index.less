@@ -1,3 +1,4 @@
+/*
 @font-face {
     font-family: 'Helvetica Neue Header';
     src: url('../fonts/helveticaneue-bold-webfont.eot');
@@ -7,7 +8,19 @@
          url('../fonts/helveticaneue-bold-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-
+}
+*/
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat-Regular'), url(https://themes.googleusercontent.com/static/fonts/montserrat/v3/zhcz-_WihjSQC0oHJ9TCYBsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 
 /* colors by Cynthia Brewer, colorbrewer2.org */
@@ -39,10 +52,12 @@ alternate color set
 */
 h1,h2,h3,h4,h5,h6,legend {
 	text-rendering: geometricPrecision;
+	font-family: "Montserrat", sans-serif;
+	
+	/*
 	font-family: 'Helvetica Neue Header';
+	*/
 }
-
-
 .half-action {
 	border-radius: 4px;
 	background-color: @color-grey;
