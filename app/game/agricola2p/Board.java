@@ -13,7 +13,8 @@ public class Board extends game.Board {
 		PLACE_WORKER,
 		EXPANDING_FARM,
 		WAITING_ON_COMMIT,
-		BUILDING_FENCES
+		BUILDING_FENCES,
+		BUILDING_TROUGHS
 	}
 	
 	public boolean canCommit = false;
@@ -36,6 +37,7 @@ public class Board extends game.Board {
 		actions.put("SFen", new ActionSFen(this));
 		actions.put("RSW", new ActionRSW(this));
 		actions.put("X", new ActionX(this));
+		actions.put("Trough", new ActionTrough(this));
 	}
 
 	public Farm redFarm = new Farm(this, "red");

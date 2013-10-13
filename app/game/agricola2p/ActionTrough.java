@@ -4,7 +4,7 @@ import game.GameError;
 import game.agricola2p.ActionX.TaskExpansion;
 import game.agricola2p.Board.State;
 
-public class ActionSFen extends Action {
+public class ActionTrough extends Action {
 
 	public class TaskBuyStoneFence extends Task {
 
@@ -13,12 +13,12 @@ public class ActionSFen extends Action {
 		}
 
 		public boolean getDisabled() {
-			return (board.activeFarm().stone < 2) || (board.activeFarm().fences < 1);
+			return board.troughs == 0 || board.activeFarm().wood < 3;
 		}
 
 	}
 	
-	public ActionSFen(Board board) {
+	public ActionTrough(Board board) {
 		super(board);
 	}
 
@@ -28,28 +28,25 @@ public class ActionSFen extends Action {
 	
 	protected void onTake() throws GameError {
 		super.onTake();
-		board.inputState = State.BUILDING_FENCES;
-		board.tasks.add(new TaskBuyStoneFence(board, "Buy Additional Fence", ":Buy"));
+		board.inputState = State.BUILDING_TROUGHS;
+		board.tasks.add(new TaskBuyStoneFence(board, "Buy Additional Trough", ":Buy"));
 		
-		board.buildable.add(new Fence(board));
-		board.activeFarm().fences--;
-		
-		if(board.activeFarm().fences >= 1) {
-			board.buildable.add(new Fence(board));
-			board.activeFarm().fences--;
-		}
+		board.buildable.add(new Trough(board));
+		board.troughs--;
 	}
 
 	protected void onTake(String[] params) throws GameError {
+		System.out.print("TAKE");
+		for(String param : params) System.out.print(" "+param);
+		System.out.println();
+		
 		switch(params[1]) {
-		case "Fence" :
-			if(board.buildable.isEmpty()) {
-				throw new GameError("No fences available to build");
-			}
+		case "Trough" :
 			try {
 				Integer x = Integer.parseInt(params[2]);
 				Integer y = Integer.parseInt(params[3]);
-				((LotFence)board.activeFarm().terrain.get(y, x)).built = true;
+				LotPasture lot = (LotPasture)board.activeFarm().terrain.get(y, x);
+				lot.trough = true;
 			}
 			catch(ArrayIndexOutOfBoundsException | NumberFormatException | ClassCastException e) {
 				throw new GameError("Invalid Location ("+params[2]+","+params[3]+")");
@@ -57,13 +54,13 @@ public class ActionSFen extends Action {
 			board.buildable.remove(board.buildable.size()-1);
 			break;
 		case "Buy" :
-			if(board.activeFarm().stone < 2) {
-				throw new GameError("Not enough stone to build a fence");
+			if(board.activeFarm().wood < 3) {
+				throw new GameError("Not enough wood to build another trough");
 			} 
 			else {
-				board.activeFarm().stone -= 2;
-				board.activeFarm().fences--;
-				board.buildable.add(new Fence(board));
+				board.activeFarm().wood -= 3;
+				board.troughs--;
+				board.buildable.add(new Trough(board));
 			}
 			break;
 		default:
@@ -73,6 +70,6 @@ public class ActionSFen extends Action {
 	
 	@Override
 	public boolean getUsable() {
-		return super.getUsable() && board.activeFarm().stone >= 2 && board.activeFarm().fences >= 1;
+		return super.getUsable() && board.troughs >= 1;
 	}
 }

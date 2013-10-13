@@ -12,13 +12,11 @@ abstract class Buildable {
 	
 	protected Board board;
 	
-	public String target;
 	public String type;
 	
-	public Buildable(Board board, String type, String target) {
+	public Buildable(Board board, String type) {
 		this.board = board;
 		this.type = type;
-		this.target = target;
 	}
 	
 	public boolean getDisabled() {

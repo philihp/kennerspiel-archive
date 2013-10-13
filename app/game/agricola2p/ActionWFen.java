@@ -55,7 +55,7 @@ public class ActionWFen extends Action {
 			else {
 				board.activeFarm().wood -= 1;
 				board.activeFarm().fences--;
-				board.buildable.add(new Fence(board, "fence"));
+				board.buildable.add(new Fence(board));
 			}
 			break;
 		default:

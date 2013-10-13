@@ -129,15 +129,19 @@
                     {{/with}}
                 </div>
                 <div class="row">
-                    <div class="span2 action">3 Stone 1 Reed &rarr; Stall</div>
-                    <div class="span2 action">
+                    <div class="span2 action {{#if usable}}usable{{/if}}">3 Stone 1 Reed &rarr; Stall</div>
+                    {{#with actions.Trough}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Trough">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
                         +1 Trough<br />
                         3 Wood &rarr; Trough
                     </div>
+                    {{/with}}
                     <div class="span2 action">&rarr; 1 Reed (1 Sheep)</div>
                     <div class="span2 action">&rarr; 1 Boar (1 sheep)</div>
                 </div>
-                <!--
                 <div class="row">
                     <div class="span2 action">
                         5 Wood/5 Stone<br />
@@ -154,7 +158,6 @@
                     <div class="span2 action">&rarr; 1 Cattle (1 Boar)</div>
                     <div class="span2 action">&rarr; 1 Horse (1 Sheep)</div>
                 </div>
-                -->
         
             </div>
             <div class="span4">
@@ -175,7 +178,7 @@
             </form>
         {{/each}}
         {{#each buildable}}
-            <div class="buildable {{type}}" data-target="{{target}}">Drag Me</div>
+            <div class="buildable {{type}}">Drag</div>
         {{/each}}
         
         <div class="row">
@@ -197,11 +200,29 @@
                         {{#each terrain}}
                         <tr>
                             {{#each this}}
-                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}} {{#if enclosed}}enclosed{{/if}}">
-                                    {{#if building}}
-                                        <img src="/assets/images/agricola2p/{{building}}.png" />
-                                    {{/if}}
-                                </td>
+                                {{#equals type "hfence"}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}}">
+                                    </td>
+                                {{/equals}}
+                                {{#equals type "vfence"}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}}">
+                                    </td>
+                                {{/equals}}
+                                {{#equals type "farmtile"}}
+                                    {{log this}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#if enclosed}}enclosed{{/if}}">
+                                        {{#if trough}}
+                                            <div class="trough"><img src="/assets/images/agricola2p/trough.png" /></div>
+                                        {{/if}}
+                                        {{#if building}}
+                                            <div class="building"><img src="/assets/images/agricola2p/{{building}}.png" /></div>
+                                        {{/if}}
+                                        
+                                    </td>
+                                {{/equals}}
+                                {{#unless type}}
+                                    <td data-y="{{y}}" data-x="{{x}}"></td>
+                                {{/unless}}
                             {{/each}}
                         </tr>
                         {{/each}}
@@ -229,11 +250,29 @@
                         {{#each terrain}}
                         <tr>
                             {{#each this}}
-                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}} {{#if enclosed}}enclosed{{/if}}">
-                                    {{#if building}}
-                                        <img src="/assets/images/agricola2p/{{building}}.png" />
-                                    {{/if}}
-                                </td>
+                                {{#equals type "hfence"}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}}">
+                                    </td>
+                                {{/equals}}
+                                {{#equals type "vfence"}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}built{{else}}unbuilt{{/if}}">
+                                    </td>
+                                {{/equals}}
+                                {{#equals type "farmtile"}}
+                                    {{log this}}
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#if enclosed}}enclosed{{/if}}">
+                                        {{#if trough}}
+                                            <div class="trough"><img src="/assets/images/agricola2p/trough.png" /></div>
+                                        {{/if}}
+                                        {{#if building}}
+                                            <div class="building"><img src="/assets/images/agricola2p/{{building}}.png" /></div>
+                                        {{/if}}
+                                        
+                                    </td>
+                                {{/equals}}
+                                {{#unless type}}
+                                    <td data-y="{{y}}" data-x="{{x}}"></td>
+                                {{/unless}}
                             {{/each}}
                         </tr>
                         {{/each}}

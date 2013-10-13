@@ -55,7 +55,6 @@ public class ActionX extends Action {
 			farm.colRangeMin -= 2;
 		} else
 			throw new RuntimeException("Unknown Param " + params[1]);
-		;
 
 		ArrayTable<Integer, Integer, Lot> terrain = farm.createTerrainTable();
 		terrain.putAll(farm.terrain);
@@ -78,6 +77,7 @@ public class ActionX extends Action {
 			}
 		}
 
+		board.expansions--;
 		board.inputState = State.WAITING_ON_COMMIT;
 	}
 
