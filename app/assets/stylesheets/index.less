@@ -98,7 +98,7 @@ body {
 }
 
 .actiondrophover {
-  background-color: @color-orange;
+  background-color: @color-green;
 }
 
 .ui-draggable {
@@ -118,6 +118,15 @@ body {
   cursor: nodrop;
 }
 
+h3.active:after {
+  font-size: small;
+  font-weight: normal;
+  content: " (active)";
+  right: 0px;
+  background-color: @color-orange;
+  padding: 0 20px 0 20px;
+  float: right;
+}
 table.farm {
 }
 table.farm td {
@@ -129,6 +138,9 @@ table.farm td {
 table.farm td.farmtile {
   height: 80px;
   width: 80px;
+}
+table.farm td.farmtile.enclosed {
+  background-color: @color-green;
 }
 table.farm td.farmtile img {
   width: 80px;
@@ -144,7 +156,21 @@ table.farm td.vfence {
   max-width: 8px;
   width: 8px;
 }
-table.farm td.vfence.fenced,
-table.farm td.hfence.fenced {
+table.farm td.vfence.built,
+table.farm td.hfence.built {
   background-color: @color-brown; 
+}
+
+.buildable.fence {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid @color-dark-grey;
+  background-color: @color-brown;
+  margin: 2px;
+  text-align: center;
+}
+.buildhover {
+  background-color: @color-green;
 }

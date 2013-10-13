@@ -1,5 +1,7 @@
 package game.agricola2p;
 
+import com.google.common.collect.ArrayTable;
+
 /**
  * Things that might exist on the landscape should extend this.
  */
@@ -11,6 +13,7 @@ public class LotPasture extends Lot{
 	public int horses;
 	public boolean trough;
 	public String building;
+	public boolean enclosed;
 	
 	public LotPasture(int x, int y) {
 		super(x,y);

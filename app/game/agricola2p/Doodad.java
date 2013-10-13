@@ -8,17 +8,17 @@ package game.agricola2p;
  * @author philihp
  *
  */
-abstract class Task {
+abstract class Doodad {
 	
 	protected Board board;
 	
-	public String label;
-	public String command;
+	public String target;
+	public String type;
 	
-	public Task(Board board, String label, String command) {
+	public Doodad(Board board, String type, String target) {
 		this.board = board;
-		this.label = label;
-		this.command = command;
+		this.type = type;
+		this.target = target;
 	}
 	
 	public boolean getDisabled() {

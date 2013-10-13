@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
-
 public class Board extends game.Board {
 	
 	public static enum State {
@@ -25,12 +23,9 @@ public class Board extends game.Board {
 	public int expansions = 4;
 	public int troughs = 10;
 	
-	public int buildableFences = 0;
-	public int buildableTroughs = 0;
-	public int buildableStables = 0;
-	public int buildableStalls = 0;
-	
 	public List<Task> tasks = new ArrayList<Task>();
+	
+	public List<Doodad> buildable = new ArrayList<Doodad>();
 	
 	public Map<String, Action> actions = new HashMap<String, Action>();
 	{
@@ -65,8 +60,8 @@ public class Board extends game.Board {
 	public void runCommand(String command) throws GameError {
 		switch(command) {
 		case "commit" :
-			buildableFences = 0;
 			tasks.clear();
+			buildable.clear();
 			
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
 			
@@ -103,6 +98,11 @@ public class Board extends game.Board {
 					action.onTake(commandTokens);
 			}
 		}
+	}
+	
+	public void preDisplay() {
+		redFarm.enclosePastures();
+		blueFarm.enclosePastures();
 	}
 
 	public Farm activeFarm() {

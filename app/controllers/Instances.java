@@ -52,6 +52,7 @@ public class Instances extends Controller {
     			break;
 			}
 		}
+		instance.getBoard().preDisplay();
 
 		return instance;
     }

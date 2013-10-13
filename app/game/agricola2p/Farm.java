@@ -53,17 +53,17 @@ public class Farm {
 		workers.add(new Worker(color, false));
 		for(Integer y : getRowRange()) {
 			for(Integer x : getColRange()) {
-				Lot tile = null;
+				Lot lot = null;
 				if(y % 2 == 0 && x % 2 == 0) {
-					tile = new LotNull(x,y);
+					lot = new LotNull(x,y);
 				}
 				else if(y % 2 == 1 && x % 2 == 1) {
-					tile = new LotPasture(x,y);
+					lot = new LotPasture(x,y);
 				}
 				else {
-					tile = new LotFence(x,y);
+					lot = new LotFence(x,y);
 				}
-				terrain.put(y, x, tile);
+				terrain.put(y, x, lot);
 			}
 		}
 		((LotFence)terrain.get(4, 9)).built = true;
@@ -75,6 +75,88 @@ public class Farm {
 	
 	public Lot[][] getTerrain() {
 		return terrain.toArray(Lot.class);
+	}
+	
+	public boolean isActive() {
+		return board.activeFarm().equals(this);
+	}
+	
+	/**
+	 * Compute the "enclosed" property of every pasture.
+	 * 
+	 * #1 First, turn them all to true.
+	 * #2 Go along the north, then west, then south, then east borders, and if there's
+	 *    no fence there, then set that bordering pasture to enclosed = false.
+	 * #3 For every enclosed pasture = false, scan its neighbors. If not blocked by a
+	 *    fence, then set that neighbor to false, and set "didAnythingChange" to true.
+	 * #4 Repeat #3 until didAnythingChange is false. 
+	 * 
+	 */
+	protected void enclosePastures() {
+		
+		for(int y = rowRangeMin+1; y < rowRangeMax; y += 2 ) {
+			for(int x = colRangeMin+1; x < colRangeMax; x+= 2) {
+				((LotPasture)terrain.get(y, x)).enclosed = true;
+			}
+		}
+
+		//north wall
+		for(int x = colRangeMin+1; x < colRangeMax; x+= 2) {
+			if(((LotFence)terrain.get(rowRangeMin, x)).built == false)
+				((LotPasture)terrain.get(rowRangeMin+1, x)).enclosed = false;
+		}
+		//south wall
+		for(int x = colRangeMin+1; x < colRangeMax; x+= 2) {
+			if(((LotFence)terrain.get(rowRangeMax, x)).built == false)
+				((LotPasture)terrain.get(rowRangeMax-1, x)).enclosed = false;
+		}
+		//west wall
+		for(int y = rowRangeMin+1; y < rowRangeMax; y+= 2) {
+			if(((LotFence)terrain.get(y, colRangeMin)).built == false)
+				((LotPasture)terrain.get(y, colRangeMin+1)).enclosed = false;
+		}
+		//east wall
+		for(int y = rowRangeMin+1; y < rowRangeMax; y+= 2) {
+			if(((LotFence)terrain.get(y,colRangeMax)).built == false)
+				((LotPasture)terrain.get(y, colRangeMax-1)).enclosed = false;
+		}
+		
+		boolean didAnythingChange;
+		int i = 0;
+		do {
+			if(i++ > 100) break;
+			didAnythingChange = false;
+			
+			for(int y = rowRangeMin+1; y < rowRangeMax; y+= 2) {
+				for(int x = colRangeMin+1; x < colRangeMax; x+= 2) {
+					LotPasture lot = (LotPasture)terrain.get(y, x);
+					if(lot.enclosed == false) {
+						//try to go north
+						if(y-2 > rowRangeMin && ((LotFence)terrain.get(y-1, x)).built == false) {
+							didAnythingChange |= ((LotPasture)terrain.get(y-2, x)).enclosed;
+							((LotPasture)terrain.get(y-2, x)).enclosed = false;
+						}
+						//try to go south
+						if(y+2 < rowRangeMax && ((LotFence)terrain.get(y+1, x)).built == false) {
+							didAnythingChange |= ((LotPasture)terrain.get(y+2, x)).enclosed;
+							((LotPasture)terrain.get(y+2, x)).enclosed = false;
+						}
+						//try to go west
+						if(x-2 > colRangeMin && ((LotFence)terrain.get(y, x-1)).built == false) {
+							didAnythingChange |= ((LotPasture)terrain.get(y,  x-2)).enclosed;
+							((LotPasture)terrain.get(y, x-2)).enclosed = false;
+						}
+						//try to go east
+						if(x+2 < colRangeMax && ((LotFence)terrain.get(y, x+1)).built == false) {
+							didAnythingChange |= ((LotPasture)terrain.get(y, x+2)).enclosed;
+							((LotPasture)terrain.get(y, x+2)).enclosed = false;
+						}
+					}
+				}
+			}
+		}
+		while(didAnythingChange);
+		System.out.println("I="+i);
 	}
 	
 }

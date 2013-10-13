@@ -43,4 +43,8 @@ abstract class Action {
 		//typically follow-up moves, such as "build fence" "which fence" "which fence" "which fence"
 	}
 	
+	public boolean getUsable() {
+		return (occupant == null); 
+	}
+	
 }

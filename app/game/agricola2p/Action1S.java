@@ -12,7 +12,7 @@ public class Action1S extends Action {
 	
 	protected void onNewRound() {
 		super.onNewRound();
-		this.stone += 3;
+		this.stone += 1;
 	}
 	
 	protected void onTake() throws GameError {

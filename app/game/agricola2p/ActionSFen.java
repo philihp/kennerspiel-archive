@@ -1,9 +1,22 @@
 package game.agricola2p;
 
 import game.GameError;
+import game.agricola2p.ActionX.TaskExpansion;
 import game.agricola2p.Board.State;
 
 public class ActionSFen extends Action {
+
+	public class TaskBuyStoneFence extends Task {
+
+		public TaskBuyStoneFence(Board board, String label, String command) {
+			super(board, label, command);
+		}
+
+		public boolean getDisabled() {
+			return (board.activeFarm().stone < 2);
+		}
+
+	}
 	
 	public ActionSFen(Board board) {
 		super(board);
@@ -16,19 +29,44 @@ public class ActionSFen extends Action {
 	protected void onTake() throws GameError {
 		super.onTake();
 		board.inputState = State.BUILDING_STONE_FENCES;
-		board.buildableFences += 2;
+		board.tasks.add(new TaskBuyStoneFence(board, "Buy Additional Fence", ":Buy"));
+		board.buildable.add(new Fence(board, "fence"));
+		board.buildable.add(new Fence(board, "fence"));
 	}
 
 	protected void onTake(String[] params) throws GameError {
-		if(params[1].equals("Buy") == false) {
-			throw new GameError("Unknown Command "+params[1]);
+		System.out.println("Switching ["+params[1]+"]");
+		switch(params[1]) {
+		case "Fence" :
+			if(board.buildable.isEmpty()) {
+				throw new GameError("No fences available to build");
+			}
+			try {
+				Integer x = Integer.parseInt(params[2]);
+				Integer y = Integer.parseInt(params[3]);
+				((LotFence)board.activeFarm().terrain.get(y, x)).built = true;
+			}
+			catch(ArrayIndexOutOfBoundsException | NumberFormatException | ClassCastException e) {
+				throw new GameError("Invalid Location ("+params[2]+","+params[3]+")");
+			}
+			board.buildable.remove(board.buildable.size()-1);
+			break;
+		case "Buy" :
+			if(board.activeFarm().stone < 2) {
+				throw new GameError("Not enough stone to build a fence");
+			} 
+			else {
+				board.activeFarm().stone -= 2;
+				board.buildable.add(new Fence(board, "fence"));
+			}
+			break;
+		default:
+			throw new GameError("Command \""+params[1]+"\"");
 		}
-		else if(board.activeFarm().stone < 2) {
-			throw new GameError("Not enough stone to build a fence");
-		}
-		else {
-			board.activeFarm().stone -= 2;
-			board.buildableFences += 1;
-		}
+	}
+	
+	@Override
+	public boolean getUsable() {
+		return super.getUsable() && board.activeFarm().stone >= 2;
 	}
 }
