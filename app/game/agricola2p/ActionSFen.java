@@ -13,7 +13,7 @@ public class ActionSFen extends Action {
 		}
 
 		public boolean getDisabled() {
-			return (board.activeFarm().stone < 2);
+			return (board.activeFarm().stone < 2) || (board.activeFarm().fences < 1);
 		}
 
 	}
@@ -28,14 +28,19 @@ public class ActionSFen extends Action {
 	
 	protected void onTake() throws GameError {
 		super.onTake();
-		board.inputState = State.BUILDING_STONE_FENCES;
+		board.inputState = State.BUILDING_FENCES;
 		board.tasks.add(new TaskBuyStoneFence(board, "Buy Additional Fence", ":Buy"));
+		
 		board.buildable.add(new Fence(board, "fence"));
-		board.buildable.add(new Fence(board, "fence"));
+		board.activeFarm().fences--;
+		
+		if(board.activeFarm().fences >= 1) {
+			board.buildable.add(new Fence(board, "fence"));
+			board.activeFarm().fences--;
+		}
 	}
 
 	protected void onTake(String[] params) throws GameError {
-		System.out.println("Switching ["+params[1]+"]");
 		switch(params[1]) {
 		case "Fence" :
 			if(board.buildable.isEmpty()) {
@@ -57,6 +62,7 @@ public class ActionSFen extends Action {
 			} 
 			else {
 				board.activeFarm().stone -= 2;
+				board.activeFarm().fences--;
 				board.buildable.add(new Fence(board, "fence"));
 			}
 			break;
@@ -67,6 +73,6 @@ public class ActionSFen extends Action {
 	
 	@Override
 	public boolean getUsable() {
-		return super.getUsable() && board.activeFarm().stone >= 2;
+		return super.getUsable() && board.activeFarm().stone >= 2 && board.activeFarm().fences >= 1;
 	}
 }

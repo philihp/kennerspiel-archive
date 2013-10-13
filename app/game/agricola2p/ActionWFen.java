@@ -13,7 +13,7 @@ public class ActionWFen extends Action {
 		}
 
 		public boolean getDisabled() {
-			return (board.activeFarm().wood < 1);
+			return (board.activeFarm().wood < 1) || (board.activeFarm().fences < 1);
 		}
 
 	}
@@ -27,7 +27,7 @@ public class ActionWFen extends Action {
 	
 	protected void onTake() throws GameError {
 		super.onTake();
-		board.inputState = State.BUILDING_STONE_FENCES;
+		board.inputState = State.BUILDING_FENCES;
 		board.tasks.add(new TaskBuyWoodFence(board, "Buy Additional Fence", ":Buy"));
 		onTake(new String[] {"","Buy"});
 	}
@@ -54,6 +54,7 @@ public class ActionWFen extends Action {
 			} 
 			else {
 				board.activeFarm().wood -= 1;
+				board.activeFarm().fences--;
 				board.buildable.add(new Fence(board, "fence"));
 			}
 			break;
@@ -64,6 +65,6 @@ public class ActionWFen extends Action {
 
 	@Override
 	public boolean getUsable() {
-		return super.getUsable() && board.activeFarm().wood >= 1;
+		return super.getUsable() && board.activeFarm().wood >= 1 && board.activeFarm().fences >= 1;
 	}
 }

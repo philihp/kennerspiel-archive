@@ -13,8 +13,7 @@ public class Board extends game.Board {
 		PLACE_WORKER,
 		EXPANDING_FARM,
 		WAITING_ON_COMMIT,
-		BUILDING_STONE_FENCES,
-		BUILDING_WOOD_FENCES
+		BUILDING_FENCES
 	}
 	
 	public boolean canCommit = false;
@@ -25,7 +24,7 @@ public class Board extends game.Board {
 	
 	public List<Task> tasks = new ArrayList<Task>();
 	
-	public List<Doodad> buildable = new ArrayList<Doodad>();
+	public List<Buildable> buildable = new ArrayList<Buildable>();
 	
 	public Map<String, Action> actions = new HashMap<String, Action>();
 	{
@@ -60,8 +59,10 @@ public class Board extends game.Board {
 	public void runCommand(String command) throws GameError {
 		switch(command) {
 		case "commit" :
-			tasks.clear();
+			
+			for(Buildable b : buildable) b.returnToStock();
 			buildable.clear();
+			tasks.clear();
 			
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
 			

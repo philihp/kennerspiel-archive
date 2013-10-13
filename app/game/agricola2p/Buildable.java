@@ -8,14 +8,14 @@ package game.agricola2p;
  * @author philihp
  *
  */
-abstract class Doodad {
+abstract class Buildable {
 	
 	protected Board board;
 	
 	public String target;
 	public String type;
 	
-	public Doodad(Board board, String type, String target) {
+	public Buildable(Board board, String type, String target) {
 		this.board = board;
 		this.type = type;
 		this.target = target;
@@ -23,6 +23,15 @@ abstract class Doodad {
 	
 	public boolean getDisabled() {
 		return false;
+	}
+
+	/**
+	 * This buildable was created, ready to be built, but the player
+	 * decided to end their turn. (Basically this is just used for
+	 * fences)
+	 */
+	public void returnToStock() {
+		
 	}
 
 }
