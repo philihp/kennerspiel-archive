@@ -28,7 +28,7 @@ public class Farm {
 	protected int colRangeMin = 8;
 	protected int colRangeMax = 12;
 	
-	protected ArrayTable<Integer, Integer, Tile> terrain = createTerrainTable();
+	protected ArrayTable<Integer, Integer, Lot> terrain = createTerrainTable();
 	
 	protected Set<Integer> getRowRange() {
 		return ContiguousSet.create(Range.closed(rowRangeMin, rowRangeMax), 
@@ -39,7 +39,7 @@ public class Farm {
 				DiscreteDomain.integers());
 	}
 	
-	protected ArrayTable<Integer, Integer, Tile> createTerrainTable() {
+	protected ArrayTable<Integer, Integer, Lot> createTerrainTable() {
 		return ArrayTable.create(getRowRange(),getColRange());
 	}
 	
@@ -53,28 +53,28 @@ public class Farm {
 		workers.add(new Worker(color, false));
 		for(Integer y : getRowRange()) {
 			for(Integer x : getColRange()) {
-				Tile tile = null;
+				Lot tile = null;
 				if(y % 2 == 0 && x % 2 == 0) {
-					tile = new TileNull(x,y);
+					tile = new LotNull(x,y);
 				}
 				else if(y % 2 == 1 && x % 2 == 1) {
-					tile = new TilePasture(x,y);
+					tile = new LotPasture(x,y);
 				}
 				else {
-					tile = new TileFence(x,y);
+					tile = new LotFence(x,y);
 				}
 				terrain.put(y, x, tile);
 			}
 		}
-		((TileFence)terrain.get(4, 9)).built = true;
-		((TileFence)terrain.get(5, 8)).built = true;
-		((TilePasture)terrain.get(5, 9)).building = "cottage";
-		((TileFence)terrain.get(5, 10)).built = true;
-		((TileFence)terrain.get(6, 9)).built = true;
+		((LotFence)terrain.get(4, 9)).built = true;
+		((LotFence)terrain.get(5, 8)).built = true;
+		((LotPasture)terrain.get(5, 9)).building = "cottage";
+		((LotFence)terrain.get(5, 10)).built = true;
+		((LotFence)terrain.get(6, 9)).built = true;
 	}
 	
-	public Tile[][] getTerrain() {
-		return terrain.toArray(Tile.class);
+	public Lot[][] getTerrain() {
+		return terrain.toArray(Lot.class);
 	}
 	
 }

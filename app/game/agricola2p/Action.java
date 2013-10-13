@@ -1,5 +1,6 @@
 package game.agricola2p;
 
+import game.GameError;
 import game.agricola2p.Board.State;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +29,7 @@ abstract class Action {
 		}
 	}
 	
-	protected void onTake() {
+	protected void onTake() throws GameError {
 		if(board.activeFarm().workers.size() == 0) return;
 		
 		Worker worker = board.activeFarm().workers.remove(0);
@@ -38,7 +39,7 @@ abstract class Action {
 		board.canCommit = true;
 	}
 	
-	protected void onTake(String[] params) {
+	protected void onTake(String[] params) throws GameError {
 		//typically follow-up moves, such as "build fence" "which fence" "which fence" "which fence"
 	}
 	

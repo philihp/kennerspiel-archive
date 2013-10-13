@@ -7,6 +7,7 @@ import com.google.common.collect.ContiguousSet;
 import com.google.common.collect.DiscreteDomain;
 import com.google.common.collect.Range;
 
+import game.GameError;
 import game.agricola2p.Board.State;
 
 public class ActionX extends Action {
@@ -22,7 +23,7 @@ public class ActionX extends Action {
 		this.fences += 1;
 	}
 	
-	protected void onTake() {
+	protected void onTake() throws GameError {
 		super.onTake();
 		board.activeFarm().fences += this.fences;
 		this.fences = 0;
@@ -41,23 +42,23 @@ public class ActionX extends Action {
 		}
 		else throw new RuntimeException("Unknown Param "+params[1]);;
 		
-		ArrayTable<Integer, Integer, Tile> terrain = farm.createTerrainTable();
+		ArrayTable<Integer, Integer, Lot> terrain = farm.createTerrainTable();
 		terrain.putAll(farm.terrain);
 		farm.terrain = terrain;
 		
 		for(Integer y : farm.getRowRange()) {
 			for(Integer x : farm.getColRange()) {
-				Tile tile = terrain.get(y, x);
+				Lot tile = terrain.get(y, x);
 				if(tile != null) continue;
 				
 				if(y % 2 == 0 && x % 2 == 0) {
-					tile = new TileNull(x,y);
+					tile = new LotNull(x,y);
 				}
 				else if(y % 2 == 1 && x % 2 == 1) {
-					tile = new TilePasture(x,y);
+					tile = new LotPasture(x,y);
 				}
 				else {
-					tile = new TileFence(x,y);
+					tile = new LotFence(x,y);
 				}
 				terrain.put(y, x, tile);
 			}

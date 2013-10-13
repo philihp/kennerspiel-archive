@@ -1,6 +1,6 @@
 package game.agricola2p;
 
-public class TileFence extends Tile {
+public class LotFence extends Lot {
 	
 	public boolean built;
 	
@@ -8,7 +8,7 @@ public class TileFence extends Tile {
 	
 	public DIRECTION type;
 	
-	public TileFence(int x, int y) {
+	public LotFence(int x, int y) {
 		super(x,y);
 		built = false;
 		if(x % 2 == 0) {

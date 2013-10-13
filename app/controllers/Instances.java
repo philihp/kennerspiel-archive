@@ -1,6 +1,8 @@
 package controllers;
 
 import game.Board;
+import game.GameError;
+import game.GameWarning;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import models.Command;
 import models.Instance;
+import models.Response;
 import play.data.*;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -17,6 +20,7 @@ import play.mvc.Controller;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 import views.html.*;
+import views.html.defaultpages.error;
 
 public class Instances extends Controller {
   
@@ -31,16 +35,34 @@ public class Instances extends Controller {
         return ok(node);
     }
     
-    public static Result get(Integer id) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    protected static Instance getInstance(Integer id) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Instance instance = Instance.finder.byId(id);
 		instance.setBoard((Board)Class.forName("game."+instance.getGame()+".Board").newInstance());
 		instance.getBoard().seedRandom(instance.getSeed());
 		
 		for(Command c : instance.getCommands()) {
-			instance.getBoard().runCommand(c.getCommand());
+			try {
+				instance.getBoard().runCommand(c.getCommand());
+			}
+			catch(GameWarning e) {
+				//TODO: alert somehow
+			}
+			catch(GameError e) {
+				//TODO: add error message to instance output
+    			break;
+			}
 		}
-		
-    	return ok(Json.toJson(instance));
+
+		return instance;
+    }
+    
+    public static Result get(Integer id) throws Exception {
+    	try {
+    		return ok(Json.toJson(getInstance(id)));
+    	}
+    	catch(InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+    		throw new Exception(e);
+    	}
     }
     
     public static Result getAll() {

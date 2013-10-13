@@ -1,5 +1,8 @@
 package game.agricola2p;
 
+import game.GameError;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +14,9 @@ public class Board extends game.Board {
 	public static enum State {
 		PLACE_WORKER,
 		EXPANDING_FARM,
-		WAITING_ON_COMMIT
+		WAITING_ON_COMMIT,
+		BUILDING_STONE_FENCES,
+		BUILDING_WOOD_FENCES
 	}
 	
 	public boolean canCommit = false;
@@ -19,6 +24,13 @@ public class Board extends game.Board {
 	public int round = 0;
 	public int expansions = 4;
 	public int troughs = 10;
+	
+	public int buildableFences = 0;
+	public int buildableTroughs = 0;
+	public int buildableStables = 0;
+	public int buildableStalls = 0;
+	
+	public List<Task> tasks = new ArrayList<Task>();
 	
 	public Map<String, Action> actions = new HashMap<String, Action>();
 	{
@@ -50,9 +62,12 @@ public class Board extends game.Board {
 		}
 	}
 
-	public void runCommand(String command) {
+	public void runCommand(String command) throws GameError {
 		switch(command) {
 		case "commit" :
+			buildableFences = 0;
+			tasks.clear();
+			
 			currentPlayer = (currentPlayer.equals(redFarm.color))?blueFarm.color:redFarm.color;
 			
 			inputState = State.PLACE_WORKER;

@@ -1,5 +1,8 @@
 package controllers;
 
+import game.Board;
+import game.GameError;
+
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +18,7 @@ import views.html.*;
 
 public class Commands extends Controller {
   
-    public static Result add() {
+    public static Result add() throws Exception {
     	Command command = Form.form(Command.class).bindFromRequest().get();
     	if(command.getCommand() == null || command.getCommand().length() == 0) {
     		return badRequest(Response.json("Missing Command"));
@@ -40,6 +43,18 @@ public class Commands extends Controller {
     		return ok(Response.json("Last move undone."));
     	}
     	else {
+    		//get the board as it is
+    		Board board = Instances.getInstance(command.getInstance().getId()).getBoard();
+    		
+    		//now try the new command
+    		try {
+    			board.runCommand(command.getCommand());
+    		}
+    		catch(GameError e) {
+    			return badRequest(Response.json(e.getMessage()));
+    		}
+    		
+    		
 	    	command.save();
 	        return ok(Json.toJson(command));
     	}

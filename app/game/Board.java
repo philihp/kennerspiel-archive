@@ -22,7 +22,7 @@ abstract public class Board {
 		return Json.newObject();
 	}
 	
-	public void runCommand(String command) throws UnsupportedOperationException {
+	public void runCommand(String command) throws GameError, GameWarning {
 		throw new UnsupportedOperationException(command);
 	}
 	

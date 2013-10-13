@@ -33,6 +33,13 @@ Handlebars.JavaScriptCompiler.prototype.nameLookup = function(parent, name, type
 	}
 };
 
+Handlebars.registerHelper('times', function(n, block) {
+    var accum = '';
+    for(var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
 Handlebars.registerHelper('equals', function(v1, v2, options) {
 	if(v1 == v2) {
 		return options.fn(this);
@@ -139,6 +146,8 @@ var InstanceView = Backbone.View.extend({
 	sendCommand: function(ev) {
 		event.stopPropagation();
 		event.preventDefault();
+		
+		console.log("Sending Command ", $(ev.target).data('command'));
 
 		var that = this;
 		var commandDetails = {

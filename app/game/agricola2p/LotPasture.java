@@ -3,7 +3,7 @@ package game.agricola2p;
 /**
  * Things that might exist on the landscape should extend this.
  */
-public class TilePasture extends Tile{
+public class LotPasture extends Lot{
 	
 	public int sheep;
 	public int boars;
@@ -12,7 +12,7 @@ public class TilePasture extends Tile{
 	public boolean trough;
 	public String building;
 	
-	public TilePasture(int x, int y) {
+	public LotPasture(int x, int y) {
 		super(x,y);
 		this.trough = false;
 		this.sheep = 0;

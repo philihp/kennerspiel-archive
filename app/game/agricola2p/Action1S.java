@@ -1,5 +1,7 @@
 package game.agricola2p;
 
+import game.GameError;
+
 public class Action1S extends Action {
 	
 	public Action1S(Board board) {
@@ -13,7 +15,7 @@ public class Action1S extends Action {
 		this.stone += 3;
 	}
 	
-	protected void onTake() {
+	protected void onTake() throws GameError {
 		super.onTake();
 		board.activeFarm().stone += this.stone;
 		this.stone = 0;

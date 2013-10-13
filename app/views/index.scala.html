@@ -41,6 +41,8 @@
     <script type="text/x-handlebars-template" id="instance-view-template">
         <h1>Agricola: All Creatures Big &amp; Small</h1>
         <hr />
+        <div id="alertPlaceholder"></div>
+        
         
         {{#with board}}
         <div class="row">
@@ -175,6 +177,14 @@
                 <button type="submit" class="btn">Expand Right</button>
             </form>
         {{/equals}}
+        {{#equals inputState "BUILDING_STONE_FENCES"}}
+            <form class="command-form" class="form-inline" data-command=":Buy">
+                <button type="submit" class="btn">Buy Stone Fence</button>
+            </form>
+            {{#times buildableFences}}
+            fence
+            {{/times}}
+        {{/equals}}
         
         <div class="row">
             <div class="span6">
@@ -195,7 +205,7 @@
                         {{#each terrain}}
                         <tr>
                             {{#each this}}
-                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}fenced{{/if}}">
+                                <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#if built}}fenced{{else}}unfenced{{/if}}">
                                     {{#if building}}
                                         <img src="/assets/images/agricola2p/{{building}}.png" />
                                     {{/if}}
@@ -246,7 +256,6 @@
 
         <div class="row">
             <div class="span6">
-                <div id="alertPlaceholder"></div>
                 <form class="undo-form" class="form-inline" data-command="undo">
                     <button type="submit" class="btn">Undo</button>
                 </form>
