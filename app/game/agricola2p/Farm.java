@@ -156,7 +156,6 @@ public class Farm {
 			}
 		}
 		while(didAnythingChange);
-		System.out.println("I="+i);
 	}
 	
 }
