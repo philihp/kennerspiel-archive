@@ -139,8 +139,26 @@
                         3 Wood &rarr; Trough
                     </div>
                     {{/with}}
-                    <div class="span2 action">&rarr; 1 Reed (1 Sheep)</div>
-                    <div class="span2 action">&rarr; 1 Boar (1 sheep)</div>
+                    {{#with actions.Rx1}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Rx1">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
+                        &rarr; 1 Reed (1 Sheep)<br />
+                        <b>{{reed}} Reed</b><br />
+                        <b>{{sheep}} Sheep</b>
+                    </div>
+                    {{/with}}
+                    {{#with actions.Boar}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Boar">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
+                        &rarr; 1 Boar (1 sheep)<br />
+                        <b>{{boar}} Boar</b><br />
+                        <b>{{sheep}} Sheep</b>
+                    </div>
+                    {{/with}}
                 </div>
                 <div class="row">
                     <div class="span2 action">
@@ -155,8 +173,26 @@
                             <div class="span2 half-action">Special Build</div>
                         </div>
                     </div>
-                    <div class="span2 action">&rarr; 1 Cattle (1 Boar)</div>
-                    <div class="span2 action">&rarr; 1 Horse (1 Sheep)</div>
+                    {{#with actions.Cattle}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Cattle">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
+                        &rarr; 1 Cattle (1 Boar)<br />
+                        <b>{{cattle}} Cattle</b><br />
+                        <b>{{boar}} Boar</b>
+                    </div>
+                    {{/with}}
+                    {{#with actions.Horse}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Horse">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
+                        &rarr; 1 Horse (1 Sheep)<br />
+                        <b>{{horses}} Horses</b><br />
+                        <b>{{sheep}} Sheep</b>
+                    </div>
+                    {{/with}}
                 </div>
         
             </div>
@@ -190,11 +226,17 @@
                         <div class="worker {{#if usable}}usable{{/if}}"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
                     {{/each}}
                     
-                    <ul>
+                    <ul style="display: inline-block">
                         <li>Wood:   {{wood}}</li>
                         <li>Stone:  {{stone}}</li>
                         <li>Reed:   {{reed}}</li>
                         <li>Fences: {{fences}}</li>
+                    </ul>
+                    <ul style="display: inline-block">
+                        <li>Sheep:   {{sheep}}</li>
+                        <li>Boar:  {{boar}}</li>
+                        <li>Cattle:   {{cattle}}</li>
+                        <li>Horses: {{horses}}</li>
                     </ul>
                     <table class="farm">
                         {{#each terrain}}
@@ -209,7 +251,6 @@
                                     </td>
                                 {{/equals}}
                                 {{#equals type "farmtile"}}
-                                    {{log this}}
                                     <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#if enclosed}}enclosed{{/if}}">
                                         {{#if trough}}
                                             <div class="trough"><img src="/assets/images/agricola2p/trough.png" /></div>
@@ -239,11 +280,18 @@
                     {{#each workers}}
                         <div class="worker {{#if usable}}usable{{/if}}"><img src="@routes.Assets.at("images/agricola2p/worker-{{color}}.png")"/></div>
                     {{/each}}
-                    <ul>
+                    
+                    <ul style="display: inline-block">
                         <li>Wood:   {{wood}}</li>
                         <li>Stone:  {{stone}}</li>
                         <li>Reed:   {{reed}}</li>
                         <li>Fences: {{fences}}</li>
+                    </ul>
+                    <ul style="display: inline-block">
+                        <li>Sheep:   {{sheep}}</li>
+                        <li>Boar:  {{boar}}</li>
+                        <li>Cattle:   {{cattle}}</li>
+                        <li>Horses: {{horses}}</li>
                     </ul>
                     
                     <table class="farm">

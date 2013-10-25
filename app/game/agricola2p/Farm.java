@@ -22,6 +22,11 @@ public class Farm {
 	public int reed = 0;
 	public int fences = 9;
 	
+	public int sheep = 0;
+	public int boar = 0;
+	public int cattle = 0;
+	public int horses = 0;
+	
 	protected int rowRangeMin = 0;
 	protected int rowRangeMax = 6;
 	

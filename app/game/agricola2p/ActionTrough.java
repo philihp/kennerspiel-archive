@@ -36,9 +36,6 @@ public class ActionTrough extends Action {
 	}
 
 	protected void onTake(String[] params) throws GameError {
-		System.out.print("TAKE");
-		for(String param : params) System.out.print(" "+param);
-		System.out.println();
 		
 		switch(params[1]) {
 		case "Trough" :
