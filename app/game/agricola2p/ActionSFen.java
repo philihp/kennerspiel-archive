@@ -73,6 +73,6 @@ public class ActionSFen extends Action {
 	
 	@Override
 	public boolean getUsable() {
-		return super.getUsable() && board.activeFarm().stone >= 2 && board.activeFarm().fences >= 1;
+		return super.getUsable() && board.activeFarm().fences >= 1;
 	}
 }
