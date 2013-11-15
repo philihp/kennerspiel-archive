@@ -137,8 +137,8 @@ var InstanceView = Backbone.View.extend({
 		});
 	},
 	sendCommand: function(ev) {
-		event.stopPropagation();
-		event.preventDefault();
+		ev.stopPropagation();
+		ev.preventDefault();
 		
 		console.log("Sending Command ", $(ev.target).data('command'));
 
