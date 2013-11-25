@@ -14,7 +14,8 @@ public class Board extends game.Board {
 		EXPANDING_FARM,
 		WAITING_ON_COMMIT,
 		BUILDING_FENCES,
-		BUILDING_TROUGHS
+		BUILDING_TROUGHS,
+		BUILDING_STALLS
 	}
 	
 	public boolean canCommit = false;
@@ -22,6 +23,7 @@ public class Board extends game.Board {
 	public int round = 0;
 	public int expansions = 4;
 	public int troughs = 10;
+	public int stalls = 4;
 	
 	public List<Task> tasks = new ArrayList<Task>();
 	
@@ -37,6 +39,7 @@ public class Board extends game.Board {
 		actions.put("SFen", new ActionSFen(this));
 		actions.put("RSW", new ActionRSW(this));
 		actions.put("X", new ActionX(this));
+		actions.put("Stall", new ActionStall(this));
 		actions.put("Trough", new ActionTrough(this));
 		actions.put("Rx1", new Action1R(this));
 		actions.put("Boar", new Action1Boar(this));

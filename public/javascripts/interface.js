@@ -66,22 +66,33 @@ $(function() {
 	});
 
 	$('.buildable.trough').draggable({
-		scope: "trough",
+		scope: "farmtile",
+		revert: 'invalid',
+		revertDuration: 200,
+		cursorAt: { left: 20, top: 20 },
+		opacity: 0.8
+	});
+
+	$('.buildable.stall').draggable({
+		scope: "farmtile",
 		revert: 'invalid',
 		revertDuration: 200,
 		cursorAt: { left: 20, top: 20 },
 		opacity: 0.8
 	});
 	
-	$('.active .farmtile.noTrough').droppable({
-		scope: "trough",
+	/* PROBLEM WITH THIS */
+	/* Apparently you can't have .droppable() on the same thing twice, for two scopes. */
+	/* Need to rethink how to do this... */	
+	$('.active .farmtile.noTrough, .active .farmtile.noBuilding').droppable({
+		scope: "farmtile",
 		hoverClass: 'buildhover',
 		drop: function(event, ui) {
 			var x = $(event.target).data('x');
 			var y = $(event.target).data('y');
 			var commandDetails = {
 					"instance.id" : instanceView.instance.id,
-					"command" : ":Trough:"+x+":"+y
+					"command" : ":Build:"+x+":"+y
 			};
 			var command = new Command();
 			command.save(commandDetails, {

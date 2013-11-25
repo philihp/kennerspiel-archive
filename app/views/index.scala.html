@@ -129,7 +129,14 @@
                     {{/with}}
                 </div>
                 <div class="row">
-                    <div class="span2 action {{#if usable}}usable{{/if}}">3 Stone 1 Reed &rarr; Stall</div>
+                    {{#with actions.Stall}}
+                    <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Stall">
+                        {{#if occupant}}
+                            <div class="worker"><img src="@routes.Assets.at("images/agricola2p/worker-{{occupant.color}}.png")"/></div>
+                        {{/if}}
+                        3 Stone 1 Reed &rarr; Stall
+                    </div>
+                    {{/with}}
                     {{#with actions.Trough}}
                     <div class="span2 action {{#if usable}}usable{{/if}}" data-command="Trough">
                         {{#if occupant}}
@@ -251,7 +258,7 @@
                                     </td>
                                 {{/equals}}
                                 {{#equals type "farmtile"}}
-                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#if enclosed}}enclosed{{/if}}">
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#unless building}}noBuilding{{/unless}} {{#if enclosed}}enclosed{{/if}}">
                                         {{#if trough}}
                                             <div class="trough"><img src="/assets/images/agricola2p/trough.png" /></div>
                                         {{/if}}
@@ -307,7 +314,7 @@
                                     </td>
                                 {{/equals}}
                                 {{#equals type "farmtile"}}
-                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#if enclosed}}enclosed{{/if}}">
+                                    <td data-y="{{y}}" data-x="{{x}}" class="{{type}} {{#unless trough}}noTrough{{/unless}} {{#unless building}}noBuilding{{/unless}} {{#if enclosed}}enclosed{{/if}}">
                                         {{#if trough}}
                                             <div class="trough"><img src="/assets/images/agricola2p/trough.png" /></div>
                                         {{/if}}
