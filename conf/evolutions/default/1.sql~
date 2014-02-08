@@ -5,15 +5,15 @@
 
 create table command (
   id                        integer auto_increment not null,
-  instance_id               integer,
   command                   varchar(255),
+  instance_id               integer,
   constraint pk_command primary key (id))
 ;
 
 create table instance (
   id                        integer auto_increment not null,
   name                      varchar(255),
-  seed                      bigint,
+  seed                      integer,
   game                      varchar(255),
   constraint pk_instance primary key (id))
 ;

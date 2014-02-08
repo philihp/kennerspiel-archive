@@ -3,18 +3,17 @@
 # ~~~~
 
 # Home page
-#GET		/api/instances					controllers.Instances.getAll()
-#GET		/api/instances/:id				controllers.Instances.get(id: Integer)
-#POST    /api/instances					controllers.Instances.add()
-#PUT     /api/instances/:id				controllers.Instances.update(id: Integer)
-#DELETE  /api/instances/:id				controllers.Instances.delete(id: Integer)
+GET      /api/instances/:id   controllers.Instances.get(id: Integer)
+GET      /api/instances/      controllers.Instances.getAll(page: Integer ?=0)
+POST     /api/instances/      controllers.Instances.create()
+PUT      /api/instances/:id   controllers.Instances.update(id: Integer)
+DELETE   /api/instances/:id   controllers.Instances.delete(id: Integer)
 
-#POST	/api/commands					controllers.Commands.add()
-#GET		/api/commands/:id				controllers.Commands.get(id: Integer)
-# PUT		/api/commands/:id			controllers.Commands.update(id: Integer)
-# DELETE	/api/commands/:id			controllers.Commands.delete(id: Integer)
+#GET      /api/commands/:id    controllers.Commands.get(id: Integer)
+POST     /api/commands        controllers.Commands.create()
+#PUT      /api/commands/:id    controllers.Commands.update(id: Integer)
+DELETE   /api/commands/:id    controllers.Commands.delete(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-GET     /                               controllers.Application.index()
+GET      /assets/*file        controllers.Assets.at(path="/public", file)
+GET      /                    controllers.Application.index()
