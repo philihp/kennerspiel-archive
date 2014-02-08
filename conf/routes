@@ -3,14 +3,14 @@
 # ~~~~
 
 # Home page
-GET		/api/instances					controllers.Instances.getAll()
-GET		/api/instances/:id				controllers.Instances.get(id: Integer)
-POST    /api/instances					controllers.Instances.add()
-PUT     /api/instances/:id				controllers.Instances.update(id: Integer)
-DELETE  /api/instances/:id				controllers.Instances.delete(id: Integer)
+#GET		/api/instances					controllers.Instances.getAll()
+#GET		/api/instances/:id				controllers.Instances.get(id: Integer)
+#POST    /api/instances					controllers.Instances.add()
+#PUT     /api/instances/:id				controllers.Instances.update(id: Integer)
+#DELETE  /api/instances/:id				controllers.Instances.delete(id: Integer)
 
-POST	/api/commands					controllers.Commands.add()
-GET		/api/commands/:id				controllers.Commands.get(id: Integer)
+#POST	/api/commands					controllers.Commands.add()
+#GET		/api/commands/:id				controllers.Commands.get(id: Integer)
 # PUT		/api/commands/:id			controllers.Commands.update(id: Integer)
 # DELETE	/api/commands/:id			controllers.Commands.delete(id: Integer)
 
