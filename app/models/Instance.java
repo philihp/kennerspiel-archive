@@ -54,6 +54,7 @@ public class Instance extends Model {
 			}
 			
 			try {
+				//by your command
 				for(String command : getCommandList()) {
 					board.runCommand(board.getCommand(command));
 				}

@@ -16,7 +16,6 @@ public class Commands extends Controller {
 	
 	public static Result create() {
 		Command command = Form.form(Command.class).bindFromRequest().get();
-		System.out.println("INSTANCE: "+command.instance);
 		command.save();
 		
 		return created(Json.toJson(command));
