@@ -1,4 +1,4 @@
-@()(content: Html)
+@(user: User)(content: Html)
 
 <!DOCTYPE html>
 
@@ -21,38 +21,28 @@
     </head>
     <body>
 
-    <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="@routes.Application.index">Kennerspiel.com</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-        	<li><a href="@routes.Application.logout()">Logout</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <ul class="nav navbar-nav navbar-right">
+        
+		  @if(user != null) {
+          <li>@user.name <span>(@user.email)</span></li>
+          }
+          <li><a href="@routes.Application.logout()">Logout</a></li>
+        </ul>
       </div>
     </div>
 
     <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div>
         
         @content
         
       </div>
-
+    <!-- Fixed navbar -->
     </div><!-- /container -->
 
 
