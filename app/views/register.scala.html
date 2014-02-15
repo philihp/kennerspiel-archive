@@ -1,9 +1,9 @@
-@(form: play.data.Form[Application.Login])
+@(form: play.data.Form[Application.Register])
 
 @main(null) {
 
-	@helper.form(routes.Application.loginSubmit) {
-		<h1>Login</h1>
+	@helper.form(routes.Application.registerSubmit) {
+		<h1>Register</h1>
 	
 		@if(form.hasGlobalErrors) {
 			<p class="error">
@@ -20,10 +20,16 @@
 			<input type="email" name="email" placeholder="Email" value="@form("email").value">
 		</p>
 		<p>
+			<input type="text" name="name" placeholder="Name" value="@form("name").value">
+		</p>
+		<p>
 			<input type="password" name="password" placeholder="Password">
 		</p>
 		<p>
-			<button type="submit">Login</button>
+			<input type="password" name="confirm" placeholder="Confirm Password">
+		</p>
+		<p>
+			<button type="submit">Register</button>
 		</p>
 
 	}

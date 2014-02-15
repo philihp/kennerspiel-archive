@@ -10,44 +10,34 @@
     	<title>Kennerspiel</title>
     	
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/index.css")">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
     </head>
     <body>
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="@routes.Application.index">Kennerspiel.com</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-        
-		  @if(user != null) {
-          <li>@user.name <span>(@user.email)</span></li>
-          }
-          <li><a href="@routes.Application.logout()">Logout</a></li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="container">
-      <div>
+<h1>Kennerspiel.com</h1>
+
+<p>
+[
+  <a href="@routes.Application.index">Main</a>
+]
+       
+@if(user != null) {
+	@user.name (@user.email)
+	<a href="@routes.Application.logout()">Logout</a> 
+} else {
+	<a href="@routes.Application.login()">Login</a>  <a href="@routes.Application.register()">Register</a> 
+}
+</p>
+ 
+<div>
         
-        @content
+  @content
         
-      </div>
-    <!-- Fixed navbar -->
-    </div><!-- /container -->
+</div>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <!--
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone.js"></script>

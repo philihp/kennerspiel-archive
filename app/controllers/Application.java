@@ -19,13 +19,33 @@ public class Application extends Controller {
 		return ok(login.render(Form.form(Login.class)));
 	}
 
-	public static Result authenticate() {
+	public static Result loginSubmit() {
 		Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
 		if (loginForm.hasErrors()) {
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
 			session("email", loginForm.get().email);
+			return redirect(routes.Application.index());
+		}
+	}
+
+	public static Result register() {
+		return ok(register.render(Form.form(Register.class)));
+	}
+	
+	public static Result registerSubmit() {
+		Form<Register> registerForm = Form.form(Register.class).bindFromRequest();
+		if(registerForm.hasErrors()) {
+			return badRequest(register.render(registerForm));
+		}
+		else {
+			new User(registerForm.get().email,
+					registerForm.get().name,
+					registerForm.get().password
+					).save();
+			session().clear();
+			session("email", registerForm.get().email);
 			return redirect(routes.Application.index());
 		}
 	}
@@ -48,4 +68,17 @@ public class Application extends Controller {
 		}
 	}
 
+	public static class Register {
+		public String email;
+		public String name;
+		public String password;
+		public String confirm;
+
+		public String validate() {
+			if (!(password != null && password.equals(confirm))) {
+				return "Passwords do not match.";
+			}
+			return null;
+		}
+	}
 }
