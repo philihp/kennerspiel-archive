@@ -1,0 +1,29 @@
+@(form: play.data.Form[Application.CreateInstance], user: User)
+
+@main(user) {
+
+	@helper.form(routes.Application.createInstanceSubmit) {
+		<h2>Create Instance</h2>
+	
+		@if(form.hasGlobalErrors) {
+			<p class="error">
+				@form.globalError.message
+			</p>
+		}
+		@if(flash.contains("success")) {
+			<p class="success">
+				@flash.get("success")
+			</p>
+		}
+		
+		<p>
+			@helper.inputText(form("name"), 'id -> "name")
+		</p>
+		<p>
+			@helper.select(field = form("game"), options = Seq("agricola2p"->"Agricola: All Creatures Big & Small"))
+		<p>
+			<button type="submit">Create Instance</button>
+		</p>
+
+	}
+}
