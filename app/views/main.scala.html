@@ -8,35 +8,34 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<title>Kennerspiel</title>
-    	
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-
+    	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    	<!--
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/css/bootstrap.min.css">
+      -->
     </head>
     <body>
+      <div class="container">
 
-
-<h1>Kennerspiel.com</h1>
-
-<p>
 [
   <a href="@routes.Application.index">Index</a>
 |
-  <a href="@routes.Application.index">Join</a>
+  <a href="@routes.Application.join">Join</a>
 |
-  <a href="@routes.Application.createInstance">Create</a>
+  <a href="@routes.Application.create">Create</a>
 |
-  <a href="@routes.Application.index">Settings</a>
+  <a href="@routes.Application.settings">Settings</a>
 |
-  <a href="@routes.Application.index">Stats</a>
+  <a href="@routes.Application.stats">Stats</a>
 ]
-       
+
 @if(user != null) {
-	@user.name (@user.email)
+	@user.name
 	<a href="@routes.Application.logout()">Logout</a> 
 } else {
 	<a href="@routes.Application.login()">Login</a>  <a href="@routes.Application.register()">Register</a> 
 }
 </p>
+<hr />
  
 <div>
         
@@ -44,15 +43,6 @@
         
 </div>
 
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
-    <!--
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone-relational/0.8.5/backbone-relational.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
-    --> 
-    <script src="@routes.Assets.at("javascripts/start.min.js")"></script>
-        
+        </div>
     </body>
 </html>

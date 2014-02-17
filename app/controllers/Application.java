@@ -1,6 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import models.*;
 import game.Board;
@@ -15,7 +18,29 @@ public class Application extends Controller {
 
 	@Security.Authenticated(Secured.class)
 	public static Result index() {
-		return ok(index.render(User.find.byId(request().username())));
+		User user = User.find.byId(request().username());
+		List<Instance> instances = new ArrayList<Instance>(user.instances.size());
+		instances.addAll(user.instances);
+		
+		return ok(index.render(user, instances));
+	}
+
+	@Security.Authenticated(Secured.class)
+	public static Result join() {
+		User user = User.find.byId(request().username());
+		return ok(join.render(user));
+	}
+
+	@Security.Authenticated(Secured.class)
+	public static Result settings() {
+		User user = User.find.byId(request().username());
+		return ok(settings.render(user));
+	}
+
+	@Security.Authenticated(Secured.class)
+	public static Result stats() {
+		User user = User.find.byId(request().username());
+		return ok(stats.render(user));
 	}
 
 	public static Result login() {
@@ -59,27 +84,38 @@ public class Application extends Controller {
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result createInstance() {
-		System.out.println(User.find.byId(request().username()).name);
-		return ok(createInstance.render(Form.form(CreateInstance.class), User.find.byId(request().username())));
+	public static Result create() {
+		Form<Create> createForm = Form.form(Create.class);
+		User user = User.find.byId(request().username());
+		return ok(create.render(createForm, user));
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result createInstanceSubmit() {
-		Form<CreateInstance> createInstanceForm = Form.form(CreateInstance.class).bindFromRequest();
-		if(createInstanceForm.hasErrors()) {
-			return badRequest(createInstance.render(createInstanceForm, User.find.byId(request().username())));
+	public static Result createSubmit() {
+		Form<Create> createForm = Form.form(Create.class).bindFromRequest();
+		User user = User.find.byId(request().username());
+		if(createForm.hasErrors()) {
+			return badRequest(create.render(createForm, user));
 		}
 		else {
 			Instance instance = new Instance();
 			instance.seed = (new Date()).getTime();
-			instance.name = createInstanceForm.get().name;
-			instance.game = createInstanceForm.get().game;
+			instance.name = createForm.get().name;
+			instance.game = createForm.get().game;
+			instance.users.add(User.find.byId(request().username()));
 			instance.save();
 			return redirect(routes.Application.index());
 		}
 	}
 
+	@Security.Authenticated(Secured.class)
+	public static Result instance(Integer id) {
+		User user = User.find.byId(request().username());
+		Instance ins = Instance.find.byId(id);
+		
+		return ok(instance.render(user, ins));
+	}
+	
 	public static class Login {
 		public String email;
 		public String password;
@@ -106,7 +142,7 @@ public class Application extends Controller {
 		}
 	}
 	
-	public static class CreateInstance {
+	public static class Create {
 		
 		@Required
 		public String name;

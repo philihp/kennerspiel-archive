@@ -1,0 +1,58 @@
+@(user: User, instance: Instance)
+
+@main(user: User) {
+   
+<h2>Instance</h2>
+
+<div class="page"></div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+<script src="@routes.Assets.at("javascripts/start.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/handlebars-helpers.js")"></script>
+
+<script type="text/x-handlebars-template" id="instance-template">
+  {{log this}}
+  {{this.game}}
+</script>
+
+<script>
+var Instance = Backbone.Model.extend({
+  urlRoot: '/api/instances'
+});
+
+var InstanceView = Backbone.View.extend({
+	el: '.page',
+	render: function(options) {
+	  var that = this;
+	  that.instance = new Instance({id: @instance.id});
+	  that.instance.fetch({
+	    success: function(instance) {
+	      var template = _.template($('#instance-template').html(), {instance: instance});
+	      var template = Handlebars.compile($('#instance-template').html());
+        that.$el.html(template(instance));
+	    }
+	  });
+	}
+});
+
+var Router = Backbone.Router.extend({
+	routes: {
+    '' : 'home'
+	}
+});
+
+var instanceView = new InstanceView();
+
+var router = new Router();
+router.on('route:home', function() {
+	  instanceView.render();
+});
+
+Backbone.history.start();
+
+</script>
+
+}

@@ -1,10 +1,14 @@
-@(user: User)
+@(user: User, instances: List[Instance])
 
 @main(user: User) {
    
 
-<h2>My Active Games</h2>
+<h2>My Active Instances</h2>
 
-<a href="#">All Games</a>
+<ul>
+@for(i <- instances) {
+	<li>[<a href="@routes.Application.instance(i.id)">Show</a>] @i.id - @i.name</li>
+}
+</ul>
 
 }

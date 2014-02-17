@@ -1,9 +1,9 @@
-@(form: play.data.Form[Application.CreateInstance], user: User)
+@(form: play.data.Form[Application.Create], user: User)
 
 @main(user) {
 
-	@helper.form(routes.Application.createInstanceSubmit) {
-		<h2>Create Instance</h2>
+	@helper.form(routes.Application.createSubmit) {
+		<h2>Create</h2>
 	
 		@if(form.hasGlobalErrors) {
 			<p class="error">

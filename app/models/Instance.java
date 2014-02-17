@@ -26,6 +26,9 @@ public class Instance extends Model {
 	
 	public String game;
 	
+	@ManyToMany
+	public Set<User> users = new HashSet<User>();
+	
 	@OneToMany
 	public List<Command> commands;
 	
@@ -65,6 +68,7 @@ public class Instance extends Model {
 		
 		return board;
 	}
+	
 	
 	
 }
