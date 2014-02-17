@@ -13,9 +13,21 @@
 <script src="@routes.Assets.at("javascripts/start.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/handlebars-helpers.js")"></script>
 
-<script type="text/x-handlebars-template" id="instance-template">
-  {{log this}}
-  {{this.game}}
+<script type="text/x-handlebars-template" id="instance-agricola2p-template">
+  <p>[ id: {{this.id}} | name: {{this.name}} | round: {{this.board.round}} move: {{this.board.move}} ]</p>
+
+  <ul>
+  {{#eachInMap this.board.tasks}}
+    <li>
+      <button {{#unless value.usable}}disabled{{/unless}}>{{key}}</button>
+      {{#if value.possibleParameters}}
+      <select>
+        {{#each value.possibleParameters}}<option>{{this}}</option>{{/each}}
+      </select>
+      {{/if}}
+    </li>
+  {{/eachInMap}}
+  </ul>
 </script>
 
 <script>
@@ -30,8 +42,7 @@ var InstanceView = Backbone.View.extend({
 	  that.instance = new Instance({id: @instance.id});
 	  that.instance.fetch({
 	    success: function(instance) {
-	      var template = _.template($('#instance-template').html(), {instance: instance});
-	      var template = Handlebars.compile($('#instance-template').html());
+	      var template = Handlebars.compile($('#instance-'+instance.get('game')+'-template').html());
         that.$el.html(template(instance));
 	    }
 	  });

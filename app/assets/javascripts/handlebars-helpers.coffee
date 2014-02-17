@@ -8,11 +8,26 @@ Handlebars.JavaScriptCompiler.prototype.nameLookup = (parent, name, type) ->
   else
     result + "['" + name + "'])"
   
+  
+  
 Handlebars.registerHelper "log", (context) ->
   console.log context  
+
+
 
 Handlebars.registerHelper "equals", (v1, v2, options) ->
   if v1==v2
     options.fn this
   else
     options.inverse this
+
+    
+    
+Handlebars.registerHelper "eachInMap", (map, block) ->
+  out = ''
+  Object.keys(map).map (prop) ->
+    out += block.fn 
+      key: prop
+      value: map[prop]
+    return
+  out
