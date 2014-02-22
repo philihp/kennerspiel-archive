@@ -2,8 +2,6 @@
 
 @main(user: User) {
    
-<h2>Instance</h2>
-
 <div class="page"></div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -14,20 +12,76 @@
 <script src="@routes.Assets.at("javascripts/handlebars-helpers.js")"></script>
 
 <script type="text/x-handlebars-template" id="instance-agricola2p-template">
-  <p>[ id: {{this.id}} | name: {{this.name}} | round: {{this.board.round}} move: {{this.board.move}} ]</p>
+  <div>[ id: {{this.id}} | name: {{this.name}} | round: {{this.board.round}} moves: {{this.board.move}} ]</div>
+
+  {{#each board.farmBoards}}
+  <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td width="25%">
+
+  <h3 style="color: {{@@key}}">{{@@key}}</h3>
+  <ul>
+  {{#each resources}}
+    <li>{{type}}</li>
+  {{/each}}
+  </ul>
+
+  </td><td width="75%">
+
+  <table border="1" cellspacing="0" cellpadding="0" class="terrain">
+    {{#each terrain}}
+    <tr>
+      {{#each this}}
+        <td class="{{type}}"></td>
+      {{/each}}
+    </tr>
+    {{/each}}   
+  </table>
+
+  </td></tr></table>
+  {{/each}}
+  
+  <hr />
+
+  <table border="0" cellspacing="0" cellpadding="0"><tr><td>
+
+  <textarea rows="4" cols="30" id="buffer"></textarea>
+  <button onclick="sendCommand()">Send Command</button>
+
+  </td><td>
 
   <ul>
-  {{#eachInMap this.board.tasks}}
-    <li>
-      <button {{#unless value.usable}}disabled{{/unless}}>{{key}}</button>
+  {{#eachInMap board.tasks}}
+    <li id="task-{{key}}">
+      <button class="button" onclick="addCommand('#task-{{key}}')" {{#unless value.usable}}disabled{{/unless}}>{{key}}</button>
       {{#if value.possibleParameters}}
-      <select>
+      <select class="param">
         {{#each value.possibleParameters}}<option>{{this}}</option>{{/each}}
       </select>
       {{/if}}
     </li>
   {{/eachInMap}}
   </ul>
+
+  </td></tr></table>
+
+  <hr />
+
+  <ul>
+  {{#each commands}}
+    <li>{{command}}</li>
+  {{/each}}
+  <ul>
+</script>
+
+<script>
+function addCommand(taskId) {
+  var command = $(taskId).children('.button').text();
+	var param = $(taskId).children('.param').val()
+	var buffer = $('#buffer');
+	buffer.val(buffer.val()+command+' '+param+'\n');
+}
+
+function sendCommand() {
+}
 </script>
 
 <script>
