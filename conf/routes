@@ -16,7 +16,7 @@ GET      /stats               controllers.Application.stats()
 GET      /instance/:id        controllers.Application.instance(id: Integer)
 
 # Home page
-GET      /api/instances/:id   controllers.Instances.get(id: Integer)
+GET      /api/instances/:id   controllers.Instances.get(id: Integer, preview: String ?= null)
 GET      /api/instances/      controllers.Instances.getAll(page: Integer ?=0)
 POST     /api/instances/      controllers.Instances.create()
 PUT      /api/instances/:id   controllers.Instances.update(id: Integer)

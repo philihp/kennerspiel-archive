@@ -38,9 +38,17 @@ public class Instances extends Controller {
 		return ok(array);
 	}
 	
-    public static Result get(Integer id) {
+    public static Result get(Integer id, String preview) throws GameError {
     	Instance instance = Instance.find.byId(id);
     	if(instance == null) return notFound("Instance not found!");
+
+    	Board board = instance.getBoard();
+		if (preview != null) {
+			for (String command : preview.split("\n")) {
+				if(command.trim().equals("")) continue;
+				board.runCommand(board.getCommand(command));
+			}
+		}
     	
     	return ok(Json.toJson(instance));
     }

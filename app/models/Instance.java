@@ -30,6 +30,7 @@ public class Instance extends Model {
 	public Set<User> users = new HashSet<User>();
 	
 	@OneToMany
+	@JsonIgnore
 	public List<Command> commands;
 	
 	public static Finder<Integer,Instance> find = new Finder<Integer,Instance>(Integer.class, Instance.class);
@@ -43,12 +44,12 @@ public class Instance extends Model {
 		return commandStrings;
 	}
 	
+	private Board board = null;
+	
 	@Transient
 	public Board getBoard() {
 		
-		Board board = null;
-		
-		if(game != null) {
+		if(board == null && game != null) {
 			try {
 				board = (Board)Class.forName("game."+game+".Board").newInstance();
 			}
@@ -61,6 +62,7 @@ public class Instance extends Model {
 				for(String command : getCommandList()) {
 					board.runCommand(board.getCommand(command));
 				}
+				board.markMovesCanon();
 			}
 			catch(GameError e) {
 			}
