@@ -2,7 +2,7 @@ name := "Kennerspiel"
 
 version := "1.0-SNAPSHOT"
 
-//resolvers += "philihp" at "https://philihp.com/repo/"
+resolvers += "philihp" at "https://philihp.com/repo/"
 
 publishTo := Some(Resolver.file("file", new File("/srv/www/philihp.com/public_html/repo")))
 
