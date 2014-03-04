@@ -56,3 +56,64 @@ alternate color set
   width: @fence-height;
   background-color: @color-green;
 }
+
+.BIT {
+  text-indent: -9999px;
+  border-width: 2px;
+  border-style: solid;
+  display: inline-block;
+}
+.ANIMAL:extend(.BIT) {
+  height: 20px;
+  width: 20px;
+}
+.SHEEP:extend(.ANIMAL) {
+  background-color: darken(@color-grey, 10%);
+  border-color: darken(@color-grey, 35%);
+}
+.PIG:extend(.ANIMAL) {
+  border-color: darken(@color-grey, 90%);
+  background-color: darken(@color-grey, 70%);
+}
+.COW:extend(.ANIMAL) {
+  border-color: darken(@color-brown, 70%);
+  background-color: darken(@color-brown, 50%);
+}
+.HORSE:extend(.ANIMAL) {
+  border-color: darken(@color-brown, 40%);
+  background-color: darken(@color-brown, 30%);
+}
+.WORKER:extend(.BIT) {
+  height: 40px;
+  width: 40px;
+  border-radius: 22px;
+}
+.WORKER.RED {
+  background-color: @color-red;
+  border-color: darken(@color-red,40%);
+}
+.WORKER.BLUE {
+  background-color: @color-blue;
+  border-color: darken(@color-blue,40%);
+}
+
+.BUILDING_RESOURCE:extend(.BIT) {
+  height: 30px;
+  width: 30px;
+  border-radius: 17px;
+}
+
+.WOOD:extend(.BUILDING_RESOURCE) {
+  background-color: darken(@color-brown, 15%);
+  border-color: darken(@color-brown, 50%);
+}
+
+.STONE:extend(.BUILDING_RESOURCE) {
+  background-color: darken(@color-grey, 50%);
+  border-color: darken(@color-grey, 75%);
+}
+
+.REED:extend(.BUILDING_RESOURCE) {
+  background-color: @color-grey;
+  border-color: darken(@color-grey, 25%);
+}
