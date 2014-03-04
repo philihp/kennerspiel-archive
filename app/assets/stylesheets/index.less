@@ -29,7 +29,7 @@ alternate color set
 @colorc: #ffed6f;
 */
 
-.terrain {
+.terrain, .actions {
   border-collapse: collapse;
 }
 
@@ -57,12 +57,29 @@ alternate color set
   background-color: @color-green;
 }
 
+.ACTION {
+  height: 120px;
+  width: 120px;
+  padding: 4px;
+}
+.ACTION.HALF_HEIGHT {
+  height: 60px;
+}
+
 .BIT {
   text-indent: -9999px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   display: inline-block;
 }
+.FENCE:extend(.BIT) {
+  height: 60px;
+  width: 8px;
+  background-color: @color-yellow;
+  border-color: darken(@color-yellow, 54%);
+  margin: 5px 0 5px 0;
+}
+
 .ANIMAL:extend(.BIT) {
   height: 20px;
   width: 20px;
@@ -95,6 +112,14 @@ alternate color set
 .WORKER.BLUE {
   background-color: @color-blue;
   border-color: darken(@color-blue,40%);
+}
+
+.STARTING_PLAYER_TOKEN:extend(.BIT) {
+  height: 40px;
+  width: 40px;
+  border-radius: 22px;
+  background-color: darken(@color-yellow,15%); 
+  border-color: darken(@color-yellow, 50%);
 }
 
 .BUILDING_RESOURCE:extend(.BIT) {

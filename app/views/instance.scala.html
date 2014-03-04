@@ -22,7 +22,7 @@
 
 
 {{#with board.gameBoard.actions}}
-<table border="1">
+<table border="1" class="actions">
   <tr>
     {{#with SP1W}}
     <td class="{{type}}">
@@ -59,7 +59,7 @@
   </tr>
   <tr>
     {{#with FENCE}}
-    <td>
+    <td class="{{type}}">
       <div><b>FENCE</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -67,7 +67,7 @@
     </td>
     {{/with}}
     {{#with WALL}}
-    <td>
+    <td class="{{type}}">
       <div><b>WALL</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -75,7 +75,7 @@
     </td>
     {{/with}}
     {{#with RSW}}
-    <td>
+    <td class="{{type}}">
       <div><b>RSW</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -83,7 +83,7 @@
     </td>
     {{/with}}
     {{#with EXPAND}}
-    <td>
+    <td class="{{type}}">
       <div><b>EXPAND</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -93,7 +93,7 @@
   </tr>
   <tr>
     {{#with STALL}}
-    <td>
+    <td class="{{type}}">
       <div><b>STALL</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -101,7 +101,7 @@
     </td>
     {{/with}}
     {{#with TROUGH}}
-    <td>
+    <td class="{{type}}">
       <div><b>TROUGH</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -109,7 +109,7 @@
     </td>
     {{/with}}
     {{#with MILL}}
-    <td>
+    <td class="{{type}}">
       <div><b>MILL</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -117,7 +117,7 @@
     </td>
     {{/with}}
     {{#with PIGS}}
-    <td>
+    <td class="{{type}}">
       <div><b>PIGS</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -127,7 +127,7 @@
   </tr>
   <tr>
     {{#with STABLE}}
-    <td>
+    <td class="{{type}}" rowspan="2">
       <div><b>STABLE</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -135,7 +135,7 @@
     </td>
     {{/with}}
     {{#with BUILD1}}
-    <td>
+    <td class="{{type}} HALF_HEIGHT">
       <div><b>BUILD1</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -143,7 +143,7 @@
     </td>
     {{/with}}
     {{#with COWS}}
-    <td>
+    <td class="{{type}}" rowspan="2">
       <div><b>COWS</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
@@ -151,14 +151,24 @@
     </td>
     {{/with}}
     {{#with HORSES}}
-    <td>
+    <td class="{{type}}" rowspan="2">
       <div><b>HORSES</b></div>
       {{#each resources}}
         <div class="{{type}} {{color}}">{{type}}</div>
       {{/each}}
     </td>
     {{/with}}
-  </tr>      
+  </tr>
+  <tr>
+    {{#with BUILD2}}
+    <td class="{{type}} HALF_HEIGHT">
+      <div><b>BUILD2</b></div>
+      {{#each resources}}
+        <div class="{{type}} {{color}}">{{type}}</div>
+      {{/each}}
+    </td>
+    {{/with}}
+  </tr>
 </table>
 {{/with}}
 
@@ -181,11 +191,9 @@
   <tr><td width="20%">
 
   <h3 style="color: {{@@key}}">{{@@key}}</h3>
-  <ul>
   {{#each resources}}
-    <li><div class="{{type}} {{color}}">{{type}}</div></li>
+    <div class="{{type}} {{color}}">{{type}}</div>
   {{/each}}
-  </ul>
 
   </td><td width="20%">
 
