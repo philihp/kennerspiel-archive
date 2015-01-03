@@ -1,14 +1,7 @@
-@(user: User, instances: List[Instance])
+@(message: String)
 
-@main(user: User) {
-   
+@main("Welcome to Play") {
 
-<h2>My Active Instances</h2>
-
-<ul>
-@for(i <- instances) {
-	<li>[<a href="@routes.Application.instance(i.id)">Show</a>] @i.id - @i.name</li>
-}
-</ul>
+    @play20.welcome(message, style = "Java")
 
 }

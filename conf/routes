@@ -2,31 +2,8 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Authentication
-GET      /login               controllers.Application.login()
-POST     /login               controllers.Application.loginSubmit()
-GET      /logout              controllers.Application.logout()
-GET      /register            controllers.Application.register()
-POST     /register            controllers.Application.registerSubmit()
-GET      /create              controllers.Application.create()
-POST     /createSubmit        controllers.Application.createSubmit()
-GET      /join                controllers.Application.join()
-GET      /settings            controllers.Application.settings()
-GET      /stats               controllers.Application.stats()
-GET      /instance/:id        controllers.Application.instance(id: Integer)
-
 # Home page
-GET      /api/instances/:id   controllers.Instances.get(id: Integer, preview: String ?= null)
-GET      /api/instances/      controllers.Instances.getAll(page: Integer ?=0)
-POST     /api/instances/      controllers.Instances.create()
-PUT      /api/instances/:id   controllers.Instances.update(id: Integer)
-DELETE   /api/instances/:id   controllers.Instances.delete(id: Integer)
-
-#GET      /api/commands/:id    controllers.Commands.get(id: Integer)
-POST     /api/commands        controllers.Commands.create()
-#PUT      /api/commands/:id    controllers.Commands.update(id: Integer)
-DELETE   /api/commands/:id    controllers.Commands.delete(id: Integer)
+GET     /                           controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET      /assets/*file        controllers.Assets.at(path="/public", file)
-GET      /                    controllers.Application.index()
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

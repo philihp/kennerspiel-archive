@@ -1,19 +1,14 @@
-name := "Kennerspiel"
+name := """kennerspiel"""
 
 version := "1.0-SNAPSHOT"
 
-resolvers += "philihp" at "https://philihp.com/repo/"
+lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-publishTo := Some(Resolver.file("file", new File("/srv/www/philihp.com/public_html/repo")))
+scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  "com.google.guava" % "guava" % "15.0",
-  "mysql" % "mysql-connector-java" % "5.1.24",
-  "kennerspiel-interface" % "kennerspiel-interface_2.10" % "1.0-SNAPSHOT" changing(),
-  "kennerspiel-agricola2p" % "kennerspiel-agricola2p_2.10" % "1.0-SNAPSHOT" changing()
+  javaWs
 )
-
-play.Project.playJavaSettings
