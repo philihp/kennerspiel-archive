@@ -21,3 +21,6 @@ dist
 *.jar
 *.war
 *.ear
+
+#Typesafe Activator Crap
+activator-sbt-*-shim.sbt
