@@ -1,1 +1,1 @@
-web:    activator run --http.port=$PORT $PLAY_OPTS
+web:    target/universal/stage/bin/kennerspiel -Dhttp.port=$PORT
