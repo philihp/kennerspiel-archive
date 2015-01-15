@@ -9,7 +9,7 @@
     <packaging>play2</packaging>
 
     <properties>
-        <play.version>2.2.1</play.version>
+        <play.version>2.2.4</play.version>
     </properties>
 
         <repositories>
