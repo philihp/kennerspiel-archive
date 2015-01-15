@@ -9,7 +9,7 @@
     <packaging>play2</packaging>
 
     <properties>
-        <play.version>2.3.7</play.version>
+        <play.version>2.2.1</play.version>
     </properties>
 
         <repositories>
@@ -62,6 +62,9 @@
                 <artifactId>play2-maven-plugin</artifactId>
                 <version>1.2.5</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <lib>target/lib</lib>
+                </configuration>
             </plugin>
 
             <plugin>
