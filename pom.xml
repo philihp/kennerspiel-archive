@@ -9,7 +9,7 @@
     <packaging>play2</packaging>
 
     <properties>
-        <play.version>2.2.4</play.version>
+        <play.version>2.2.6</play.version>
         <scala.version>2.10</scala.version>
     </properties>
 
@@ -57,16 +57,6 @@
         <testSourceDirectory>test</testSourceDirectory>
 
         <plugins>
-
-            <plugin>
-                <groupId>org.nanoko.playframework</groupId>
-                <artifactId>play2-maven-plugin</artifactId>
-                <version>1.2.5</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <executableName>play</executableName>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
