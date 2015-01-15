@@ -63,7 +63,7 @@
                 <version>1.2.5</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <lib>target/lib</lib>
+                    <executableName>play</executableName>
                 </configuration>
             </plugin>
 
