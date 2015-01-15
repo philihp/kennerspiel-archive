@@ -10,6 +10,7 @@
 
     <properties>
         <play.version>2.2.4</play.version>
+        <scala.version>2.10</scala.version>
     </properties>
 
         <repositories>
@@ -29,13 +30,13 @@
             <!-- Play Framework Dependencies -->
             <dependency>
                 <groupId>com.typesafe.play</groupId>
-                <artifactId>play_2.10</artifactId>
+                <artifactId>play_${scala.version}</artifactId>
                 <version>${play.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.typesafe.play</groupId>
-                <artifactId>play-test_2.10</artifactId>
+                <artifactId>play-test_${scala.version}</artifactId>
                 <version>${play.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -43,7 +44,7 @@
              <!-- the Java API is in this artifact -->
              <dependency>
                  <groupId>com.typesafe.play</groupId>
-                 <artifactId>play-java_2.10</artifactId>
+                 <artifactId>play-java_${scala.version}</artifactId>
                  <version>${play.version}</version>
                  <scope>provided</scope>
              </dependency>
