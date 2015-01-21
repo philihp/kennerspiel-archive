@@ -5,5 +5,14 @@ machine:
 deployment:
   staging:
     branch: master
-    heroku:
-      appname: kennerspiel
+    codedeploy:
+      kenner-app:
+        application_root: /
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: kenner-bucket
+            key_pattern: apps/kenner-app-{SHORT_COMMIT}
+        region: us-west-2
+        deployment_group: kenner-group
+        deployment_config: CodeDeployDefault.AllAtOnce
