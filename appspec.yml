@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /srv/kennerspiel/
+hooks:
+  BeforeInstall:
+    - location: bin/install.sh
+      timeout: 1800
+      runas: ec2-user
+  ApplicationStart:
+    - location: bin/start.sh
+      runas: ec2-user
+  ValidateService:
+    - location: bin/verify.sh
+      runas: ec2-user
