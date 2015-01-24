@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /srv/kennerspiel
-play start
+nohup play start&
