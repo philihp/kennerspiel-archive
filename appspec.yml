@@ -6,7 +6,7 @@ files:
 hooks:
   ApplicationStart:
     - location: bin/start.sh
-      runas: ec2-user
+      runas: root
   ValidateService:
     - location: bin/verify.sh
-      runas: ec2-user
+      runas: root
