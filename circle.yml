@@ -12,7 +12,7 @@ deployment:
           revision_type: S3
           s3_location:
             bucket: kenner-bucket
-            key_pattern: apps/kenner-app-{SHORT_COMMIT}
+            key_pattern: apps/kenner-app-{SHORT_COMMIT}.zip
         region: us-west-2
         deployment_group: kenner-group
         deployment_config: CodeDeployDefault.AllAtOnce
