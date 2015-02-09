@@ -19,6 +19,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  javaWs
+  javaWs,
+  "com.philihp" % "weblabora" % "2.0.2"
 )
 
+//play.Project.playJavaSettings

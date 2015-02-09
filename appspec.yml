@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /srv/kennerspiel/
+hooks:
+  ApplicationStart:
+    - location: bin/start.sh
+      runas: root
+  ValidateService:
+    - location: bin/verify.sh
+      runas: root
