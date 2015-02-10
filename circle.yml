@@ -22,6 +22,7 @@ test:
     - "./activator test docker:stage":
         timeout: 900
   post:
+    - cp Dockerrun.aws.json target/docker/
     - cp -R target/test-reports $CI_REPORTS
     - cd target/docker; zip -r ../kennerspiel-$CIRCLE_SHA1.zip .; cd ../../
     - cp target/kennerspiel-$CIRCLE_SHA1.zip $CIRCLE_ARTIFACTS
