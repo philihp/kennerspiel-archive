@@ -5,6 +5,8 @@ name := """kennerspiel"""
 
 version := "1.0-SNAPSHOT"
 
+resolvers += Resolver.mavenLocal
+
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.11.1"
@@ -20,7 +22,5 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
-  "com.philihp" % "weblabora" % "2.0.2"
+  "com.philihp" % "weblabora" % "2.0.3-SNAPSHOT"
 )
-
-//play.Project.playJavaSettings
