@@ -33,4 +33,4 @@ deployment:
     commands:
       - aws s3 cp $CIRCLE_ARTIFACTS/kennerspiel-$CIRCLE_SHA1.zip s3://kennerspiel-deployments/kennerspiel-$CIRCLE_SHA1.zip
       - aws elasticbeanstalk create-application-version --application-name Kennerspiel --version-label $CIRCLE_SHA1 --source-bundle S3Bucket=kennerspiel-deployments,S3Key=kennerspiel-$CIRCLE_SHA1.zip --region us-west-2
-      - aws elasticbeanstalk update-environment --environment-name kennerspiel-env --version-label $CIRCLE_SHA1 --region us-west-2
+      - aws elasticbeanstalk update-environment --environment-name kennerspiel --version-label $CIRCLE_SHA1 --region us-west-2
