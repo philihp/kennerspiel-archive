@@ -24,3 +24,6 @@ dist
 
 #Typesafe Activator Crap
 activator-sbt-*-shim.sbt
+
+conf/evolutions/default/
+conf/play-authenticate/mine.conf
