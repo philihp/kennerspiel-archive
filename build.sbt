@@ -28,5 +28,6 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "com.philihp" % "weblabora" % "2.0.3-SNAPSHOT",
-  "com.feth" %% "play-authenticate" % "0.6.8"
+  "com.feth" %% "play-authenticate" % "0.6.8",
+  "mysql" % "mysql-connector-java" % "5.1.18"
 )
