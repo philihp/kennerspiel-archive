@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html lang="@lang().code()">
 <head>
-    <title>@title</title>
+  <title>@title</title>
 </head>
 
 <body>
 @if(flash.contains(Application.FLASH_ERROR_KEY)) {
 <div style="color: red;">
-    @flash().get(Application.FLASH_ERROR_KEY)
+  @flash().get(Application.FLASH_ERROR_KEY)
 </div>
 }
 @if(flash.contains(Application.FLASH_MESSAGE_KEY)) {
 <div style="color: blue;">
-    @flash().get(Application.FLASH_MESSAGE_KEY)
+  @flash().get(Application.FLASH_MESSAGE_KEY)
 </div>
 }
 @content
@@ -22,7 +22,7 @@
 <hr>
 
 <footer>
-    <p>&copy; 2012-2015 Kennerspiel.com</p>
+  <p>&copy; 2012-2015 Kennerspiel.com</p>
 </footer>
 </body>
 </html>

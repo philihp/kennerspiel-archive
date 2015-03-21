@@ -1,4 +1,4 @@
-import NativePackagerKeys._
+import com.typesafe.sbt.SbtNativePackager.NativePackagerKeys._
 import com.typesafe.sbt.SbtNativePackager._
 
 name := """kennerspiel"""
