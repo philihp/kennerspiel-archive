@@ -6,6 +6,7 @@ import play.mvc.Controller;
 import play.mvc.Http.Session;
 import play.mvc.Result;
 import views.html.index;
+import com.feth.play.module.pa.controllers.Authenticate;
 
 public class Application extends Controller {
 
@@ -18,9 +19,8 @@ public class Application extends Controller {
   }
 
   public static Result oAuthDenied(final String providerKey) {
-    com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-    flash(FLASH_ERROR_KEY,
-        "You need to accept the OAuth connection in order to use this website!");
+    Authenticate.noCache(response());
+    flash(FLASH_ERROR_KEY, "Authentication failed.");
     return redirect(routes.Application.index());
   }
 
