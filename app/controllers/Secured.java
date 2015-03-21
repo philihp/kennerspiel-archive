@@ -2,6 +2,11 @@ package controllers;
 
 import com.feth.play.module.pa.PlayAuthenticate;
 import com.feth.play.module.pa.user.AuthUser;
+import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.GameCountry;
+import com.philihp.weblabora.model.GameLength;
+import com.philihp.weblabora.model.GamePlayers;
+import play.libs.Json;
 import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -24,4 +29,11 @@ public class Secured extends Security.Authenticator {
     ctx.flash().put(Application.FLASH_MESSAGE_KEY, "Nice try, but you need to log in first!");
     return redirect(routes.Application.index());
   }
+
+  public static Result weblabora() {
+    Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
+    return ok(Json.toJson(board));
+  }
+
+
 }

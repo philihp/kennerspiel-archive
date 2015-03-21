@@ -29,11 +29,5 @@ public class Application extends Controller {
     return localUser;
   }
 
-/*
-    public static Result weblabora() {
-        Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
-        return ok(Json.toJson(board));
-    }
-*/
 
 }
