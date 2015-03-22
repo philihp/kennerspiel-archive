@@ -8,7 +8,7 @@ body {
   /* Margin top for the nav bar */
   padding-top: 70px;
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 
@@ -17,10 +17,10 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: 40px;
   background-color: #f5f5f5;
 }
 
 .footer .container .text-muted {
-  margin: 20px 0;
+  margin: 10px 0;
 }
