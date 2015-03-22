@@ -1,19 +1,7 @@
 @import com.feth.play.module.pa.views.html._
 
-@main("Play! Authenticate simple OAuth sample") {
+@main("Kennerspiel.com") {
 
-@currentAuth() { auth =>
-@if(auth != null) {
-<a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout">Logout</a>
-<br/><br/>
-}
-}
+games go here
 
-Login/Signup:
-@forProviders() { p =>
-<a href="@p.getUrl()">@p.getKey()</a>
-}
-
-<br/><br/>
-<a href="@routes.Restricted.index">Secrets everywhere...</a>
 }

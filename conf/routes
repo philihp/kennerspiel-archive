@@ -6,3 +6,5 @@ GET  /authenticate/:provider            com.feth.play.module.pa.controllers.Auth
 GET  /authenticate/:provider/denied     controllers.Application.oAuthDenied(provider: String)
 
 GET  /weblabora                         controllers.Secured.weblabora
+
+GET  /assets/*file                      controllers.Assets.at(path="/public", file)
