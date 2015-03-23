@@ -9,8 +9,12 @@ import views.html.profile.*;
 @Security.Authenticated(Secured.class)
 public class ProfileController extends Controller {
 
-  public static Result index() {
+  public static Result settings() {
     User localUser = Application.getLocalUser(session());
     return ok(settings.render(localUser));
+  }
+  public static Result rankings() {
+    User localUser = Application.getLocalUser(session());
+    return ok(rankings.render(localUser));
   }
 }

@@ -1,7 +1,9 @@
 # Routes
 GET  /                                  controllers.Application.index
-GET  /instance                          controllers.InstanceController.index
-GET  /profile                           controllers.ProfileController.index
+GET  /instance/create                   controllers.InstanceController.create
+GET  /instance/join                     controllers.InstanceController.join
+GET  /profile/settings                  controllers.ProfileController.settings
+GET  /profile/rankings                  controllers.ProfileController.rankings
 GET  /logout                            com.feth.play.module.pa.controllers.Authenticate.logout
 GET  /authenticate/:provider            com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
 GET  /authenticate/:provider/denied     controllers.Application.oAuthDenied(provider: String)

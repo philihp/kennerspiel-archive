@@ -9,8 +9,11 @@ import views.html.instance.*;
 @Security.Authenticated(Secured.class)
 public class InstanceController extends Controller {
 
-  public static Result index() {
+  public static Result create() {
     return ok(create.render(null));
+  }
+  public static Result join() {
+    return ok(join.render(null));
   }
 
 }
