@@ -10,14 +10,16 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
 
 @Entity
 @Table(name = "users")
 public class User extends Model {
-  /**
-   *
-   */
+
   private static final long serialVersionUID = 1L;
 
   @Id
@@ -130,6 +132,21 @@ public class User extends Model {
 
   public LinkedAccount getAccountByProvider(final String providerKey) {
     return LinkedAccount.findByProviderKey(this, providerKey);
+  }
+
+  public String getAvatarURL() {
+    return "//www.gravatar.com/avatar/"+getEmailMD5()+"?d=retro";
+  }
+
+  private String getEmailMD5() {
+    try {
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      byte[] d = md.digest(email.getBytes());
+      return (new HexBinaryAdapter()).marshal(d).toLowerCase();
+    }
+    catch(NoSuchAlgorithmException e) {
+      return "00000000000000000000000000000000";
+    }
   }
 
 }

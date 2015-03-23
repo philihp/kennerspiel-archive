@@ -10,7 +10,6 @@ import com.feth.play.module.pa.controllers.Authenticate;
 
 public class Application extends Controller {
 
-
   public static final String FLASH_MESSAGE_KEY = "message";
   public static final String FLASH_ERROR_KEY = "error";
 
