@@ -1,7 +1,7 @@
 import com.typesafe.sbt.SbtNativePackager.NativePackagerKeys._
 import com.typesafe.sbt.SbtNativePackager._
 
-name := """kennerspiel"""
+name := "kennerspiel"
 
 version := "1.0-SNAPSHOT"
 
@@ -10,14 +10,6 @@ resolvers += Resolver.mavenLocal
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.11.1"
-
-// Docker------------------
-
-maintainer in Docker := "Philihp Busby <philihp@gmail.com>"
-
-dockerBaseImage := "dockerfile/java:oracle-java8"
-
-dockerExposedPorts in Docker := Seq(9000)
 
 // Dependencies------------
 resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -29,5 +21,6 @@ libraryDependencies ++= Seq(
   javaWs,
   "com.philihp" % "weblabora" % "2.0.3-SNAPSHOT",
   "com.feth" %% "play-authenticate" % "0.6.8",
-  "mysql" % "mysql-connector-java" % "5.1.18"
+  "mysql" % "mysql-connector-java" % "5.1.18",
+  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )

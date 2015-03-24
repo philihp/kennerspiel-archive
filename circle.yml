@@ -2,35 +2,25 @@ machine:
   environment:
     JAVA_TOOL_OPTIONS: '-Dfile.encoding=UTF8 -Duser.timezone=UTC'
     _JAVA_OPTIONS: '-Xms512m -Xmx1024m -Xss2m'
-  services:
-    - docker
   java:
     version: oraclejdk8
-  python:
-    version: 2.7.6
 
 dependencies:
   cache_directories:
     - ~/.sbt
-  pre:
-    - pip install awscli
   override:
-    - "./activator compile":
+    - "./activator compile stage":
         timeout: 300
+
 test:
   override:
-    - "./activator test docker:stage":
+    - "./activator test":
         timeout: 900
   post:
-    - cp Dockerrun.aws.json target/docker/
     - cp -R target/test-reports $CI_REPORTS
-    - cd target/docker; zip -r ../kennerspiel-$CIRCLE_SHA1.zip .; cd ../../
-    - cp target/kennerspiel-$CIRCLE_SHA1.zip $CIRCLE_ARTIFACTS
 
 deployment:
-  prod:
+  staging:
     branch: master
-    commands:
-      - aws s3 cp $CIRCLE_ARTIFACTS/kennerspiel-$CIRCLE_SHA1.zip s3://kennerspiel-deployments/kennerspiel-$CIRCLE_SHA1.zip
-      - aws elasticbeanstalk create-application-version --auto-create-application --application-name Kennerspiel --version-label $CIRCLE_SHA1 --source-bundle S3Bucket=kennerspiel-deployments,S3Key=kennerspiel-$CIRCLE_SHA1.zip --region us-west-2
-      - aws elasticbeanstalk update-environment --environment-name kennerspiel --version-label $CIRCLE_SHA1 --region us-west-2
+    heroku:
+      appname: kennerspiel
