@@ -19,8 +19,7 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
+  "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
   "com.philihp" % "weblabora" % "2.0.3-SNAPSHOT",
-  "com.feth" %% "play-authenticate" % "0.6.8",
-  "mysql" % "mysql-connector-java" % "5.1.18",
-  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+  "com.feth" %% "play-authenticate" % "0.6.8"
 )
