@@ -1,9 +1,14 @@
-@(instance: models.Instance = null)
+@(instanceForm: Form[Instance])
 
+@import helper.twitterBootstrap._
 @import com.feth.play.module.pa.views.html._
 
 @main("Create Instance") {
 
-instance form here
+  @helper.form(action = routes.InstanceController.create) {
+
+    @helper.inputText(instanceForm("name"))
+
+  }
 
 }

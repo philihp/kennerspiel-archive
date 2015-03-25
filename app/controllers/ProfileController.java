@@ -15,6 +15,6 @@ public class ProfileController extends Controller {
   }
   public static Result rankings() {
     User localUser = Application.getLocalUser(session());
-    return ok(rankings.render(localUser));
+    return TODO;
   }
 }
