@@ -15,4 +15,6 @@ public class Instance {
 
   public Long seed;
 
+  public String gameName;
+
 }

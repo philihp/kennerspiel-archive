@@ -4,13 +4,14 @@
 # --- !Ups
 
 create table instance (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   seed                      bigint,
+  game_name                 varchar(255),
   constraint pk_instance primary key (id))
 ;
 
 create table linked_account (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   user_id                   bigint,
   provider_user_id          varchar(255),
   provider_key              varchar(255),
@@ -18,19 +19,13 @@ create table linked_account (
 ;
 
 create table users (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   email                     varchar(255),
   name                      varchar(255),
-  active                    boolean,
-  email_validated           boolean,
+  active                    tinyint(1) default 0,
+  email_validated           tinyint(1) default 0,
   constraint pk_users primary key (id))
 ;
-
-create sequence instance_seq;
-
-create sequence linked_account_seq;
-
-create sequence users_seq;
 
 alter table linked_account add constraint fk_linked_account_user_1 foreign key (user_id) references users (id) on delete restrict on update restrict;
 create index ix_linked_account_user_1 on linked_account (user_id);
@@ -39,19 +34,13 @@ create index ix_linked_account_user_1 on linked_account (user_id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists instance;
+drop table instance;
 
-drop table if exists linked_account;
+drop table linked_account;
 
-drop table if exists users;
+drop table users;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists instance_seq;
-
-drop sequence if exists linked_account_seq;
-
-drop sequence if exists users_seq;
+SET FOREIGN_KEY_CHECKS=1;
 
