@@ -2,12 +2,13 @@
 
 @import helper.twitterBootstrap._
 @import com.feth.play.module.pa.views.html._
+@import helper._
 
 @main("Create Instance") {
 
-  @helper.form(action = routes.InstanceController.create) {
+  @form(action = routes.InstanceController.createSubmit) {
 
-    @helper.inputText(instanceForm("name"))
+    @inputText(instanceForm("gameName"))
 
   }
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import models.Instance;
 import models.User;
 import play.data.Form;
@@ -15,12 +16,14 @@ public class InstanceController extends Controller {
 
   public static Result create() {
     Form<Instance> form = instanceForm.bindFromRequest();
-
     return ok(create.render(form));
   }
 
   public static Result createSubmit() {
-    return ok(create.render(null));
+    Form<Instance> form = instanceForm.bindFromRequest();
+    Instance instance = form.get();
+    Ebean.save(instance);
+    return TODO;
   }
   public static Result join() {
     return TODO;
