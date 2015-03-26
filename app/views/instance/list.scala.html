@@ -1,0 +1,13 @@
+@(instances: List[Instance])
+
+@import com.feth.play.module.pa.views.html._
+
+@main("Join Instance") {
+
+  <ul>
+  @for(instance <- instances) {
+    <li>@instance</li>
+  }
+  </ul>
+
+}

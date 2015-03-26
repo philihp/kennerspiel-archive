@@ -9,6 +9,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.instance.*;
 
+import java.util.List;
+
 @Security.Authenticated(Secured.class)
 public class InstanceController extends Controller {
 
@@ -23,9 +25,15 @@ public class InstanceController extends Controller {
     Form<Instance> form = instanceForm.bindFromRequest();
     Instance instance = form.get();
     Ebean.save(instance);
-    return TODO;
+    return redirect(routes.InstanceController.list());
   }
-  public static Result join() {
+
+  public static Result list() {
+    List<Instance> instances = Ebean.find(Instance.class).findList();
+    return ok(list.render(instances));
+  }
+
+  public static Result find() {
     return TODO;
   }
 

@@ -1,8 +1,9 @@
 # Routes
 GET  /                                  controllers.Application.index
 GET  /instance/create                   controllers.InstanceController.create
-POST /instance/create                   controllers.InstanceController.createSubmit
-GET  /instance/join                     controllers.InstanceController.join
+POST /instance/createSubmit             controllers.InstanceController.createSubmit
+GET  /instance/list                     controllers.InstanceController.list
+GET  /instance/find                     controllers.InstanceController.find
 GET  /profile/settings                  controllers.ProfileController.settings
 GET  /profile/rankings                  controllers.ProfileController.rankings
 GET  /logout                            com.feth.play.module.pa.controllers.Authenticate.logout

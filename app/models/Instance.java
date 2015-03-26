@@ -17,4 +17,8 @@ public class Instance {
 
   public String gameName;
 
+  public String toString() {
+    return "["+id+":"+gameName+"]";
+  }
+
 }
