@@ -1,0 +1,15 @@
+@(instance: Instance)
+
+@import com.feth.play.module.pa.views.html._
+
+@main("Get Instance") {
+
+  Instance: @instance<br />
+  States:
+  <ul>
+    @for(state <- instance.states) {
+      <li>@state</li>
+    }
+  </ul>
+
+}

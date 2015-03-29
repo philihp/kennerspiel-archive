@@ -1,8 +1,8 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "instance")
@@ -16,6 +16,13 @@ public class Instance {
   public Long seed;
 
   public String gameName;
+
+  @OneToMany
+  @OrderBy("rank")
+  public List<State> states;
+
+  @ManyToMany
+  public List<User> players = new ArrayList<>();
 
   public String toString() {
     return "["+id+":"+gameName+"]";

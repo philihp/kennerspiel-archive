@@ -6,7 +6,7 @@
 
   <ul>
   @for(instance <- instances) {
-    <li>@instance</li>
+    <li><a href="@routes.InstanceController.get(instance.id)">@instance</a></li>
   }
   </ul>
 

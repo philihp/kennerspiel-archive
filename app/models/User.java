@@ -40,6 +40,9 @@ public class User extends Model {
   @OneToMany(cascade = CascadeType.ALL)
   public List<LinkedAccount> linkedAccounts;
 
+  @ManyToMany(mappedBy = "players")
+  public List<Instance> instances = new ArrayList<>();
+
   public static final Finder<Long, User> find = new Finder<Long, User>(
       Long.class, User.class);
 
