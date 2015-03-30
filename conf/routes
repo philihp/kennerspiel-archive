@@ -5,6 +5,7 @@ POST /instance/createSubmit             controllers.InstanceController.createSub
 GET  /instance/list                     controllers.InstanceController.list
 GET  /instance/join                     controllers.InstanceController.join
 POST /instance/joinSubmit/:id           controllers.InstanceController.joinSubmit(id: Long)
+POST /instance/leaveSubmit/:id          controllers.InstanceController.leaveSubmit(id: Long)
 GET  /instance/:id                      controllers.InstanceController.get(id: Long)
 GET  /profile/settings                  controllers.ProfileController.settings
 GET  /profile/rankings                  controllers.ProfileController.rankings

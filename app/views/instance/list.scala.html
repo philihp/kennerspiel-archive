@@ -6,7 +6,13 @@
 
   <ul>
   @for(instance <- instances) {
-    <li><a href="@routes.InstanceController.get(instance.id)">@instance</a></li>
+    <li>
+      @instance
+      @helper.form(action = routes.InstanceController.leaveSubmit(instance.id)) {
+        <input type="submit" class="btn btn-primary" value="Leave"/>
+        <a href="@routes.InstanceController.get(instance.id)" class="btn btn-default">View</a>
+      }
+    </li>
   }
   </ul>
 

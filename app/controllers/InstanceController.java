@@ -86,15 +86,27 @@ public class InstanceController extends Controller {
   }
 
   /**
-   * Joins the current user to the table.
+   * Joins the current user to the instance.
    */
   public static Result joinSubmit(Long id) {
     Instance instance = Ebean.find(Instance.class, id);
     User user = Application.getLocalUser(session());
     instance.players.add(user);
     Ebean.save(instance);
-    flash(Application.FLASH_SUCCESS_KEY, "Successfully joined game "+instance);
+    flash(Application.FLASH_SUCCESS_KEY, "Successfully joined instance "+instance);
     return redirect(routes.InstanceController.get(id));
+  }
+
+  /**
+   * Removes the current user from the instance.
+   */
+  public static Result leaveSubmit(Long id) {
+    Instance instance = Ebean.find(Instance.class, id);
+    User user = Application.getLocalUser(session());
+    instance.players.remove(user);
+    Ebean.save(instance);
+    flash(Application.FLASH_SUCCESS_KEY, "Successfully left instance "+instance);
+    return redirect(routes.InstanceController.list());
   }
 
 }
