@@ -7,6 +7,8 @@ create table instance (
   id                        bigint not null,
   seed                      bigint,
   game_name                 varchar(255),
+  phase                     varchar(1),
+  constraint ck_instance_phase check (phase in ('N','A','F')),
   constraint pk_instance primary key (id))
 ;
 
