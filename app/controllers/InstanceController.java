@@ -7,9 +7,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.instance.create;
-import views.html.instance.get;
-import views.html.instance.list;
+import views.html.instance.*;
 
 import java.util.List;
 
@@ -60,7 +58,7 @@ public class InstanceController extends Controller {
   /**
    * Shows instances that the user can join
    */
-  public static Result find() {
+  public static Result join() {
 //    String sql = "SELECT i.id, i.game_name FROM instance i"
 //                +"  LEFT JOIN instance_users x ON (i.id = x.instance_id AND x.users_id = :user_id)"
 //                +"  WHERE x.instance_id IS NULL";
@@ -84,7 +82,19 @@ public class InstanceController extends Controller {
         .setRawSql(rawSql)
         .setParameter("user_id", user.id)
         .where().eq("phase", Instance.Phase.NEW).findList();
-    return ok(list.render(instances));
+    return ok(join.render(instances));
+  }
+
+  /**
+   * Joins the current user to the table.
+   */
+  public static Result joinSubmit(Long id) {
+    Instance instance = Ebean.find(Instance.class, id);
+    User user = Application.getLocalUser(session());
+    instance.players.add(user);
+    Ebean.save(instance);
+    flash(Application.FLASH_SUCCESS_KEY, "Successfully joined game "+instance);
+    return redirect(routes.InstanceController.get(id));
   }
 
 }

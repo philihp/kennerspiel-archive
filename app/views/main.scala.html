@@ -45,9 +45,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Game <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.InstanceController.find">Find Instance</a></li>
+              <li><a href="@routes.InstanceController.join">Join An Instance</a></li>
               <li><a href="@routes.InstanceController.list">List My Instances</a></li>
-              <li><a href="@routes.InstanceController.create">Create Instance</a></li>
+              <li><a href="@routes.InstanceController.create">Create New Instance</a></li>
             </ul>
           </li>
         </ul>
@@ -73,14 +73,24 @@
 
   <div class="container">
 
-    @if(flash.contains(Application.FLASH_ERROR_KEY)) {
-    <div style="color: red;">
-      @flash().get(Application.FLASH_ERROR_KEY)
+    @if(flash.contains(Application.FLASH_SUCCESS_KEY)) {
+    <div class="alert alert-success" role="alert">
+      @flash().get(Application.FLASH_SUCCESS_KEY)
     </div>
     }
-    @if(flash.contains(Application.FLASH_MESSAGE_KEY)) {
-    <div style="color: blue;">
-      @flash().get(Application.FLASH_MESSAGE_KEY)
+    @if(flash.contains(Application.FLASH_INFO_KEY)) {
+    <div class="alert alert-info" role="alert">
+      @flash().get(Application.FLASH_INFO_KEY)
+    </div>
+    }
+    @if(flash.contains(Application.FLASH_WARNING_KEY)) {
+    <div class="alert alert-warning" role="alert">
+      @flash().get(Application.FLASH_WARNING_KEY)
+    </div>
+    }
+    @if(flash.contains(Application.FLASH_DANGER_KEY)) {
+    <div class="alert alert-danger" role="alert">
+      @flash().get(Application.FLASH_DANGER_KEY)
     </div>
     }
 

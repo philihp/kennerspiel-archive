@@ -1,9 +1,19 @@
-@(instance: models.Instance = null)
+@(instances: List[Instance])
 
 @import com.feth.play.module.pa.views.html._
 
 @main("Join Instance") {
 
-  Lists all instances
+  <ul>
+  @for(instance <- instances) {
+    <li>
+      @instance
+      @helper.form(action = routes.InstanceController.joinSubmit(instance.id)) {
+        <input type="submit" class="btn btn-primary" value="Join"/>
+        <a href="@routes.InstanceController.get(instance.id)" class="btn btn-default">View</a>
+      }
+    </li>
+  }
+  </ul>
 
 }

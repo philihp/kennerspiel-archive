@@ -3,7 +3,8 @@ GET  /                                  controllers.Application.index
 GET  /instance/create                   controllers.InstanceController.create
 POST /instance/createSubmit             controllers.InstanceController.createSubmit
 GET  /instance/list                     controllers.InstanceController.list
-GET  /instance/find                     controllers.InstanceController.find
+GET  /instance/join                     controllers.InstanceController.join
+POST /instance/joinSubmit/:id           controllers.InstanceController.joinSubmit(id: Long)
 GET  /instance/:id                      controllers.InstanceController.get(id: Long)
 GET  /profile/settings                  controllers.ProfileController.settings
 GET  /profile/rankings                  controllers.ProfileController.rankings
