@@ -18,9 +18,3 @@ test:
         timeout: 900
   post:
     - cp -R target/test-reports $CI_REPORTS
-
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: kennerspiel
