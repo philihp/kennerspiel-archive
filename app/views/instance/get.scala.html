@@ -1,15 +1,23 @@
-@(instance: Instance)
+@(instance: Instance, stateForm: Form[State])
 
 @import com.feth.play.module.pa.views.html._
 
 @main("Get Instance") {
 
-  Instance: @instance<br />
-  States:
+  @instance<br />
   <ul>
     @for(state <- instance.states) {
       <li>@state</li>
     }
   </ul>
+
+  @helper.form(action = routes.InstanceController.explore(instance.id)) {
+    @helper.inputText(stateForm("token"))
+    <input type="submit" value="Explore" class="btn btn-default" />
+  }
+  @helper.form(action = routes.InstanceController.backtrack(instance.id)) {
+    <input type="submit" value="Backtrack" class="btn btn-default" />
+  }
+
 
 }

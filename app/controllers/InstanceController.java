@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.*;
 import models.Instance;
+import models.State;
 import models.User;
 import play.data.Form;
 import play.mvc.Controller;
@@ -9,12 +10,14 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.instance.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Security.Authenticated(Secured.class)
 public class InstanceController extends Controller {
 
   private static Form<Instance> instanceForm = Form.form(Instance.class);
+  private static Form<State> stateForm = Form.form(State.class);
 
   /**
    * Displays a form for creating an instance
@@ -52,7 +55,16 @@ public class InstanceController extends Controller {
    */
   public static Result get(Long id) {
     Instance instance = Ebean.find(Instance.class, id);
-    return ok(get.render(instance));
+
+    // looks like @orderBy is ignored by eBean!?
+    instance.states.sort(
+      new Comparator<State>() {
+        @Override public int compare(State s1, State s2) {
+          return (int)(s1.id - s2.id);
+        }
+      });
+
+    return ok(get.render(instance, stateForm));
   }
 
   /**
@@ -107,6 +119,35 @@ public class InstanceController extends Controller {
     Ebean.save(instance);
     flash(Application.FLASH_SUCCESS_KEY, "Successfully left instance "+instance);
     return redirect(routes.InstanceController.list());
+  }
+
+  /**
+   * Adds a new state to an instance
+   */
+  public static Result explore(Long instance_id) {
+    User user = Application.getLocalUser(session());
+    Instance instance = Ebean.find(Instance.class, instance_id);
+    Form<State> form = stateForm.bindFromRequest();
+    State state = form.get();
+    state.instance = instance;
+    Ebean.save(state);
+    return redirect(routes.InstanceController.get(instance_id));
+  }
+
+  /**
+   * Removes the last explored state
+   */
+  public static Result backtrack(Long id) {
+    Instance instance = Ebean.find(Instance.class, id);
+    instance.states.sort(
+      new Comparator<State>() {
+        @Override public int compare(State s1, State s2) {
+          return (int)(s1.id - s2.id);
+        }
+      });
+    State lastState = instance.states.get(instance.states.size()-1);
+    Ebean.delete(lastState);
+    return redirect(routes.InstanceController.get(id));
   }
 
 }

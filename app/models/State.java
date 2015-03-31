@@ -1,9 +1,11 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "state")
@@ -23,8 +25,14 @@ public class State {
   @ManyToOne
   public Instance instance;
 
+  @Version
+  public Timestamp dateUpdated;
+
+  @CreatedTimestamp
+  public Timestamp dateCreated;
+
   public String toString() {
-    return "["+id+":"+token+"]";
+    return "[ State : " + id + " : " + token + " ]";
   }
 
 }

@@ -2,6 +2,8 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.ExpressionList;
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
 import com.feth.play.module.pa.user.AuthUser;
 import com.feth.play.module.pa.user.AuthUserIdentity;
 import com.feth.play.module.pa.user.EmailIdentity;
@@ -13,6 +15,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -42,6 +45,12 @@ public class User extends Model {
 
   @ManyToMany(mappedBy = "players")
   public List<Instance> instances = new ArrayList<>();
+
+  @Version
+  public Timestamp dateUpdated;
+
+  @CreatedTimestamp
+  public Timestamp dateCreated;
 
   public static final Finder<Long, User> find = new Finder<Long, User>(
       Long.class, User.class);

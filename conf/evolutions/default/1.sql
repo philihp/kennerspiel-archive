@@ -8,6 +8,8 @@ create table instance (
   seed                      bigint,
   game_name                 varchar(255),
   phase                     varchar(1),
+  date_updated              timestamp not null,
+  date_created              timestamp not null,
   constraint ck_instance_phase check (phase in ('N','A','F')),
   constraint pk_instance primary key (id))
 ;
@@ -25,6 +27,8 @@ create table state (
   rank                      float,
   token                     varchar(255),
   instance_id               bigint,
+  date_updated              timestamp not null,
+  date_created              timestamp not null,
   constraint pk_state primary key (id))
 ;
 
@@ -34,6 +38,8 @@ create table users (
   name                      varchar(255),
   active                    boolean,
   email_validated           boolean,
+  date_updated              timestamp not null,
+  date_created              timestamp not null,
   constraint pk_users primary key (id))
 ;
 

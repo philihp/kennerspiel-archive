@@ -1,12 +1,11 @@
 @(instanceForm: Form[Instance])
 
 @import com.feth.play.module.pa.views.html._
-@import helper._
 
 @main("Create Instance") {
 
-  @form(action = routes.InstanceController.createSubmit) {
-    @inputText(instanceForm("gameName"))
+  @helper.form(action = routes.InstanceController.createSubmit) {
+    @helper.inputText(instanceForm("gameName"))
     <input type="submit" value="Create Instance" class="btn btn-default" />
   }
 
