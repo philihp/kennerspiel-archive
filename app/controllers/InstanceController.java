@@ -1,10 +1,12 @@
 package controllers;
 
 import com.avaje.ebean.*;
+import com.philihp.weblabora.model.*;
 import models.Instance;
 import models.State;
 import models.User;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -57,6 +59,16 @@ public class InstanceController extends Controller {
     Instance instance = Ebean.find(Instance.class, id);
     instance.sortStates();
     return ok(get.render(instance, stateForm));
+  }
+
+  public static Result getJSON(Long id) throws WeblaboraException {
+    Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
+    Instance instance = Ebean.find(Instance.class, id);
+    instance.sortStates();
+    for(State state : instance.states) {
+      MoveProcessor.processMove(board, state.token);
+    }
+    return ok(Json.toJson(board));
   }
 
   /**

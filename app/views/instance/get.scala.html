@@ -20,4 +20,30 @@
   }
 
 
+<script id="results-template" type="text/x-handlebars-template">
+  Stuff
+</script>
+<div id="results"></div>
+
+  <script>
+
+$(document).ready(function () {
+
+  var templateSource = $("#results-template").html();
+  var template = Handlebars.compile(templateSource);
+  var resultsPlaceholder = $("#results");
+
+  var q = "charlie";
+
+  $.ajax({
+    url: '/instance/1/board',
+    success: function (response) {
+      data = response.data;
+      resultsPlaceholder.html(template(data));
+    }
+  });
+})
+
+  </script>
+
 }

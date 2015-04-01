@@ -7,6 +7,7 @@ create table instance (
   id                        bigint not null,
   seed                      bigint,
   game_name                 varchar(255),
+  game_type                 varchar(255),
   phase                     varchar(1),
   date_updated              timestamp not null,
   date_created              timestamp not null,

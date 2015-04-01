@@ -24,6 +24,8 @@ public class Instance {
 
   public String gameName;
 
+  public String gameType;
+
   public enum Phase {
     @EnumValue("N") NEW,
     @EnumValue("A") ACTIVE,
