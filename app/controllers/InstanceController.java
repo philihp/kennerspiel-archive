@@ -109,7 +109,7 @@ public class InstanceController extends Controller {
     User user = Application.getLocalUser(session());
     instance.players.add(user);
     Ebean.save(instance);
-    flash(Application.FLASH_SUCCESS_KEY, "Successfully joined instance "+instance);
+    flash(Application.FLASH_SUCCESS_KEY, "Successfully joined instance " + instance);
     return redirect(routes.InstanceController.get(id));
   }
 
@@ -121,7 +121,7 @@ public class InstanceController extends Controller {
     User user = Application.getLocalUser(session());
     instance.players.remove(user);
     Ebean.save(instance);
-    flash(Application.FLASH_SUCCESS_KEY, "Successfully left instance "+instance);
+    flash(Application.FLASH_SUCCESS_KEY, "Successfully left instance " + instance);
     return redirect(routes.InstanceController.list());
   }
 
@@ -132,9 +132,21 @@ public class InstanceController extends Controller {
     User user = Application.getLocalUser(session());
     Instance instance = Ebean.find(Instance.class, instance_id);
     Form<State> form = stateForm.bindFromRequest();
-    State state = form.get();
-    state.instance = instance;
-    Ebean.save(state);
+    State newState = form.get();
+
+    try {
+      Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
+      instance.sortStates();
+      for(State state : instance.states) {
+        MoveProcessor.processMove(board, state.token);
+      }
+      MoveProcessor.processMove(board, newState.token);
+      newState.instance = instance;
+      Ebean.save(newState);
+    }
+    catch(WeblaboraException e) {
+      flash(Application.FLASH_DANGER_KEY, e.getMessage());
+    }
     return redirect(routes.InstanceController.get(instance_id));
   }
 
