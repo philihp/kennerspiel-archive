@@ -131,7 +131,10 @@ public class InstanceController extends Controller {
    */
   public static Result backtrack(Long id) {
     Instance instance = Ebean.find(Instance.class, id);
-    if(!instance.states.isEmpty()) {
+    if(instance.states.isEmpty()) {
+      flash(Application.FLASH_DANGER_KEY, "You can not backtrack past the start of the game");
+    }
+    else {
       instance.sortStates();
       State lastState = instance.states.get(instance.states.size()-1);
       Ebean.delete(lastState);
