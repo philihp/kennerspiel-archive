@@ -55,15 +55,7 @@ public class InstanceController extends Controller {
    */
   public static Result get(Long id) {
     Instance instance = Ebean.find(Instance.class, id);
-
-    // looks like @orderBy is ignored by eBean!?
-    instance.states.sort(
-      new Comparator<State>() {
-        @Override public int compare(State s1, State s2) {
-          return (int)(s1.id - s2.id);
-        }
-      });
-
+    instance.sortStates();
     return ok(get.render(instance, stateForm));
   }
 
@@ -139,14 +131,11 @@ public class InstanceController extends Controller {
    */
   public static Result backtrack(Long id) {
     Instance instance = Ebean.find(Instance.class, id);
-    instance.states.sort(
-      new Comparator<State>() {
-        @Override public int compare(State s1, State s2) {
-          return (int)(s1.id - s2.id);
-        }
-      });
-    State lastState = instance.states.get(instance.states.size()-1);
-    Ebean.delete(lastState);
+    if(!instance.states.isEmpty()) {
+      instance.sortStates();
+      State lastState = instance.states.get(instance.states.size()-1);
+      Ebean.delete(lastState);
+    }
     return redirect(routes.InstanceController.get(id));
   }
 

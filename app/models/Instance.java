@@ -7,6 +7,7 @@ import com.avaje.ebean.annotation.UpdatedTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,18 @@ public class Instance {
 
   @CreatedTimestamp
   public Timestamp dateCreated;
+
+  /**
+   * Necessary because Ebean is broken
+   */
+  public void sortStates() {
+    states.sort(
+    new Comparator<State>() {
+      @Override public int compare(State s1, State s2) {
+        return (int)(s1.id - s2.id);
+      }
+    });
+  }
 
   public String toString() {
     return "[ Instance : " + id + " : " + gameName + " ]";

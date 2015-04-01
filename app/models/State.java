@@ -23,6 +23,7 @@ public class State {
   public User user;
 
   @ManyToOne
+  @OrderBy("id")
   public Instance instance;
 
   @Version
