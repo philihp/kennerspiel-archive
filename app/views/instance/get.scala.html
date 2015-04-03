@@ -4,26 +4,44 @@
 
 @main("Get Instance") {
 
-  @instance<br />
-  <ul>
-    @for(state <- instance.states) {
-      <li>@state</li>
-    }
-  </ul>
+  <div class="col-md-2">
+    @instance<br />
+    <ul>
+      @for(state <- instance.states) {
+        <li>@state</li>
+      }
+    </ul>
 
-  @helper.form(action = routes.InstanceController.explore(instance.id)) {
-    @helper.inputText(stateForm("token"))
-    <input type="submit" value="Explore" class="btn btn-default" />
-  }
-  @helper.form(action = routes.InstanceController.backtrack(instance.id)) {
-    <input type="submit" value="Backtrack" class="btn btn-default" />
-  }
+    @helper.form(action = routes.InstanceController.explore(instance.id)) {
+      @helper.inputText(stateForm("token"))
+      <input type="submit" value="Explore" class="btn btn-default" />
+    }
+    @helper.form(action = routes.InstanceController.backtrack(instance.id)) {
+      <input type="submit" value="Backtrack" class="btn btn-default" />
+    }
+  </div>
+  <div class="col-md-10" id="results"></div>
 
 
 <script id="results-template" type="text/x-handlebars-template">
-  Stuff
+
+  <h3>Resource Rondel</h3>
+  {{#with wheel}}
+    <table class="table table-bordered">
+      <tr>
+        {{#each armValues}}
+          <th>{{this}}</th>
+        {{/each}}
+      </tr>
+      <tr>
+        {{#each table}}
+          <td>{{#each this}}{{this}}<br />{{/each}}</td>
+        {{/each}}
+      </tr>
+    </table>
+  {{/with}}
+
 </script>
-<div id="results"></div>
 
   <script>
 
@@ -33,12 +51,9 @@ $(document).ready(function () {
   var template = Handlebars.compile(templateSource);
   var resultsPlaceholder = $("#results");
 
-  var q = "charlie";
-
   $.ajax({
     url: '/instance/1/board',
-    success: function (response) {
-      data = response.data;
+    success: function (data) {
       resultsPlaceholder.html(template(data));
     }
   });
