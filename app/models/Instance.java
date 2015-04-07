@@ -58,7 +58,7 @@ public class Instance {
   }
 
   public String toString() {
-    return "[ Instance : " + id + " : " + gameName + " ]";
+    return "{" + id + ":" + gameName + "}";
   }
 
 }

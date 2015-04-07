@@ -33,7 +33,7 @@ public class State {
   public Timestamp dateCreated;
 
   public String toString() {
-    return "[ State : " + id + " : " + token + " ]";
+    return "[" + id + ":" + token + "]";
   }
 
 }
