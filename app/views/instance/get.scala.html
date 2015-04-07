@@ -25,8 +25,8 @@
 
 <script id="results-template" type="text/x-handlebars-template">
 
-  <h3>Resource Rondel</h3>
   {{#with wheel}}
+    <h3>Resource Rondel</h3>
     <table class="table table-bordered">
       <tr>
         {{#each armValues}}
@@ -40,6 +40,32 @@
       </tr>
     </table>
   {{/with}}
+  {{#each players}}
+    <h3>Player {{color}}</h3>
+    {{chit peat 'Peat'}}
+    {{chit penny 'Penny'}}
+    {{chit clay 'Clay'}}
+    {{chit wood 'Wood'}}
+    {{chit grain 'Grain'}}
+    {{chit sheep 'Sheep'}}
+    {{chit stone 'Stone'}}
+    {{chit flour 'Flour'}}
+    {{chit grapes 'Grapes'}}
+    {{chit nickel 'Nickel'}}
+    {{chit hops 'Hops'}}
+    {{chit coal 'Coal'}}
+    {{chit book 'Book'}}
+    {{chit pottery 'Pottery'}}
+    {{chit whiskey 'Whiskey'}}
+    {{chit straw 'Straw'}}
+    {{chit meat 'Meat'}}
+    {{chit ornament 'Ornament'}}
+    {{chit bread 'Bread'}}
+    {{chit wine 'Wine'}}
+    {{chit beer 'Beer'}}
+    {{chit reliquary 'Reliquary'}}
+  {{/each}}
+  {{player}}
 
 </script>
 
@@ -48,6 +74,15 @@
 $(document).ready(function () {
 
   var templateSource = $("#results-template").html();
+
+  Handlebars.registerHelper('chit', function(n, image) {
+    s='';
+    for(i=0; i<n; i++) {
+      s+='<img src="/assets/images/weblabora/chit/'+image+'.jpg" class="img-thumbnail" />';
+    }
+    return new Handlebars.SafeString(s);
+  });
+
   var template = Handlebars.compile(templateSource);
   var resultsPlaceholder = $("#results");
 
