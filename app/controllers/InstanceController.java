@@ -56,15 +56,14 @@ public class InstanceController extends Controller {
    * Shows an instance
    */
   public static Result get(Long id) {
-    Instance instance = Ebean.find(Instance.class, id);
+    Instance instance = Ebean.find(Instance.class).fetch("states").where().idEq(id).findUnique();
     instance.sortStates();
     return ok(get.render(instance, stateForm));
   }
 
   public static Result getJSON(Long id) throws WeblaboraException {
     Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
-    Instance instance = Ebean.find(Instance.class, id);
-    instance.sortStates();
+    Instance instance = Ebean.find(Instance.class).fetch("states").where().idEq(id).findUnique();
     for(State state : instance.states) {
       MoveProcessor.processMove(board, state.token);
     }
