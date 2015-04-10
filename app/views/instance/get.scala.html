@@ -118,7 +118,7 @@ $(document).ready(function () {
   var resultsPlaceholder = $("#results");
 
   $.ajax({
-    url: '/instance/1/board',
+    url: '/instance/@instance.id/board',
     success: function (data) {
       resultsPlaceholder.html(template(data));
     }
