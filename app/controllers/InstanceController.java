@@ -84,11 +84,7 @@ public class InstanceController extends Controller {
     User user = Application.getLocalUser(session());
     RawSql rawSql =
         RawSqlBuilder
-            // let ebean parse the SQL so that it can
-            // add expressions to the WHERE and HAVING
-            // clauses
             .parse(sql)
-                // map resultSet columns to bean properties
             .columnMapping("i.id", "id")
             .columnMapping("i.game_name", "gameName")
             .create();
