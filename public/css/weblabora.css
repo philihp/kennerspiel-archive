@@ -1,12 +1,16 @@
 .terrain-table {
     width: auto !important;
 }
+.terrain-table th, .terrain-table td {
+    border-top: none !important;
+}
 
 .terrain-cell {
     height: 142px;
     width: 91px;
 }
 
+.building,
 .terrain-cell img {
     height: 125px;
     width: 75px;
@@ -31,4 +35,13 @@
 }
 .water {
     background-color: #cbdbff;
+}
+.mountain {
+    position: relative;
+    top: 71px;
+    background-color: #cfcfcf;
+}
+
+.over-scroll {
+    overflow-x: scroll;
 }
