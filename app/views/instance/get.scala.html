@@ -2,15 +2,12 @@
 
 @import com.feth.play.module.pa.views.html._
 
-@main("Get Instance") {
+@main(instance.gameName) {
 
-  <div class="col-md-2">
-    @instance<br />
-    <ul>
-      @for(state <- instance.states) {
-        <li>@state</li>
-      }
-    </ul>
+  <div class="col-md-2 over-scroll">
+    @for(state <- instance.states) {
+      @state.token<br />
+    }
 
     @helper.form(action = routes.InstanceController.explore(instance.id)) {
       @helper.inputText(stateForm("token"))
@@ -27,7 +24,7 @@
 
   {{#with wheel}}
     <h3>Resource Rondel</h3>
-    <table class="table table-bordered">
+    <table class="table">
       <tr>
         {{#each armValues}}
           <th>{{this}}</th>
@@ -85,6 +82,11 @@
   {{/each}}
   {{player}}
 
+  <h3>Unbuilt Buildings</h3>
+  {{#each unbuiltBuildings}}
+    {{erection 'BUILDING' this}}
+  {{/each}}
+
 </script>
 
   <script>
@@ -101,6 +103,7 @@ $(document).ready(function () {
     return new Handlebars.SafeString(s);
   });
   Handlebars.registerHelper('lower', function(str) {
+    if(str == null) return "";
     return str.toLowerCase();
   });
   Handlebars.registerHelper('erection', function(use, building) {

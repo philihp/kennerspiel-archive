@@ -30,10 +30,4 @@ public class Secured extends Security.Authenticator {
     return redirect(routes.Application.index());
   }
 
-  public static Result weblabora() {
-    Board board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
-    return ok(Json.toJson(board));
-  }
-
-
 }

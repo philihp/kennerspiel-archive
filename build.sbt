@@ -21,6 +21,6 @@ libraryDependencies ++= Seq(
   javaWs,
   "xalan" % "serializer" % "2.7.2",
   "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
-  "com.philihp" % "weblabora" % "2.0.3-SNAPSHOT",
+  "com.philihp" % "weblabora" % "2.1.0-SNAPSHOT",
   "com.feth" %% "play-authenticate" % "0.6.8"
 )
