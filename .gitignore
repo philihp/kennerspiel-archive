@@ -26,3 +26,8 @@ dist
 activator-sbt-*-shim.sbt
 
 .envrc
+
+server.pass.key
+server.key
+server.csr
+server.crt
