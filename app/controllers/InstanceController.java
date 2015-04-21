@@ -61,12 +61,16 @@ public class InstanceController extends Controller {
     return ok(get.render(instance, stateForm));
   }
 
-  public static Result getJSON(Long id) throws WeblaboraException {
+  public static Result getJSON(Long id, String proposedMove) throws WeblaboraException {
     Board board = new Board();
     Instance instance = Ebean.find(Instance.class).fetch("states").where().idEq(id).findUnique();
     instance.sortStates();
     for(State state : instance.states) {
       MoveProcessor.processMove(board, state.token);
+    }
+    if(proposedMove != null) {
+      board.preMove(proposedMove);
+      MoveProcessor.processActions(board, proposedMove);
     }
     return ok(Json.toJson(board));
   }

@@ -5,12 +5,30 @@ import com.feth.play.module.pa.exceptions.AuthException;
 import controllers.routes;
 import play.Application;
 import play.GlobalSettings;
+import play.api.mvc.Handler;
+import play.libs.F;
 import play.mvc.Call;
+import play.mvc.*;
+import play.*;
+import static play.libs.F.Promise;
 
 public class Global extends GlobalSettings {
 
+  @Override
+  public Handler onRouteRequest(Http.RequestHeader request) {
+    if(request.secure()) {
+      return super.onRouteRequest(request);
+    }
+    else {
+      //TODO redirect to ssl when in production
+      return super.onRouteRequest(request);
+    }
+  }
+
   public void onStart(final Application app) {
     PlayAuthenticate.setResolver(new Resolver() {
+
+
 
       @Override
       public Call login() {
