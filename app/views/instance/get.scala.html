@@ -6,7 +6,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="useModal" tabindex="-1" role="dialog" aria-labelledby="useModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -25,10 +25,6 @@
   </div>
 
   <div class="col-md-2 over-scroll">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-      Launch demo modal
-    </button>
 
     @for(state <- instance.states) {
       @state.token<br />
@@ -45,114 +41,124 @@
   <div class="col-md-10" id="results"></div>
 
 
-<script id="results-template" type="text/x-handlebars-template">
-
-
-  <h3>Unbuilt Buildings</h3>
-  {{#each unbuiltBuildings}}
-    {{erection 'BUILDING' this}}
-  {{/each}}
-
-  {{#with wheel}}
-    <h3>Resource Rondel</h3>
-    <table class="table">
-      <tr>
-        {{#each armValues}}
-          <th>{{this}}</th>
-        {{/each}}
-      </tr>
-      <tr>
-        {{#each table}}
-          <td>{{#each this}}{{this}}<br />{{/each}}</td>
-        {{/each}}
-      </tr>
-    </table>
-  {{/with}}
-  {{#each players}}
-    <hr />
-
-    <h3>Player {{color}}</h3>
-    {{chit peat 'Peat'}}
-    {{chit penny 'Penny'}}
-    {{chit clay 'Clay'}}
-    {{chit wood 'Wood'}}
-    {{chit grain 'Grain'}}
-    {{chit sheep 'Sheep'}}
-    {{chit stone 'Stone'}}
-    {{chit flour 'Flour'}}
-    {{chit grapes 'Grapes'}}
-    {{chit nickel 'Nickel'}}
-    {{chit hops 'Hops'}}
-    {{chit coal 'Coal'}}
-    {{chit book 'Book'}}
-    {{chit pottery 'Pottery'}}
-    {{chit whiskey 'Whiskey'}}
-    {{chit straw 'Straw'}}
-    {{chit meat 'Meat'}}
-    {{chit ornament 'Ornament'}}
-    {{chit bread 'Bread'}}
-    {{chit wine 'Wine'}}
-    {{chit beer 'Beer'}}
-    {{chit reliquary 'Reliquary'}}
-
-    <hr />
-
-    <table class="table terrain-table">
-      {{#with landscape.terrainTable}}
-        {{#each this}}
-          <tr>
-            {{#each this}}
-              <td class="terrain-cell {{lower terrainType}}">
-                {{erection terrainUse erection}}
-              </td>
-            {{/each}}
-          </tr>
-        {{/each}}
-      {{/with}}
-    </table>
-  {{/each}}
-  {{player}}
-
-</script>
-
+  <script id="results-template" type="text/x-handlebars-template">
+    <h3>Unbuilt Buildings</h3>
+    {{#each unbuiltBuildings}}
+      {{erection 'BUILDING' this}}
+    {{/each}}
+    {{#with wheel}}
+      <h3>Resource Rondel</h3>
+      <table class="table">
+        <tr>
+          {{#each armValues}}
+            <th>{{this}}</th>
+          {{/each}}
+        </tr>
+        <tr>
+          {{#each table}}
+            <td>{{#each this}}{{this}}<br />{{/each}}</td>
+          {{/each}}
+        </tr>
+      </table>
+    {{/with}}
+    {{#each players}}
+      <hr />
+      <h3>Player {{color}}</h3>
+      {{chit peat 'Peat'}}
+      {{chit penny 'Penny'}}
+      {{chit clay 'Clay'}}
+      {{chit wood 'Wood'}}
+      {{chit grain 'Grain'}}
+      {{chit sheep 'Sheep'}}
+      {{chit stone 'Stone'}}
+      {{chit flour 'Flour'}}
+      {{chit grapes 'Grapes'}}
+      {{chit nickel 'Nickel'}}
+      {{chit hops 'Hops'}}
+      {{chit coal 'Coal'}}
+      {{chit book 'Book'}}
+      {{chit pottery 'Pottery'}}
+      {{chit whiskey 'Whiskey'}}
+      {{chit straw 'Straw'}}
+      {{chit meat 'Meat'}}
+      {{chit ornament 'Ornament'}}
+      {{chit bread 'Bread'}}
+      {{chit wine 'Wine'}}
+      {{chit beer 'Beer'}}
+      {{chit reliquary 'Reliquary'}}
+      <hr />
+      <table class="table terrain-table">
+        {{#with landscape.terrainTable}}
+          {{#each this}}
+            <tr>
+              {{#each this}}
+                <td class="terrain-cell {{lower terrainType}}">
+                  {{erection terrainUse erection}}
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        {{/with}}
+      </table>
+    {{/each}}
+    {{player}}
+  </script>
   <script>
-$(document).ready(function () {
+  $(document).ready(function () {
+    window.kennerspiel = {};
 
-  var templateSource = $("#results-template").html();
+    var templateSource = $("#results-template").html();
 
-  Handlebars.registerHelper('chit', function(n, image) {
-    s='';
-    for(i=0; i<n; i++) {
-      s+='<img src="/assets/images/weblabora/chit/'+image+'.jpg" class="img-rounded" /> ';
-    }
-    return new Handlebars.SafeString(s);
-  });
-  Handlebars.registerHelper('lower', function(str) {
-    if(str == null) return "";
-    return str.toLowerCase();
-  });
-  Handlebars.registerHelper('erection', function(use, building) {
-    switch(use) {
-      case 'FOREST':
-        return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Wood.jpg" class="img" />');
-      case 'MOOR':
-        return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Peat.jpg" class="img" />');
-      case 'BUILDING':
-        return new Handlebars.SafeString('<img src="/assets/images/weblabora/buildings/'+(building.image)+'.jpg" class="img building" />');
-    }
-  });
+    Handlebars.registerHelper('chit', function(n, image) {
+      s='';
+      for(i=0; i<n; i++) {
+        s+='<img src="/assets/images/weblabora/chit/'+image+'.jpg" class="img-rounded" /> ';
+      }
+      return new Handlebars.SafeString(s);
+    });
+    Handlebars.registerHelper('lower', function(str) {
+      if(str == null) return "";
+      return str.toLowerCase();
+    });
+    Handlebars.registerHelper('erection', function(use, building) {
+      switch(use) {
+        case 'FOREST':
+          return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Wood.jpg" class="img" />');
+        case 'MOOR':
+          return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Peat.jpg" class="img" />');
+        case 'BUILDING':
+          return new Handlebars.SafeString('<img src="/assets/images/weblabora/buildings/'+
+              (building.image)+
+              '.jpg" class="img building clickable" '+
+              'data-toggle="modal" '+
+              'data-target="#useModal" '+
+              'data-image="'+building.image+'" '+
+              'data-name="'+building.name+'" '+
+              '/>');
+      }
+    });
 
-  var template = Handlebars.compile(templateSource);
-  var resultsPlaceholder = $("#results");
+    var template = Handlebars.compile(templateSource);
+    var resultsPlaceholder = $("#results");
 
-  $.ajax({
-    url: '/instance/@instance.id/board',
-    success: function (data) {
-      resultsPlaceholder.html(template(data));
-    }
-  });
-})
+    $.ajax({
+      url: '/instance/@instance.id/board',
+      success: function (data) {
+        window.kennerspiel.board = data;
+        resultsPlaceholder.html(template(data));
+      }
+    });
 
+    $('#useModal').on('show.bs.modal', function (event) {
+      var clickable = $(event.relatedTarget); // Button that triggered the modal
+      var image = clickable.data('image'); // Extract info from data-* attributes
+      var name = clickable.data('name'); // Extract info from data-* attributes
+      var modal = $(this);
+      modal.find('.modal-title').text('Use ' + name);
+      modal.find('.modal-body').load('/assets/html/weblabora/'+image+'.html');
+    });
+
+  }) // $(document).ready()
   </script>
 
 }

@@ -16,11 +16,14 @@
     width: 75px;
 }
 
-.building {
-    transition: all .2s ease-in-out;
-}
-.building:hover {
-    transform: scale(2.0);
+/*.building {*/
+    /*transition: all .2s ease-in-out;*/
+/*}*/
+/*.building:hover {*/
+    /*transform: scale(2.0);*/
+/*}*/
+.clickable {
+    cursor: pointer;
 }
 
 
