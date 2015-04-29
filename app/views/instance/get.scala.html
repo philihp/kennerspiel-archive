@@ -14,11 +14,13 @@
           <h4 class="modal-title" id="myModalLabel">Use Building</h4>
         </div>
         <div class="modal-body">
-          ...
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Use</button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="useClergyman">Use Clergyman</button>
+            <button type="button" class="btn btn-primary" id="usePrior">Use Prior</button>
+          </div>
         </div>
       </div>
     </div>
@@ -105,7 +107,20 @@
   </script>
   <script>
   $(document).ready(function () {
-    window.kennerspiel = {};
+    window.kennerspiel = {
+      reload: function() {
+        $.ajax({
+          url: '/instance/@instance.id/board',
+          data: {
+            move: $('#token').val()
+          },
+          success: function (data) {
+            window.kennerspiel.board = data;
+            resultsPlaceholder.html(template(data));
+          }
+        });
+      }
+    };
 
     var templateSource = $("#results-template").html();
 
@@ -132,6 +147,7 @@
               '.jpg" class="img building clickable" '+
               'data-toggle="modal" '+
               'data-target="#useModal" '+
+              'data-id="'+building.id+'" '+
               'data-image="'+building.image+'" '+
               'data-name="'+building.name+'" '+
               '/>');
@@ -141,23 +157,37 @@
     var template = Handlebars.compile(templateSource);
     var resultsPlaceholder = $("#results");
 
-    $.ajax({
-      url: '/instance/@instance.id/board',
-      success: function (data) {
-        window.kennerspiel.board = data;
-        resultsPlaceholder.html(template(data));
-      }
-    });
-
     $('#useModal').on('show.bs.modal', function (event) {
       var clickable = $(event.relatedTarget); // Button that triggered the modal
       var image = clickable.data('image'); // Extract info from data-* attributes
       var name = clickable.data('name'); // Extract info from data-* attributes
+      var id = clickable.data('id');
       var modal = $(this);
+      modal.data('id', id);
+      modal.data('params', '');
+      modal.data('modifier', '');
+      $('#useModal').find('.modal-footer').find('.btn-primary').prop('disabled', false);
       modal.find('.modal-title').text('Use ' + name);
       modal.find('.modal-body').load('/assets/html/weblabora/'+image+'.html');
     });
 
+    $('#useClergyman').click(function() {
+      var modal = $('#useModal');
+      var id = modal.data('id');
+      var params = modal.data('params');
+      var modifier = modal.data('modifier');
+      $('#token').val('use('+id+params+')'+modifier);
+      modal.modal('hide');
+
+      window.kennerspiel.reload();
+    })
+
+    $('#usePrior').click(function() {
+      $('#useModal').data('modifier', '*');
+      $('#useClergyman').click();
+    })
+
+    window.kennerspiel.reload();
   }) // $(document).ready()
   </script>
 

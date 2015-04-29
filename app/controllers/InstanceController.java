@@ -68,7 +68,7 @@ public class InstanceController extends Controller {
     for(State state : instance.states) {
       MoveProcessor.processMove(board, state.token);
     }
-    if(proposedMove != null) {
+    if(proposedMove != null && !"".equals(proposedMove)) {
       board.preMove(proposedMove);
       MoveProcessor.processActions(board, proposedMove);
     }
