@@ -40,7 +40,7 @@
       <input type="submit" value="Backtrack" class="btn btn-default" />
     }
   </div>
-  <div class="col-md-10" id="results"></div>
+  <div class="col-md-10" id="board"></div>
 
 
   <script id="results-template" type="text/x-handlebars-template">
@@ -107,23 +107,7 @@
   </script>
   <script>
   $(document).ready(function () {
-    window.kennerspiel = {
-      reload: function() {
-        $.ajax({
-          url: '/instance/@instance.id/board',
-          data: {
-            move: $('#token').val()
-          },
-          success: function (data) {
-            window.kennerspiel.board = data;
-            resultsPlaceholder.html(template(data));
-          }
-        });
-      }
-    };
-
-    var templateSource = $("#results-template").html();
-
+    var Handlebars = { registerHelper: function() {} };
     Handlebars.registerHelper('chit', function(n, image) {
       s='';
       for(i=0; i<n; i++) {
@@ -154,9 +138,6 @@
       }
     });
 
-    var template = Handlebars.compile(templateSource);
-    var resultsPlaceholder = $("#results");
-
     $('#useModal').on('show.bs.modal', function (event) {
       var clickable = $(event.relatedTarget); // Button that triggered the modal
       var image = clickable.data('image'); // Extract info from data-* attributes
@@ -179,7 +160,7 @@
       $('#token').val('use('+id+params+')'+modifier);
       modal.modal('hide');
 
-      window.kennerspiel.reload();
+      window.weblabora.reload();
     })
 
     $('#usePrior').click(function() {
@@ -187,7 +168,7 @@
       $('#useClergyman').click();
     })
 
-    window.kennerspiel.reload();
+    window.weblabora.load(@instance.id);
   }) // $(document).ready()
   </script>
 
