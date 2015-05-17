@@ -19,4 +19,5 @@ GET  /authenticate/:provider/denied     controllers.Application.oAuthDenied(prov
 
 #GET  /weblabora                         controllers.Secured.weblabora
 
-GET  /assets/*file                      controllers.Assets.at(path="/public", file)
+#GET  /jsroutes.js       controllers.Application.jsRoutes()
+GET  /assets/*file      controllers.Assets.at(path="/public", file)
