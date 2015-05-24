@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.webjars.bower" % "react" % "0.13.3"
 )
 
-pipelineStages := Seq(rjs, digest)
+pipelineStages := Seq(rjs, digest, gzip)
 
 RjsKeys.paths += ("jsRoutes" -> ("/jsroutes" -> "empty:"))
 

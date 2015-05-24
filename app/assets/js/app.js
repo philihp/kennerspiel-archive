@@ -1,3 +1,7 @@
-require(["bootstrap"], function(common) {
-  console.log('Index started');
+require(["bootstrap", "react", "jquery"], function(common) {
+  $('.history-hover').click(function() {
+    $('.history-box').slideToggle(100);
+  });
+
+  console.log('started');
 });
