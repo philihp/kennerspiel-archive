@@ -16,7 +16,8 @@
     paths: {
       jquery: "../lib/jquery/dist/jquery",
       bootstrap: "../lib/bootstrap/dist/js/bootstrap",
-      react: "../lib/react/react"
+      react: "../lib/react/react",
+      alt: "../lib/alt/dist/alt"
     }
   });
 

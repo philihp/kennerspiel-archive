@@ -28,7 +28,8 @@ libraryDependencies ++= Seq(
   "org.webjars.bower" % "jquery" % "2.1.3",
   "org.webjars.bower" % "bootstrap" % "3.3.4" exclude("org.webjars", "jquery"),
   "org.webjars.bower" % "underscore" % "1.8.3",
-  "org.webjars.bower" % "react" % "0.13.3"
+  "org.webjars.bower" % "react" % "0.13.3",
+  "org.webjars.bower" % "alt" % "0.16.10"
 )
 
 pipelineStages := Seq(rjs, digest, gzip)
