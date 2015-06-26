@@ -16,5 +16,3 @@ test:
   override:
     - "./activator test":
         timeout: 900
-  post:
-    - cp -R target/test-reports $CI_REPORTS
