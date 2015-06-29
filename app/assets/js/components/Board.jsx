@@ -5,7 +5,9 @@ define(function (require, exports, module) {
   var BoardStore = require('stores/BoardStore');
   var BoardActions = require('actions/BoardActions');
   var Buildings = require('components/Buildings');
+  var Extensions = require('components/Extensions');
   var Rondel = require('components/Rondel');
+  var Player = require('components/Player');
 
   return React.createClass({
     displayName: 'Board',
@@ -32,14 +34,27 @@ define(function (require, exports, module) {
         return <div/>;
       }
       else {
+        var players = [];
+        for(var i = 0; i < this.state.board.players.length; i++) {
+          var playerData = this.state.board.players[i];
+          players.push(
+              <Player key={i}
+                      color={playerData.color}
+                      landscape={playerData.landscape.terrainTable}
+                  />
+          );
+        }
+
         return (
           <div>
             <h3>Resource Rondel</h3>
             <Rondel armValues={this.state.board.wheel.armValues} table={this.state.board.wheel.table} />
             <h3>Unbuilt Buildings</h3>
             <Buildings buildings={this.state.board.unbuiltBuildings} />
-            <div>Plots and Districts</div>
-            <div>Players...</div>
+            <h3>Extensions</h3>
+            <Extensions type="Plots" costs={this.state.board.plotCosts}/>
+            <Extensions type="Districts" costs={this.state.board.districtCosts}/>
+            {players}
           </div>
         );
       }
