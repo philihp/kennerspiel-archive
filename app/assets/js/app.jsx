@@ -2,13 +2,13 @@ define(function (require, exports, module) {
   var Bootstrap = require('bootstrap');
   var React = require('react');
   var Jquery = require('jquery');
-  var WeblaboraApp = require('components/WeblaboraApp');
+  var Board = require('components/Board');
 
   $('.history-hover').click(function () {
     $('.history-box').slideToggle(100);
   });
 
   React.render(
-    <WeblaboraApp />, document.getElementById('app')
+    <Board id={$('#app').data('instance')} />, document.getElementById('app')
   )
 });

@@ -1,11 +1,22 @@
 define(function (require, exports, module) {
   var alt = require('../alt');
+  var $ = require('jquery');
+  return alt.createActions({
 
-  var BoardActions = alt.createActions({
     updateBoard: function(board) {
       this.dispatch(board);
-    }
-  });
+    },
 
-  module.exports = BoardActions;
+    fetchBoard: function() {
+      this.dispatch();
+      $.get('/instance/371/board', function(data) {
+        this.actions.updateBoard(data);
+      }.bind(this));
+    },
+
+    fetchFailed: function(errorMessage) {
+      this.dispatch(errorMessage);
+    }
+
+  });
 });

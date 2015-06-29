@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="col-md-12 history-box">                                                                                                                                 >
+  <div class="col-md-12 history-box" style="display: none">                                                                                                                                 >
     @for(state <- instance.states) {
       @state.token<br />
     }
@@ -40,7 +40,7 @@
     }
   </div>
 
-  <div class="col-md-12" id="app"></div>
+  <div class="col-md-12" id="app" data-instance="@instance.id"></div>
 
   <script id="results-template" type="text/x-handlebars-template">
     <h3>Unbuilt Buildings</h3>

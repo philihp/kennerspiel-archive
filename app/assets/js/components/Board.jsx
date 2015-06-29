@@ -3,36 +3,46 @@
 define(function (require, exports, module) {
   var React = require('react');
   var BoardStore = require('stores/BoardStore');
+  var BoardActions = require('actions/BoardActions');
+  var Rondel = require('components/Rondel');
 
-  var Board = React.createClass({
-    getInitialState() {
+  return React.createClass({
+    displayName: 'Board',
+
+    getInitialState: function() {
       return BoardStore.getState();
     },
 
-    componentDidMount() {
+    componentDidMount: function() {
       BoardStore.listen(this.onChange);
+      BoardActions.fetchBoard();
     },
 
-    componentWillUnmount() {
+    componentWillUnmount: function() {
       BoardStore.unlisten(this.onChange);
     },
 
-    onChange(state) {
+    onChange: function(state) {
       this.setState(state);
     },
 
-    render() {
-      return (
+    render: function() {
+      if(this.state.board == null) {
+        return (
+            <div>Loading</div>
+        );
+      }
+      else {
+        return (
           <div>
-            <div>Rondel</div>
+            <Rondel armValues={this.state.board.wheel.armValues} />
             <div>Unbuilt Buildings</div>
             <div>Plots and Districts</div>
             <div>Players...</div>
           </div>
-      );
+        );
+      }
     }
+
   });
-
-  module.exports = Board;
-
 });
