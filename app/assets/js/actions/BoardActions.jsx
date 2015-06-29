@@ -7,9 +7,9 @@ define(function (require, exports, module) {
       this.dispatch(board);
     },
 
-    fetchBoard: function() {
+    fetchBoard: function(id) {
       this.dispatch();
-      $.get('/instance/371/board', function(data) {
+      $.get('/instance/'+id+'/board', function(data) {
         this.actions.updateBoard(data);
       }.bind(this));
     },

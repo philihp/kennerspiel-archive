@@ -8,7 +8,9 @@ define(function (require, exports, module) {
     $('.history-box').slideToggle(100);
   });
 
-  React.render(
-    <Board id={$('#app').data('instance')} />, document.getElementById('app')
-  )
+  $('#app').each(function(app) {
+    React.render(
+      <Board id={$('#app').data('instance')} />, document.getElementById('app')
+    )
+  });
 });

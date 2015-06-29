@@ -4,6 +4,7 @@ define(function (require, exports, module) {
   var React = require('react');
   var BoardStore = require('stores/BoardStore');
   var BoardActions = require('actions/BoardActions');
+  var Buildings = require('components/Buildings');
   var Rondel = require('components/Rondel');
 
   return React.createClass({
@@ -15,7 +16,7 @@ define(function (require, exports, module) {
 
     componentDidMount: function() {
       BoardStore.listen(this.onChange);
-      BoardActions.fetchBoard();
+      BoardActions.fetchBoard(this.props.id);
     },
 
     componentWillUnmount: function() {
@@ -28,15 +29,15 @@ define(function (require, exports, module) {
 
     render: function() {
       if(this.state.board == null) {
-        return (
-            <div>Loading</div>
-        );
+        return <div/>;
       }
       else {
         return (
           <div>
-            <Rondel armValues={this.state.board.wheel.armValues} />
-            <div>Unbuilt Buildings</div>
+            <h3>Resource Rondel</h3>
+            <Rondel armValues={this.state.board.wheel.armValues} table={this.state.board.wheel.table} />
+            <h3>Unbuilt Buildings</h3>
+            <Buildings buildings={this.state.board.unbuiltBuildings} />
             <div>Plots and Districts</div>
             <div>Players...</div>
           </div>
