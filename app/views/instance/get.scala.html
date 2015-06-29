@@ -26,8 +26,7 @@
     </div>
   </div>
 
-  <div class="col-md-2 over-scroll">
-
+  <div class="col-md-12 history-box" style="display: none">                                                                                                                                 >
     @for(state <- instance.states) {
       @state.token<br />
     }
@@ -40,8 +39,8 @@
       <input type="submit" value="Backtrack" class="btn btn-default" />
     }
   </div>
-  <div class="col-md-10" id="results"></div>
 
+  <div class="col-md-12" id="app" data-instance="@instance.id"></div>
 
   <script id="results-template" type="text/x-handlebars-template">
     <h3>Unbuilt Buildings</h3>
@@ -64,7 +63,6 @@
       </table>
     {{/with}}
     {{#each players}}
-      <hr />
       <h3>Player {{color}}</h3>
       {{chit peat 'Peat'}}
       {{chit penny 'Penny'}}
@@ -88,7 +86,6 @@
       {{chit wine 'Wine'}}
       {{chit beer 'Beer'}}
       {{chit reliquary 'Reliquary'}}
-      <hr />
       <table class="table terrain-table">
         {{#with landscape.terrainTable}}
           {{#each this}}
@@ -104,91 +101,6 @@
       </table>
     {{/each}}
     {{player}}
-  </script>
-  <script>
-  $(document).ready(function () {
-    window.kennerspiel = {
-      reload: function() {
-        $.ajax({
-          url: '/instance/@instance.id/board',
-          data: {
-            move: $('#token').val()
-          },
-          success: function (data) {
-            window.kennerspiel.board = data;
-            resultsPlaceholder.html(template(data));
-          }
-        });
-      }
-    };
-
-    var templateSource = $("#results-template").html();
-
-    Handlebars.registerHelper('chit', function(n, image) {
-      s='';
-      for(i=0; i<n; i++) {
-        s+='<img src="/assets/images/weblabora/chit/'+image+'.jpg" class="img-rounded" /> ';
-      }
-      return new Handlebars.SafeString(s);
-    });
-    Handlebars.registerHelper('lower', function(str) {
-      if(str == null) return "";
-      return str.toLowerCase();
-    });
-    Handlebars.registerHelper('erection', function(use, building) {
-      switch(use) {
-        case 'FOREST':
-          return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Wood.jpg" class="img" />');
-        case 'MOOR':
-          return new Handlebars.SafeString('<img src="/assets/images/weblabora/terrain/Peat.jpg" class="img" />');
-        case 'BUILDING':
-          return new Handlebars.SafeString('<img src="/assets/images/weblabora/buildings/'+
-              (building.image)+
-              '.jpg" class="img building clickable" '+
-              'data-toggle="modal" '+
-              'data-target="#useModal" '+
-              'data-id="'+building.id+'" '+
-              'data-image="'+building.image+'" '+
-              'data-name="'+building.name+'" '+
-              '/>');
-      }
-    });
-
-    var template = Handlebars.compile(templateSource);
-    var resultsPlaceholder = $("#results");
-
-    $('#useModal').on('show.bs.modal', function (event) {
-      var clickable = $(event.relatedTarget); // Button that triggered the modal
-      var image = clickable.data('image'); // Extract info from data-* attributes
-      var name = clickable.data('name'); // Extract info from data-* attributes
-      var id = clickable.data('id');
-      var modal = $(this);
-      modal.data('id', id);
-      modal.data('params', '');
-      modal.data('modifier', '');
-      $('#useModal').find('.modal-footer').find('.btn-primary').prop('disabled', false);
-      modal.find('.modal-title').text('Use ' + name);
-      modal.find('.modal-body').load('/assets/html/weblabora/'+image+'.html');
-    });
-
-    $('#useClergyman').click(function() {
-      var modal = $('#useModal');
-      var id = modal.data('id');
-      var params = modal.data('params');
-      var modifier = modal.data('modifier');
-      $('#token').val('use('+id+params+')'+modifier);
-      modal.modal('hide');
-
-      window.kennerspiel.reload();
-    })
-
-    $('#usePrior').click(function() {
-      $('#useModal').data('modifier', '*');
-      $('#useClergyman').click();
-    })
-
-    window.kennerspiel.reload();
-  }) // $(document).ready()
   </script>
 
 }
