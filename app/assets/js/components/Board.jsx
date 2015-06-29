@@ -23,7 +23,12 @@ define(function (require, exports, module) {
 
     render() {
       return (
-          <div>Board</div>
+          <div>
+            <div>Rondel</div>
+            <div>Unbuilt Buildings</div>
+            <div>Plots and Districts</div>
+            <div>Players...</div>
+          </div>
       );
     }
   });
