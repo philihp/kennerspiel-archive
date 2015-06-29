@@ -1,3 +1,5 @@
+'use strict'
+
 define(function (require, exports, module) {
   var Bootstrap = require('bootstrap');
   var React = require('react');
@@ -13,4 +15,5 @@ define(function (require, exports, module) {
       <Board id={$('#app').data('instance')} />, document.getElementById('app')
     )
   });
+
 });

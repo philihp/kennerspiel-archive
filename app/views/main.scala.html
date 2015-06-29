@@ -20,9 +20,9 @@
   <![endif]-->
 
   <!--script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.js"></script-->
-  <!--helper.requireJs(core = "/assets/lib/requirejs/require.js", module = routes.Assets.at("js/app.jsx").url) -->
+  <!--helper.requireJs(core = "/assets/lib/requirejs/require.js", module = routes.Assets.versioned("js/app.jsx").url) -->
 
-  <script data-main="@routes.Assets.versioned("js/main.js")" type="text/javascript" src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
+  @helper.requireJs(core = routes.Assets.versioned("javascripts/require.js").url, module = routes.Assets.versioned("js/main").url)
 
 </head>
 <body>

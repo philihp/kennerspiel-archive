@@ -36,4 +36,6 @@ pipelineStages := Seq(rjs, digest, gzip)
 
 RjsKeys.paths += ("jsRoutes" -> ("/jsroutes" -> "empty:"))
 
+RjsKeys.mainModule := "main"
+
 emojiLogs
