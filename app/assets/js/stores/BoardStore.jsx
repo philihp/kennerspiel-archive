@@ -7,11 +7,14 @@ define(function (require, exports, module) {
     bindListeners: {
       handleUpdateBoard: BoardActions.updateBoard,
       handleFetchBoard: BoardActions.fetchBoard,
-      handleFetchFailed: BoardActions.fetchFailed
+      handleFetchFailed: BoardActions.fetchFailed,
+      handleAddCommand: BoardActions.addCommand,
+      handleCommitMove: BoardActions.commitMove
     },
 
     state: {
       board: null,
+      token: "",
       errorMessage: null
     },
 
@@ -24,11 +27,22 @@ define(function (require, exports, module) {
     },
 
     handleFetchBoard: function() {
-      this.state.board = null;
+      $.get('/instance/'+Window.INSTANCE_ID+'/board?move='+this.state.token, function(data) {
+        BoardActions.updateBoard(data);
+      }.bind(this));
+
+      // this is where you'd put a loading thing if you wanted it to flicker
     },
 
     handleFetchFailed: function(errorMessage) {
       this.state.errorMessage = errorMessage;
+    },
+
+    handleAddCommand: function(command) {
+      this.state.token = command;
+    },
+
+    handleCommitMove: function() {
     }
 
   });

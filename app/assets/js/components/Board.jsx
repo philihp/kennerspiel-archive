@@ -18,7 +18,7 @@ define(function (require, exports, module) {
 
     componentDidMount: function() {
       BoardStore.listen(this.onChange);
-      BoardActions.fetchBoard(this.props.id);
+      BoardActions.fetchBoard(BoardStore.getState().token);
     },
 
     componentWillUnmount: function() {
@@ -47,13 +47,20 @@ define(function (require, exports, module) {
 
         return (
           <div>
-            <h3>Resource Rondel</h3>
-            <Rondel armValues={this.state.board.wheel.armValues} table={this.state.board.wheel.table} />
+            <div className="row">
+              <div className="col-md-8">
+                <h3>Resource Rondel</h3>
+                <Rondel armValues={this.state.board.wheel.armValues} table={this.state.board.wheel.table} />
+              </div>
+              <div className="col-md-4">
+                <input type="text" value={this.state.token} readOnly="true" />
+                <h3>Extensions</h3>
+                <Extensions type="Plot" command="P(0,COAST)" costs={this.state.board.plotCosts}/>
+                <Extensions type="District" command="D(2,HILLS)" costs={this.state.board.districtCosts}/>
+              </div>
+            </div>
             <h3>Unbuilt Buildings</h3>
             <Buildings buildings={this.state.board.unbuiltBuildings} />
-            <h3>Extensions</h3>
-            <Extensions type="Plots" costs={this.state.board.plotCosts}/>
-            <Extensions type="Districts" costs={this.state.board.districtCosts}/>
             {players}
           </div>
         );

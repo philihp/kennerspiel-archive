@@ -9,9 +9,9 @@ define(function (require, exports, module) {
     render: function() {
       switch(this.props.terrainUse) {
         case 'FOREST':
-            return (<img src="/assets/images/weblabora/terrain/Wood.jpg" class="img" />);
+            return (<img src="/assets/images/weblabora/terrain/Wood.jpg" className="img" />);
         case 'MOOR':
-            return (<img src="/assets/images/weblabora/terrain/Peat.jpg" class="img" />);
+            return (<img src="/assets/images/weblabora/terrain/Peat.jpg" className="img" />);
         case 'BUILDING':
             return (
                 <img src={'/assets/images/weblabora/buildings/'+this.props.building.image+'.jpg'}

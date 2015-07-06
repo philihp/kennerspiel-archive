@@ -6,13 +6,15 @@ define(function (require, exports, module) {
   var Jquery = require('jquery');
   var Board = require('components/Board');
 
+  Window.INSTANCE_ID = $('#app').data('instance');
+
   $('.history-hover').click(function () {
     $('.history-box').slideToggle(100);
   });
 
   $('#app').each(function(app) {
     React.render(
-      <Board id={$('#app').data('instance')} />, document.getElementById('app')
+      <Board />, document.getElementById('app')
     )
   });
 

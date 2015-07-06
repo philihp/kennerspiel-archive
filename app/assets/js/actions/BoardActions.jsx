@@ -1,21 +1,28 @@
 define(function (require, exports, module) {
   var alt = require('../alt');
   var $ = require('jquery');
+
   return alt.createActions({
 
     updateBoard: function(board) {
       this.dispatch(board);
     },
 
-    fetchBoard: function(id) {
+    fetchBoard: function(token) {
       this.dispatch();
-      $.get('/instance/'+id+'/board', function(data) {
-        this.actions.updateBoard(data);
-      }.bind(this));
     },
 
     fetchFailed: function(errorMessage) {
       this.dispatch(errorMessage);
+    },
+
+    addCommand: function(moveString) {
+      this.dispatch(moveString);
+      this.actions.fetchBoard();
+    },
+
+    commitMove: function() {
+      this.dispatch();
     }
 
   });
