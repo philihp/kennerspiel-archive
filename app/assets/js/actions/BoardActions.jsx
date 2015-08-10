@@ -21,6 +21,11 @@ define(function (require, exports, module) {
       this.actions.fetchBoard();
     },
 
+    undoCommand: function() {
+      this.dispatch();
+      this.actions.fetchBoard();
+    },
+
     commitMove: function() {
       this.dispatch();
     }

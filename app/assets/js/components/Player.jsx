@@ -9,18 +9,27 @@ define(function (require, exports, module) {
 
     render: function () {
       var rows = [];
-      for(var i = 0; i < this.props.landscape.length; i++) {
+      for (var row in this.props.landscape) {
         var cells = [];
-        for(var j = 0; j < this.props.landscape[i].length; j++) {
-          var plot = this.props.landscape[i][j];
-          cells.push(
-              <td key={j} className={"terrain-cell " + plot.terrainType.toLowerCase()}>
-                <Erection terrainUse={plot.terrainUse} building={plot.erection} />
-              </td>
-          );
+        for (var col in this.props.landscape[row]) {
+          var plot = this.props.landscape[row][col];
+          if (plot != null) {
+            cells.push(
+                <td key={'('+col+','+row+')'} className={"terrain-cell " + plot.terrainType.toLowerCase()}>
+                  <Erection terrainUse={plot.terrainUse} building={plot.erection}/>
+                </td>
+            );
+          }
+          else {
+            // if you don't do this, then weird stuff happens with buying districts and plots
+            cells.push(
+                <td key={'('+col+','+row+')'} className="hide" />
+            )
+          }
         }
-        rows.push(<tr key={i}>{cells}</tr>);
+        rows.push(<tr key={'('+row+')'}>{cells}</tr>);
       }
+
 
       return (
           <div>

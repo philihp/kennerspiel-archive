@@ -57,6 +57,9 @@ define(function (require, exports, module) {
                 <h3>Extensions</h3>
                 <Extensions type="Plot" command="P(0,COAST)" costs={this.state.board.plotCosts}/>
                 <Extensions type="District" command="D(2,HILLS)" costs={this.state.board.districtCosts}/>
+
+                <button className="btn btn-warning" onClick={this._undo}>Undo</button>
+
               </div>
             </div>
             <h3>Unbuilt Buildings</h3>
@@ -65,6 +68,10 @@ define(function (require, exports, module) {
           </div>
         );
       }
+    },
+
+    _undo: function() {
+      BoardActions.undoCommand();
     }
 
   });
