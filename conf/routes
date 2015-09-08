@@ -17,7 +17,7 @@ GET  /logout                            com.feth.play.module.pa.controllers.Auth
 GET  /authenticate/:provider            com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
 GET  /authenticate/:provider/denied     controllers.Application.oAuthDenied(provider: String)
 
-#GET  /weblabora                         controllers.Secured.weblabora
+GET  /weblabora                         controllers.WeblaboraController.get(command: java.util.List[String], proposed: String ?= null)
 
 #GET  /jsroutes.js       controllers.Application.jsRoutes()
 #GET  /assets/*file      controllers.Assets.at(path="/public", file)
