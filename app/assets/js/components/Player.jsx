@@ -30,10 +30,19 @@ define(function (require, exports, module) {
         rows.push(<tr key={'('+row+')'}>{cells}</tr>);
       }
 
+      var inventory = [];
+      for (var i in this.props.inventory) {
+        for(var j = this.props.inventory[i].quantity; j > 0; j--) {
+          inventory.push(<img src={'/assets/images/weblabora/chit/'+this.props.inventory[i].type+'.jpg'}/>);
+        }
+      }
 
       return (
           <div>
             <h3>{this.props.color}</h3>
+            <div>
+              {inventory}
+            </div>
             <table className="table terrain-table">
               {rows}
             </table>
