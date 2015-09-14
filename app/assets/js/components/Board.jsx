@@ -41,6 +41,7 @@ define(function (require, exports, module) {
               <Player key={i}
                       color={playerData.color}
                       landscape={playerData.landscape.terrainTable}
+                      inventory={playerData.inventory}
                   />
           );
         }
