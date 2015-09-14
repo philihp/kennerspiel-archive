@@ -1,0 +1,22 @@
+{
+  "name": "kennerspiel",
+  "version": "0.3.0",
+  "homepage": "http://kennerspiel.com",
+  "authors": [
+    "philihp"
+  ],
+  "description": "Web-based boardgame persistence engine",
+  "keywords": ["boardgames"],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+
+  }
+}
