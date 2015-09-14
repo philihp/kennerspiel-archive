@@ -1,0 +1,10 @@
+{
+  "name": "kennerspiel",
+  "description": "Web-based boardgame persistence engine",
+  "repository": "https://github.com/philihp/kennerspiel",
+  "logo": "https://kennerspiel.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static", "react", "webpack", "mongodb"],
+  "addons" : [
+  	"mongohq"
+  ]
+}

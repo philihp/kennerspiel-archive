@@ -32,3 +32,6 @@ server.pass.key
 server.key
 server.csr
 server.crt
+
+/node_modules
+/build

@@ -1,1 +1,1 @@
-web: webpack --config ./config/webpack.production.js
+web: npm start
