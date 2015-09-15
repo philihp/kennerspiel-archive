@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "webpack --config webpack.config.production.js --progress --profile --colors"
+    "build": "webpack --config webpack.config.production.js --progress --profile --colors",
+    "prod": "webpack --config webpack.config.production.js --progress --profile --colors && node server"
   },
   "devDependencies": {
     "babel-core": "^5.4.7",
