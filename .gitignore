@@ -10,6 +10,7 @@ dist
 /.idea
 /*.iml
 /out
+*.jar
 /.idea_modules
 /.classpath
 /.project
@@ -19,7 +20,6 @@ dist
 
 .target
 # Package Files #
-*.jar
 *.war
 *.ear
 
