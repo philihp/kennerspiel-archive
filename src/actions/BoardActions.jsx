@@ -1,29 +1,9 @@
 var alt = require('../alt');
+import axios from 'axios';
+import { api } from '../utils/api'
 
-class BoardActions {
-  updateBoard(board) {
-    this.dispatch(board);
-  }
-
-  fetchBoard(token) {
-    this.dispatch();
-  }
-
-  fetchFailed(errormessage) {
-    this.dispatch(errorMessage);
-  }
-
-  addCommand(moveString) {
-    this.dispatch(moveString);
-    this.actions.fetchboard();
-  }
-
-  undoCommand() {
-    this.dispatch();
-    this.actions.fetchBoard();
-  }
-
-  commitMove() {
-    this.dispatch();
-  }
-}
+export default alt.createActions({
+    displayName: 'BoardActions',
+    boardFetched: board => board,
+    boardFailed: err => err,
+})

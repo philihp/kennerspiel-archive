@@ -1,11 +1,15 @@
-var React        = require('react');
-var BoardStore   = require('../stores/BoardStore');
-var BoardActions = require('../actions/BoardActions');
+import React, { Component } from 'react'
+import BoardStore from '../stores/BoardStore'
 
-var Board = React.createClass({
-  render() {
-    return <div>Board Here</div>;
-  }
-});
+class Board extends Component {
+    componentDidMount() {
+        BoardStore.fetchBoard()
+    }
+    render() {
+        return (
+            <div>Board</div>
+        )
+    }
+}
 
-module.exports = Board;
+export default Board

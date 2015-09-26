@@ -1,0 +1,1 @@
+export const api = (route = '') => `http://weblabora-svc.herokuapp.com/`;
