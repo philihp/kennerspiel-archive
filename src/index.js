@@ -1,12 +1,12 @@
 import React from 'react'
 import { Router, Route, Link } from 'react-router'
 import { history } from 'react-router/lib/HashHistory'
-import Board from './components/Board'
+import App from './components/App'
 
 React.render((
         <Router history={history}>
-            <Route path="/" component={Board}/>
+            <Route path="/" component={App}/>
         </Router>
     ),
-    document.getElementById('root')
-);
+    document.body
+)

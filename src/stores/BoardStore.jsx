@@ -13,7 +13,6 @@ class BoardStore {
         }
         this.bindActions(BoardActions)
         this.bindListeners({
-            //moveAdded: BoardActions.moveAdded,
         })
         this.registerAsync(BoardSource)
         this.on('beforeEach', () => {
@@ -25,8 +24,9 @@ class BoardStore {
         this.setState({board});
     }
 
-    boardFailed(errorMessage) {
-        this.setState({errorMessage});
+    boardFailed(error) {
+        console.error(error.data.message);
+        this.setState({error});
     }
 
     moveAdded([board, move]) {
