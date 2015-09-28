@@ -2,6 +2,7 @@ import alt from '../alt'
 import makeHot from 'alt/utils/makeHot'
 import BoardActions from '../actions/BoardActions'
 import BoardSource from '../sources/BoardSource'
+import connectToStores from 'alt/utils/connectToStores'
 
 class BoardStore {
     static displayName = 'BoardStore';
@@ -21,11 +22,11 @@ class BoardStore {
     }
 
     boardFetched(board) {
+        console.log('BoardStore.boardFetched(',board,')')
         this.setState({board});
     }
 
     boardFailed(error) {
-        console.error(error.data.message);
         this.setState({error});
     }
 

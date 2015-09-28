@@ -4,6 +4,11 @@ import { api } from '../utils/api'
 
 export default alt.createActions({
     displayName: 'BoardActions',
-    boardFetched: board => board,
-    boardFailed: err => err,
+    boardFetched(board) {
+        console.log('BoardActions.boardFetched(',board,')')
+        this.dispatch(board)
+    },
+    boardFailed(error) {
+        this.dispatch(err)
+    }
 })
