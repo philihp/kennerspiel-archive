@@ -4,18 +4,18 @@
   "description": "Webpage based boardgame engine",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --harmony server.js"
   },
   "dependencies": {
     "alt": "^0.17.3",
     "axios": "0.5.4",
     "react": "^0.13.0",
-    "react-bootstrap": "0.24.4",
-    "react-router": "1.0.0-beta3",
-    "babel": "5.8.21",
+    "react-bootstrap": "^0.25.2",
+    "react-router": "^1.0.0-beta3",
+    "babel": "^5.8.21",
     "babel-core": "^5.8.21",
     "babel-loader": "^5.1.2",
-    "express": "~4.5.0",
+    "express": "~4.13.0",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.8.2",
