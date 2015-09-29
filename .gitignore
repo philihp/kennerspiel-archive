@@ -35,3 +35,5 @@ server.crt
 
 /node_modules
 /build
+
+/public/build/

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { api } from '../utils/api'
 
-import BoardActions from '../actions/BoardActions'
+import BoardActions from '../actions/BoardActions.jsx'
 
 export default {
     fetchBoard: {

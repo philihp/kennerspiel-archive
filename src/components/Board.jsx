@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import connectToStores from 'alt/utils/connectToStores'
-import BoardStore from '../stores/BoardStore'
+import BoardStore from '../stores/BoardStore.jsx'
 
 class Board extends Component {
     render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import Board from './Board'
-import BoardStore from '../stores/BoardStore'
+import Board from './Board.jsx'
+import BoardStore from '../stores/BoardStore.jsx'
 
 class App extends Component {
     componentDidMount() {

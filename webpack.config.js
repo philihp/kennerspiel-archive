@@ -1,21 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const mainPath = path.resolve(__dirname, 'src', 'index.js');
+const buildPath = path.resolve(__dirname, 'public', 'build');
+const nodeModulesPath = path.resolve(__dirname, 'node_modules');
+
 module.exports = {
     devtool: 'eval',
     entry: [
-        'webpack-dev-server/client?http://localhost:3000',
+        'webpack-dev-server/client?http://localhost:3003',
         'webpack/hot/only-dev-server',
-        './src/',
+        mainPath,
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: buildPath,
         filename: 'bundle.js',
-        publicPath: '/static/',
+        publicPath: '/build/',
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -24,7 +27,10 @@ module.exports = {
         loaders: [{
             test: /\.jsx?$/,
             loaders: ['react-hot', 'babel-loader?stage=0'],
-            include: path.join(__dirname, 'src'),
+            exclude: [nodeModulesPath],
+        },{
+            test: /\.css$/,
+            loader: 'style!css',
         }]
     },
 };

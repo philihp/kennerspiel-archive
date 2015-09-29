@@ -1,11 +1,11 @@
 import alt from '../alt'
 import makeHot from 'alt/utils/makeHot'
-import BoardActions from '../actions/BoardActions'
-import BoardSource from '../sources/BoardSource'
+import BoardActions from '../actions/BoardActions.jsx'
+import BoardSource from '../sources/BoardSource.jsx'
 import connectToStores from 'alt/utils/connectToStores'
 
 class BoardStore {
-    static displayName = 'BoardStore';
+    static displayName: 'BoardStore';
 
     constructor() {
         this.state = {
