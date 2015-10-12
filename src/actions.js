@@ -65,4 +65,3 @@ export function fetchBoardIfNeeded(moves) {
     }
   };
 }
-X

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "node deploy"
+    "postinstall": "node deploy",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:watch": "npm test -- --watch"
   },
   "dependencies": {
     "react": "^0.13.3",
@@ -19,12 +21,14 @@
     "babel": "^5.8.21",
     "babel-core": "^5.8.21",
     "babel-loader": "^5.1.2",
-    "isomorphic-fetch": "^2.1.1",
     "express": "~4.13.0",
+    "http-proxy": "^1.11.2",
+    "isomorphic-fetch": "^2.1.1",
+    "mocha": "^2.3.3",
+    "expect": "^1.12.1",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.11.0",
-    "webpack-dev-server": "^1.8.2",
-    "http-proxy": "^1.11.2"
+    "webpack-dev-server": "^1.8.2"
   },
   "repository": {
     "type": "git",
