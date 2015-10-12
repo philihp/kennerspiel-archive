@@ -5,9 +5,7 @@ export default class MoveBox extends Component {
     const { value, onChange, options } = this.props;
 
     return (
-      <textarea rows="7" cols="80" onChange={e => onChange(e.target.value)}>
-        {value}
-      </textarea>
+      <textarea rows="7" cols="80" onChange={e => onChange(e.target.value)} defaultValue={value} />
     );
   }
 }
