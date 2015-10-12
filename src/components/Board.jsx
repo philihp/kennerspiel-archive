@@ -1,24 +1,16 @@
-import React, { Component } from 'react'
-import connectToStores from 'alt/utils/connectToStores'
-import BoardStore from '../stores/BoardStore.jsx'
+import React, { PropTypes, Component } from 'react';
 
-class Board extends Component {
-    render() {
-        return (
-            <div>Board</div>
-        )
-    }
+export default class Board extends Component {
+  render () {
+    return (
+      <pre>
+        {JSON.stringify(this.props.board)}
+      </pre>
+    );
+  }
 }
 
-export default connectToStores({
-    getStores() {
-        return [BoardStore]
-    },
-    getPropsFromStores(props) {
-        console.log('Board.connectToStores.getPropsFromStores(',BoardStore.getState(),')');
-        const state = BoardStore.getState()
-        return {
-            board: BoardStore.getState().board
-        }
-    }
-}, Board)
+Board.propTypes = {
+  board: PropTypes.array.isRequired
+};
+X
