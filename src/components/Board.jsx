@@ -13,4 +13,3 @@ export default class Board extends Component {
 Board.propTypes = {
   board: PropTypes.array.isRequired
 };
-X
