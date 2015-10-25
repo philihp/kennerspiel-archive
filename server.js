@@ -44,4 +44,3 @@ proxy.on('error', function(e) {
 app.listen(port, function () {
     console.log(process.env.NODE_ENV + ' running on port ' + port);
 })
-

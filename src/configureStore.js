@@ -3,14 +3,13 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers';
 // Redux DevTools store enhancers
-import { devTools, persistState } from 'redux-devtools';
+//import { devTools, persistState } from 'redux-devtools';
 
 const loggerMiddleware = createLogger();
 
 const createStoreWithMiddleware = compose(
-  applyMiddleware(thunkMiddleware,loggerMiddleware),
-  // TODO Remove when in production
-  devTools()
+  applyMiddleware(thunkMiddleware,loggerMiddleware)
+  // devTools()
 )(createStore);
 
 export default function configureStore(initialState) {
