@@ -69,7 +69,6 @@ class App extends Component {
 
 App.propTypes = {
   moves: PropTypes.string.isRequired,
-  board: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired
