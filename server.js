@@ -5,8 +5,8 @@ const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer();
 const app = express();
 
-
-const isProduction = process.env.NODE_ENV === 'production';
+const nodeMode = process.env.NODE_ENV || 'development'
+const isProduction = nodeMode === 'production';
 const port = isProduction ? process.env.PORT : 3000;
 const publicPath = path.resolve(__dirname, 'public');
 
@@ -42,5 +42,5 @@ proxy.on('error', function(e) {
 
 // And run the server
 app.listen(port, function () {
-    console.log(process.env.NODE_ENV + ' running on port ' + port);
+    console.log('server.js running as ' + nodeMode + ' on :' + port);
 })

@@ -13,7 +13,7 @@ const NAV_LINKS = {
   'stats': {
     link: '/stats.html',
     title: 'Stats'
-  }
+  },
 };
 
 const NavMain = React.createClass({
