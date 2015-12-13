@@ -5,7 +5,7 @@ import MoveBox from '../components/MoveBox';
 import Board from '../components/Board';
 import NavMain from '../components/NavMain';
 
-const stubgame = "CONFIG(PLAYERS,4)|CONFIG(LENGTH,LONG)|CONFIG(COUNTRY,IRELAND)\nF(1,0)\nU(LG2,Sh)\nB(I03,3,1)|U(I03,Pn)*\nU(LW1)\nU(LR3,Pn)|P(0,COAST)\nV(Gn)|B(I09,3,0)|U(I09)*";
+const stubgame = 'config PLAYERS 4\nconfig LENGTH LONG\nconfig COUNTRY IRELAND\nstart\n';
 
 class App extends Component {
   constructor(props) {

@@ -8,21 +8,21 @@ export const REFRESH_MOVES = 'REFRESH_MOVES';
 export function modifyMoves(moves) {
   return {
     type: MODIFY_MOVES,
-    moves
+    moves,
   };
 }
 
 export function refreshMoves(moves) {
   return {
     type: REFRESH_MOVES,
-    moves
+    moves,
   };
 }
 
 function requestBoard(moves) {
   return {
     type: REQUEST_BOARD,
-    moves
+    moves,
   };
 }
 
@@ -31,31 +31,32 @@ function receiveBoard(moves, json) {
     type: RECEIVE_BOARD,
     moves,
     board: json,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
 function fetchBoard(moves) {
   return dispatch => {
     dispatch(requestBoard(moves));
-    return fetch('//weblabora-svc.herokuapp.com/', {
-        method: 'post',
-        body: moves
-      })
-      .then(req => req.json())
-      .then(json => dispatch(receiveBoard(moves, json)));
-  }
+    const host = (window.location.hostname === 'kennerspiel.com') ? 'weblabora-svc.herokuapp.com' : 'localhost:5000';
+    return fetch(`//${host}/`, {
+      method: 'post',
+      body: moves,
+    })
+    .then(req => req.json())
+    .then(json => dispatch(receiveBoard(moves, json)));
+  };
 }
 
 function shouldFetchBoard(state, moves) {
   const board = state.boardByMoves[moves];
+  let shouldIt = board.didInvalidate;
   if (!board) {
-    return true;
+    shouldIt = true;
   } else if (board.isFetching) {
-    return false;
-  } else {
-    return board.didInvalidate;
+    shouldIt = false;
   }
+  return shouldIt;
 }
 
 export function fetchBoardIfNeeded(moves) {

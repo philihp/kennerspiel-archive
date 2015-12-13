@@ -1,24 +1,25 @@
 {
-    "env": {
-        "browser": true,
-        "node": true
-    },
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
 
-    "globals": {
-        "React": true
-    },
+  "globals": {
+    "React": true
+  },
 
-    "ecmaFeatures": {
-        "jsx": true
-    },
+  "ecmaFeatures": {
+    "jsx": true
+  },
 
-    "plugins": [
-        "react"
-    ],
+  "plugins": [
+    "react"
+  ],
 
-    "parser": "babel-eslint",
-    
-    "rules": {
-      "strict": 0
-    }
+  "parser": "babel-eslint",
+
+  "rules": {
+    "strict": 0
+  }
 }
