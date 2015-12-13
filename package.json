@@ -7,7 +7,8 @@
     "start": "node server.js",
     "postinstall": "node deploy",
     "lint": "eslint src --ext .js --ext .jsx",
-    "test": "mocha --compilers js:babel/register --recursive",
+    "mocha": "mocha --compilers js:babel/register --recursive",
+    "test": "npm run mocha && npm run lint",
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
