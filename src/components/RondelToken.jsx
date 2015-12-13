@@ -1,49 +1,58 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
+
+const propTypes = {
+  token: PropTypes.object.isRequired,
+};
 
 export default class RondelToken extends Component {
+
+  _rotate(pos) {
+    switch (pos) {
+    case 'A':
+      return 360 * 12.5 / 13;
+    case 'B':
+      return 360 * 11.5 / 13;
+    case 'C':
+      return 360 * 10.5 / 13;
+    case 'D':
+      return 360 * 9.5 / 13;
+    case 'E':
+      return 360 * 8.5 / 13;
+    case 'F':
+      return 360 * 7.5 / 13;
+    case 'G':
+      return 360 * 6.5 / 13;
+    case 'H':
+      return 360 * 5.5 / 13;
+    case 'I':
+      return 360 * 4.5 / 13;
+    case 'J':
+      return 360 * 3.5 / 13;
+    case 'K':
+      return 360 * 2.5 / 13;
+    case 'L':
+      return 360 * 1.5 / 13;
+    case 'M':
+      return 360 * 0.5 / 13;
+    default:
+      return 0;
+    }
+  }
 
   render() {
     const radius = this.props.token.radius;
     const position = this.props.token.position;
 
-    if(!this.props.token.active) return null;
+    if (!this.props.token.active) return null;
 
     return (
-      <g id="grape" transform={'rotate('+this._rotate(position)+')'}>
-        <text x={0} y={radius} style={{fontSize: '10px', kerning:-0.5, textAnchor: 'middle', fill:'#000'}}>
+      <g id="grape" transform={'rotate(' + this._rotate(position) + ')'}>
+        <text x={0} y={radius} style={{fontSize: '10px', kerning: -0.5, textAnchor: 'middle', fill: '#000'}}>
           {this.props.label}
         </text>
       </g>
     );
   }
-
-  _rotate(pos) {
-    if (pos == 'A')
-			return 360 * 12.5 / 13;
-		if (pos == 'B')
-			return 360 * 11.5 / 13;
-		if (pos == 'C')
-			return 360 * 10.5 / 13;
-		if (pos == 'D')
-			return 360 * 9.5 / 13;
-		if (pos == 'E')
-			return 360 * 8.5 / 13;
-		if (pos == 'F')
-			return 360 * 7.5 / 13;
-		if (pos == 'G')
-			return 360 * 6.5 / 13;
-		if (pos == 'H')
-			return 360 * 5.5 / 13;
-		if (pos == 'I')
-			return 360 * 4.5 / 13;
-		if (pos == 'J')
-			return 360 * 3.5 / 13;
-		if (pos == 'K')
-			return 360 * 2.5 / 13;
-		if (pos == 'L')
-			return 360 * 1.5 / 13;
-		if (pos == 'M')
-			return 360 * 0.5 / 13;
-		return 0;
-  }
 }
+
+RondelToken.propTypes = propTypes;

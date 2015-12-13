@@ -7,6 +7,10 @@ import NavMain from '../components/NavMain';
 
 const stubgame = 'config PLAYERS 4\nconfig LENGTH LONG\nconfig COUNTRY IRELAND\nstart\n';
 
+const propTypes = {
+  board: PropTypes.object,
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,13 +39,13 @@ class App extends Component {
 
     const { dispatch, moves, isFetching } = this.props;
 
-    if(!isFetching) {
+    if (!isFetching) {
       dispatch(refreshMoves(moves));
       dispatch(fetchBoardIfNeeded(moves));
     }
   }
 
-  render () {
+  render() {
     const { moves, board, isFetching, lastUpdated } = this.props;
 
     return (
@@ -49,13 +53,12 @@ class App extends Component {
         <NavMain activePage="home" />
 
         <div className="container">
-
           <div>
             <a href="#" className="btn btn-default" disabled={isFetching} onClick={this.handleRefreshClick}>Refresh</a>
             <span>Last updated at {new Date(lastUpdated).toLocaleTimeString()}</span>
           </div>
 
-          <MoveBox value={stubgame} onChange={this.handleChange} />
+          <MoveBox value={stubgame} onChange={this.handleChange} moves={moves} />
 
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
             <Board board={board} />
@@ -71,7 +74,7 @@ App.propTypes = {
   moves: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -79,18 +82,20 @@ function mapStateToProps(state) {
   const {
     isFetching,
     lastUpdated,
-    items: board
-    } = boardByMoves[moves] || {
+    items: board,
+  } = boardByMoves[moves] || {
     isFetching: true,
-    items: []
+    items: [],
   };
 
   return {
     moves,
     board,
     isFetching,
-    lastUpdated
+    lastUpdated,
   };
 }
+
+App.propTypes = propTypes;
 
 export default connect(mapStateToProps)(App);

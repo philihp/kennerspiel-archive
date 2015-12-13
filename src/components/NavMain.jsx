@@ -4,32 +4,42 @@ import { Link } from 'react-router';
 const NAV_LINKS = {
   'profile': {
     link: '/profile.html',
-    title: 'Profile'
+    title: 'Profile',
   },
   'instances': {
     link: '/instances.html',
-    title: 'Instances'
+    title: 'Instances',
   },
   'stats': {
     link: '/stats.html',
-    title: 'Stats'
+    title: 'Stats',
   },
 };
 
 const NavMain = React.createClass({
   propTypes: {
-    activePage: React.PropTypes.string
+    activePage: React.PropTypes.string,
+  },
+
+  renderNavItem(linkName) {
+    const link = NAV_LINKS[linkName];
+
+    return (
+      <li className={this.props.activePage === linkName ? 'active' : null} key={linkName}>
+        <a href={link.link}>{link.title}</a>
+      </li>
+    );
   },
 
   render() {
-    let brand = <Link to="/" className="navbar-brand">React-Bootstrap</Link>;
-    let links = Object.keys(NAV_LINKS).map(this.renderNavItem);
+    const brand = <Link to="/" className="navbar-brand">Kennerspiel</Link>;
+    const links = Object.keys(NAV_LINKS).map(this.renderNavItem);
 
     return (
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">Kennerspiel</a>
+            {brand}
           </div>
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
@@ -41,15 +51,6 @@ const NavMain = React.createClass({
     );
   },
 
-  renderNavItem(linkName) {
-    let link = NAV_LINKS[linkName];
-
-    return (
-      <li className={this.props.activePage === linkName ? 'active' : null} key={linkName}>
-        <a href={link.link}>{link.title}</a>
-      </li>
-    );
-  }
 });
 
 export default NavMain;

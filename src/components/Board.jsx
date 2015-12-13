@@ -1,9 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 
-import Rondel from './Rondel'
+import Rondel from './Rondel';
+
+const propTypes = {
+  board: PropTypes.object.isRequired,
+};
 
 export default class Board extends Component {
-  render () {
+  render() {
     return (
       <div className="board">
         {this.props.board &&
@@ -16,3 +20,5 @@ export default class Board extends Component {
     );
   }
 }
+
+Board.propTypes = propTypes;

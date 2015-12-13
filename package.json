@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "postinstall": "node deploy",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .js --ext .jsx",
     "test": "mocha --compilers js:babel/register --recursive",
     "test:watch": "npm test -- --watch"
   },
@@ -30,6 +30,7 @@
     "eslint": "^1.7.2",
     "eslint-config-airbnb": "1.0.0",
     "eslint-plugin-airbnb": "2.1.1",
+    "eslint-plugin-babel": "2.1.1",
     "eslint-plugin-react": "^3.6.3",
     "expect": "^1.12.1",
     "mocha": "^2.3.3",
