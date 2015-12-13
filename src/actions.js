@@ -50,11 +50,13 @@ function fetchBoard(moves) {
 
 function shouldFetchBoard(state, moves) {
   const board = state.boardByMoves[moves];
-  let shouldIt = board.didInvalidate;
+  let shouldIt;
   if (!board) {
     shouldIt = true;
   } else if (board.isFetching) {
     shouldIt = false;
+  } else {
+    shouldIt = board.didInvalidate;
   }
   return shouldIt;
 }
