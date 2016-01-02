@@ -1,9 +1,23 @@
 import 'babel-core/polyfill';
-
 import React from 'react';
-import Root from './containers/Root';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import DevTools from './containers/DevTools';
 
-React.render(
-  <Root />,
-  document.getElementById('root')
+import configureStore from './store/configureStore';
+
+const store = configureStore();
+
+const rootElement = document.getElementById('root');
+
+render(
+  // TODO: DevTools shouldn't be included on Production, similar to configureStore
+  <Provider store={store}>
+    <div>
+      <App />
+      <DevTools />
+    </div>
+  </Provider>,
+  rootElement
 );

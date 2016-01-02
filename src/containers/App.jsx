@@ -85,7 +85,7 @@ function mapStateToProps(state) {
     items: board,
   } = boardByMoves[moves] || {
     isFetching: true,
-    items: [],
+    items: {},
   };
 
   return {

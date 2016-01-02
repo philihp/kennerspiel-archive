@@ -18,7 +18,7 @@ function moves(state = 'config PLAYERS 4\nconfig LENGTH LONG\nconfig COUNTRY IRE
 function board(state = {
   isFetching: false,
   didInvalidate: false,
-  items: [],
+  items: {},
 }, action) {
   switch (action.type) {
   case REFRESH_MOVES:
@@ -38,6 +38,7 @@ function board(state = {
       lastUpdated: action.receivedAt,
     });
   default:
+    console.warn('Invalid Action: ', action.type);
     return state;
   }
 }
