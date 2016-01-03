@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# version 1.0.0
+
+CACHE:
+//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
+//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js
+//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css
+
+NETWORK:
+*
