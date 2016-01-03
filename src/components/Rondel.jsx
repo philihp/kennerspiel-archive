@@ -53,13 +53,21 @@ export default class Rondel extends Component {
       + (-ARM_RADIUS) + ' ' + (ARM_WIDTH / 2) + ','
       + (-ARM_LENGTH) + ' z';
   }
+
   render() {
     if (!this.props.wheel) return null;
 
     // TODO refactor this as proper member vars
 
+    const SEGS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
     const WHEEL_RADIUS = 140;
-    const ARM_TEXT_RADIUS = 28;
+    const ARM_TEXT_RADIUS = -19;
+
+
+    const ARROW_RADIUS = 34;
+    const ARROW_SIZE = 7;
+    const ARROW_PATH = `M ${(-ARROW_SIZE / 2)}, ${(-ARROW_RADIUS)} l${ARROW_SIZE}, ${ARROW_SIZE / 2} v${-ARROW_SIZE} z`;
 
     const points = new Array(13);
     for (let n = 0; n < 13; n++) {
@@ -86,46 +94,29 @@ export default class Rondel extends Component {
             <polyline points={points.join(' ')} fill="black" filter="url(#shadow)" />
           </g>
           <g id="wheel">
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[0] + ' ' + points[1] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[1] + ' ' + points[2] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[2] + ' ' + points[3] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[3] + ' ' + points[4] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[4] + ' ' + points[5] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[5] + ' ' + points[6] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[6] + ' ' + points[7] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[7] + ' ' + points[8] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[8] + ' ' + points[9] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[9] + ' ' + points[10] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[10] + ' ' + points[11] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[11] + ' ' + points[12] + ' 0,0'} />
-            <polyline fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={'0,0 ' + points[12] + ' ' + points[0] + ' 0,0'} />
+            {SEGS.map(i => {
+              return (
+                <polyline key={`segblock-${i}`} fill="#fcfcfc" stroke="#b3b3b3" strokeWidth="1" points={`0,0 ${points[i]} ${points[(i + 1) % SEGS.length]} 0,0`} />
+              );
+            })}
           </g>
           <g id="arm" transform="rotate(0)" style={{fontSize: '10px', textAnchor: 'middle'}}>
-            <path d={this._armPath()} style={{fill: '#ffffff', fillOpacity: 1, stroke: '#686868', strokeWidth: 1}} />
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 12.5 / 13) + ')'}>{this.props.wheel.armValues[12]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 11.5 / 13) + ')'}>{this.props.wheel.armValues[11]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 10.5 / 13) + ')'}>{this.props.wheel.armValues[10]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 9.5 / 13) + ')'}>{this.props.wheel.armValues[9]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 8.5 / 13) + ')'}>{this.props.wheel.armValues[8]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 7.5 / 13) + ')'}>{this.props.wheel.armValues[7]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 6.5 / 13) + ')'}>{this.props.wheel.armValues[6]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 5.5 / 13) + ')'}>{this.props.wheel.armValues[5]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 4.5 / 13) + ')'}>{this.props.wheel.armValues[4]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 3.5 / 13) + ')'}>{this.props.wheel.armValues[3]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 2.5 / 13) + ')'}>{this.props.wheel.armValues[2]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 1.5 / 13) + ')'}>{this.props.wheel.armValues[1]}</text>
-            <text x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * 0.5 / 13) + ')'}>{this.props.wheel.armValues[0]}</text>
-            <path d="${wheelArt.arrowPath}" fill="#000" />
+            <path d={this._armPath()} style={{fill: '#ffffff', fillOpacity: 1, stroke: '#686868', strokeWidth: 1}} />{SEGS.map(i => {
+              return (
+                <text key={`wheeltext-${i}`} x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * (12.5 - i) / 13) + ')'}>{this.props.wheel.armValues[12 - i]}</text>
+              );
+            })}
+            <path d={ARROW_PATH} fill="#000" />
           </g>
-          <RondelToken label="Grape" token={this.props.wheel.grape} />
-          <RondelToken label="Stone" token={this.props.wheel.stone} />
-          <RondelToken label="Grain" token={this.props.wheel.grain} />
-          <RondelToken label="Sheep" token={this.props.wheel.sheep} />
-          <RondelToken label="Joker" token={this.props.wheel.joker} />
-          <RondelToken label="Wood" token={this.props.wheel.wood} />
-          <RondelToken label="Clay" token={this.props.wheel.clay} />
-          <RondelToken label="Peat" token={this.props.wheel.peat} />
-          <RondelToken label="Coin" token={this.props.wheel.coin} />
+          <RondelToken label="Grape" token={this.props.wheel.grape} radius={125} />
+          <RondelToken label="Stone" token={this.props.wheel.stone} radius={115} />
+          <RondelToken label="Grain" token={this.props.wheel.grain} radius={105} />
+          <RondelToken label="Sheep" token={this.props.wheel.sheep} radius={95} />
+          <RondelToken label="Wood" token={this.props.wheel.wood} radius={85} />
+          <RondelToken label="Joker" token={this.props.wheel.joker} radius={75} />
+          <RondelToken label="Peat" token={this.props.wheel.peat} radius={65} />
+          <RondelToken label="Coin" token={this.props.wheel.coin} radius={55} />
+          <RondelToken label="Clay" token={this.props.wheel.clay} radius={45} />
         </svg>
       </div>
     );

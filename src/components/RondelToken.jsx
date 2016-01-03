@@ -2,6 +2,11 @@ import React, { PropTypes, Component } from 'react';
 
 const propTypes = {
   token: PropTypes.object.isRequired,
+  radius: PropTypes.number,
+};
+
+const defaultProps = {
+  radius: 50,
 };
 
 export default class RondelToken extends Component {
@@ -40,7 +45,7 @@ export default class RondelToken extends Component {
   }
 
   render() {
-    const radius = this.props.token.radius;
+    const radius = -this.props.radius;
     const position = this.props.token.position;
 
     if (!this.props.token.active) return null;
@@ -56,3 +61,4 @@ export default class RondelToken extends Component {
 }
 
 RondelToken.propTypes = propTypes;
+RondelToken.defaultProps = defaultProps;
