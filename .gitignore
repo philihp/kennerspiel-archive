@@ -37,3 +37,6 @@ server.crt
 /build
 
 /public/build/
+/public/bootstrap.min.css
+/public/bootstrap.min.js
+/public/jquery.min.js

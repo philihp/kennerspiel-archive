@@ -1,0 +1,53 @@
+.landscape td {
+  font-size: xx-small;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #777;
+  height: 50px;
+  width: 50px;
+}
+
+.water {
+	background-color: #87b6ff;
+}
+.coast {
+	background-color: #ffdd67;
+}
+.plains {
+	background-color: #7cd958;
+}
+.hillside {
+	background-color: #bdd6b5;
+}
+.mountain {
+	background-color: #A2A6A0;
+}
+
+div.moor {
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  background-color: #7cb958;
+  border: 1px solid #6ca948;
+  font-size: x-large;
+  color: #6c9948;
+}
+
+div.forest {
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  background-color: #6cc948;
+  border: 1px solid #5cb938;
+  font-size: x-large;
+  color: #5cb938;
+}
+
+div.building {
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  background-color: #aaaaaa;
+  border: 1px solid #555555;
+  color: #555555;
+}

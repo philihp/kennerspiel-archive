@@ -28,9 +28,9 @@ module.exports = {
             test: /\.jsx?$/,
             loaders: ['react-hot', 'babel-loader?stage=0'],
             exclude: [nodeModulesPath],
-        },{
-            test: /\.css$/,
-            loader: 'style!css',
-        }]
+        },
+        { test: /\.css$/, loader: 'style-loader!css-loader' },
+        { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+      ]
     },
 };
