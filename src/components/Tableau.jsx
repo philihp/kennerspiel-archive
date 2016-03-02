@@ -25,26 +25,29 @@ export default class Tableau extends Component {
 
   render() {
     const landscape = this.props.player.landscape.terrainTable;
-
+    const color = this.props.player.color;
 
     return (
-      <div className="tableau" key={`tableau-${this.props.player.color}`}>
-        <h3>{this.props.player.color}</h3>
+      <div className="tableau" key={`tableau-${color}`}>
+        <h3>{color}</h3>
         <table className="landscape">
-          {landscape.map(row =>
-            <tr>
-              {row.map(cell => {
-                if (cell) {
-                  return (
-                    <td className={cell.terrainType}>
-                      {this.renderCellContents(cell)}
-                    </td>
-                  );
-                }
-                return null;
-              })}
-            </tr>
-          )}
+          <tbody>
+            {landscape.map((row, y) =>
+              <tr key={`landscape.${color}.${y}`}>
+                {row.map((cell, x) => {
+                  if (cell) {
+                    return (
+                      <td key={`landscape.${color}.${y}.${x}`}
+                          className={cell.terrainType}>
+                        {this.renderCellContents(cell)}
+                      </td>
+                    );
+                  }
+                  return null;
+                })}
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     );

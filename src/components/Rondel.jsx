@@ -79,7 +79,7 @@ export default class Rondel extends Component {
     const viewBox = [-150.5, -150.5, 300, 300].join(' ');
 
     return (
-      <div style={{backgroundColor: '#FFDAE2'}}>
+      <div>
         <svg style={{height: 300, width: 300}} viewBox={viewBox}>
           <defs>
             <linearGradient id="housefill" x1="0%" y1="0%" x2="100%" y2="0%">
