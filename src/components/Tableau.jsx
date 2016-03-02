@@ -23,13 +23,28 @@ export default class Tableau extends Component {
     }
   }
 
+  renderChits(chit) {
+    const chits = [];
+    for (let i = 0; i < chit.quantity; i++) {
+      chits.push(
+        <div key={`inventory.${this.props.player.color}.${chit.type}.${i}`} className="chit">{chit.type}</div>
+      );
+    }
+
+    return chits;
+  }
+
   render() {
     const landscape = this.props.player.landscape.terrainTable;
+    const inventory = this.props.player.inventory;
     const color = this.props.player.color;
 
     return (
       <div className="tableau" key={`tableau-${color}`}>
         <h3>{color}</h3>
+        {inventory.map((chit) =>
+          this.renderChits(chit)
+        )}
         <table className="landscape">
           <tbody>
             {landscape.map((row, y) =>

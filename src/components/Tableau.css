@@ -47,7 +47,20 @@ div.building {
   margin: auto;
   height: 40px;
   width: 40px;
+  padding-top: 5px;
   background-color: #aaaaaa;
   border: 1px solid #555555;
   color: #555555;
+}
+
+.chit {
+  height: 40px;
+  width: 40px;
+  margin: 0 5px 5px 0;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  padding-top: 10px;
+  font-size: x-small;
+  text-align: center;
+  display: inline-block;
 }
