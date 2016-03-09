@@ -10,31 +10,31 @@ export default class Rondel extends Component {
   _rotate(pos) {
     switch (pos) {
     case 'A':
-      return 360 * 12.5 / 13;
+      return 360 * 12 / 13;
     case 'B':
-      return 360 * 11.5 / 13;
+      return 360 * 11 / 13;
     case 'C':
-      return 360 * 10.5 / 13;
+      return 360 * 10 / 13;
     case 'D':
-      return 360 * 9.5 / 13;
+      return 360 * 9 / 13;
     case 'E':
-      return 360 * 8.5 / 13;
+      return 360 * 8 / 13;
     case 'F':
-      return 360 * 7.5 / 13;
+      return 360 * 7 / 13;
     case 'G':
-      return 360 * 6.5 / 13;
+      return 360 * 6 / 13;
     case 'H':
-      return 360 * 5.5 / 13;
+      return 360 * 5 / 13;
     case 'I':
-      return 360 * 4.5 / 13;
+      return 360 * 4 / 13;
     case 'J':
-      return 360 * 3.5 / 13;
+      return 360 * 3 / 13;
     case 'K':
-      return 360 * 2.5 / 13;
+      return 360 * 2 / 13;
     case 'L':
-      return 360 * 1.5 / 13;
+      return 360 * 1 / 13;
     case 'M':
-      return 360 * 0.5 / 13;
+      return 360 * 0 / 13;
     default:
       return 0;
     }
@@ -100,7 +100,7 @@ export default class Rondel extends Component {
               );
             })}
           </g>
-          <g id="arm" transform="rotate(0)" style={{fontSize: '10px', textAnchor: 'middle'}}>
+          <g id="arm" transform={'rotate(' + this._rotate(this.props.wheel.arm.position) + ')'} style={{fontSize: '10px', textAnchor: 'middle'}}>
             <path d={this._armPath()} style={{fill: '#ffffff', fillOpacity: 1, stroke: '#686868', strokeWidth: 1}} />{SEGS.map(i => {
               return (
                 <text key={`wheeltext-${i}`} x="0" y={ARM_TEXT_RADIUS} transform={'rotate(' + (360 * (12.5 - i) / 13) + ')'}>{this.props.wheel.armValues[12 - i]}</text>

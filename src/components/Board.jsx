@@ -15,7 +15,7 @@ export default class Board extends Component {
           (<Rondel wheel={this.props.board.wheel} armOffset={this.props.board.armOffset} />)
         }
         {this.props.board.players && this.props.board.players.map(player =>
-          <Tableau key={`tableau.${player.color}`} player={player} />
+          <Tableau key={`tableau-${player.color}`} player={player} />
         )}
       </div>
     );

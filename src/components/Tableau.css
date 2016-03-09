@@ -3,8 +3,8 @@
   text-align: center;
   border-collapse: collapse;
   border: 1px solid #777;
-  height: 50px;
-  width: 50px;
+  height: 135px;
+  width: 85px;
 }
 
 .water {
@@ -25,8 +25,8 @@
 
 div.moor {
   margin: auto;
-  height: 40px;
-  width: 40px;
+  height: 125px;
+  width: 75px;
   background-color: #7cb958;
   border: 1px solid #6ca948;
   font-size: x-large;
@@ -35,32 +35,24 @@ div.moor {
 
 div.forest {
   margin: auto;
-  height: 40px;
-  width: 40px;
+  height: 125px;
+  width: 75px;
   background-color: #6cc948;
   border: 1px solid #5cb938;
   font-size: x-large;
   color: #5cb938;
 }
 
-div.building {
-  margin: auto;
-  height: 40px;
-  width: 40px;
-  padding-top: 5px;
-  background-color: #aaaaaa;
-  border: 1px solid #555555;
-  color: #555555;
+img.building {
+  height: 125px;
+  width: 75px;
 }
 
 .chit {
   height: 40px;
   width: 40px;
   margin: 0 5px 5px 0;
-  background-color: #eeeeee;
   border: 1px solid #dddddd;
-  padding-top: 10px;
-  font-size: x-small;
-  text-align: center;
+  border-radius: 5px;
   display: inline-block;
 }
